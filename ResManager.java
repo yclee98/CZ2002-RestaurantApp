@@ -1,3 +1,4 @@
-public class ResManager{
+public class
+ResManager{
     
 }
