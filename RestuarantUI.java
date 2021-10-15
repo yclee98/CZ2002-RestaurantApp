@@ -47,13 +47,14 @@ public class RestuarantUI {
         do{
             System.out.println("*****Menu Items/Promotion*****");
             System.out.println("Select an option");
-            System.out.println("1. Create Menu Item");
-            System.out.println("2. Update Menu Item");
-            System.out.println("3. Remove Menu Item");
-            System.out.println("4. Create Promotion");
-            System.out.println("5. Update Promotion");
-            System.out.println("6. Remove Promotion");
-            System.out.println("7. Back");
+            System.out.println("1. View Menu"); 
+            System.out.println("2. Create Menu Item");
+            System.out.println("3. Update Menu Item");
+            System.out.println("4. Remove Menu Item");
+            System.out.println("5. Create Promotion");
+            System.out.println("6. Update Promotion");
+            System.out.println("7. Remove Promotion");
+            System.out.println("8. Back");
             menuOption = userInput.nextInt();
             System.out.println();
             
@@ -73,7 +74,7 @@ public class RestuarantUI {
                 default:
             }
 
-        }while(menuOption>0 && menuOption<7);
+        }while(menuOption>0 && menuOption<8);
     }
 
     private static void order(){
@@ -81,12 +82,13 @@ public class RestuarantUI {
         do{
             System.out.println("*****Order*****");
             System.out.println("Select an option");
-            System.out.println("1. Create Order");
-            System.out.println("2. View Order");
-            System.out.println("3. Add Order Item");
-            System.out.println("4. Remove Order Item");
-            System.out.println("5. Print Order Invoice");
-            System.out.println("6. Back");
+            System.out.println("1. View All Orders");
+            System.out.println("2. Create Order");
+            System.out.println("3. View Individual Order");
+            System.out.println("4. Add Items to Order"); 
+            System.out.println("5. Remove items from Order");
+            System.out.println("6. Print Order Invoice");
+            System.out.println("7. Back");
             orderOption = userInput.nextInt();
             System.out.println();
 
@@ -103,7 +105,7 @@ public class RestuarantUI {
                     break;
                 default:
             }
-        }while(orderOption>0 && orderOption<6);
+        }while(orderOption>0 && orderOption<7);
     }
 
     private static void reservation(){
@@ -111,9 +113,11 @@ public class RestuarantUI {
         do{
             System.out.println("*****Reservation*****");
             System.out.println("Select an option");
-            System.out.println("1. Create Reservation Booking");
-            System.out.println("2. Remove Reservation BOoking");
-            System.out.println("3. Back");
+            System.out.println("1. View All Reservations");
+            System.out.println("2. Create Reservation Booking");
+            System.out.println("3. View Individual Reservation Booking");
+            System.out.println("4. Remove Reservation BOoking");
+            System.out.println("5. Back");
             reservationOption = userInput.nextInt();
             System.out.println();
 
@@ -124,6 +128,6 @@ public class RestuarantUI {
                     break;
                 default:
             }
-        }while(reservationOption>0 && reservationOption<3);
+        }while(reservationOption>0 && reservationOption<5);
     }
 }
