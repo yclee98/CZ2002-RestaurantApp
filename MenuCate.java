@@ -5,7 +5,9 @@ public class MenuCate {
 	private String catName;
 	private long catID;
 	
-	public MenuCate() {
+	public MenuCate(String catName, long catID) {
+		this.catName = catName;
+		this.catID = catID;
 		
 	}
 	

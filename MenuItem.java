@@ -1,17 +1,15 @@
 package oopProject;
 
-enum MenuCates {APPETIZER, MAIN_COURSE, SOUP, DRINK, DESSERT, SIDE}
-
 public class MenuItem {
 	
 	private String name;
 	private String description;
 	private float price;
 	private long itemID;
-	private MenuCates itemCate;
+	private MenuCate itemCate;
 	
 	public MenuItem(String name, String description, float price, 
-					long itemID, MenuCates itemCate) {
+					long itemID, MenuCate itemCate) {
 		
 		this.name = name;
 		this.description = description;
@@ -53,11 +51,11 @@ public class MenuItem {
 		this.itemID = itemID;
 	} 
 	
-	public MenuCates getItemCate() {
+	public MenuCate getItemCate() {
 		return this.itemCate;
 	}
 	
-	public void setItemCate(MenuCates itemCate) {
+	public void setItemCate(MenuCate itemCate) {
 		this.itemCate = itemCate;
 	} 
 	
