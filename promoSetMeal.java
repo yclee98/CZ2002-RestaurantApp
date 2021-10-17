@@ -37,7 +37,29 @@ public class promoSetMeal {
 		mealItems.add(newItem);
 	}
 	
-	public int changeItem(MenuItem newItem, MenuItem oldItem) {
+	public boolean doesIncludeItem(String itemName) {
+		
+		for(int i=0; i < mealItems.size(); i++) {
+    		if(mealItems.get(i).getName().equals(itemName)) {
+    			return true; //found
+    		}
+    	}
+
+    	return false; //not found
+	}
+	
+	public boolean doesIncludeItem(long itemID) {
+		
+		for(int i=0; i < mealItems.size(); i++) {
+    		if(mealItems.get(i).getItemID() == itemID) {
+    			return true; //found
+    		}
+    	}
+
+    	return false; //not found
+	}
+	
+	public int changeItem(MenuItem newItem, MenuItem oldItem) { //must pass in MenuItem objects
 		
 		if(!mealItems.contains(oldItem)) {
 			
@@ -50,7 +72,7 @@ public class promoSetMeal {
 		
 		for(int i=0; i< mealItems.size(); i++) {
 			
-			if(mealItems.get(i).getName() == oldItem.getName()) {
+			if(mealItems.get(i).getName().equals(oldItem.getName())) {
 				
 				mealItems.set(i, newItem);
 				
