@@ -4,6 +4,13 @@ public class Customer
 	private long customerID;
 	private String customerName;
 	private boolean isMember;
+
+	public Customer(long custId, String custName, boolean mem)
+	{
+		customerId=custId;
+		customerName=custName;
+		isMember=mem;
+	}
 	
 	public long getCustomerID() {
 		return customerID;
