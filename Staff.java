@@ -1,4 +1,6 @@
-public class Staff {
+import FlatFile.CSVFormat;
+
+public class Staff implements CSVFormat{
     private long staffID;
     private String staffName;
     private char gender;
@@ -42,4 +44,13 @@ public class Staff {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    @Override
+    public String toCSVFormat() {
+        return staffID + "," +
+            staffName + "," +
+            gender + "," +
+            jobTitle; 
+    }
+    
 }
