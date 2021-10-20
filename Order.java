@@ -88,6 +88,4 @@ public class Order {
             totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * quantity;
         }
     }
-
-
 }
