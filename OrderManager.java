@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class OrderManager {
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private double discount = 0.1;
     private double taxes = 0.07;
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     public OrderManager(){}
 
-    public void createOrder(long staffID, Customer customer, int tableNo){
+    public long createOrder(long staffID, Customer customer, int tableNo){
         Order newOrder = new Order(staffID, customer, tableNo);
         orderList.add(newOrder);
+        return newOrder.getOrderID();
     }
 
     public void addItemToOrder(long orderID, MenuItem newItem, int quantity){
@@ -65,7 +69,7 @@ public class OrderManager {
                     System.out.println("    "+ (j+1) + ": " + itemsInOrder.get(j).getItem().getName()
                     + " " + itemsInOrder.get(j).getQuantity());
                 }
-                System.out.println("    Order price = " + orderList.get(i).getTotalPrice());
+                System.out.printf("    Order price = $%.2f\n", orderList.get(i).getTotalPrice());
             }
         }
         if(!found){
@@ -93,36 +97,45 @@ public class OrderManager {
         viewOrder(orderID);
         paymentPrice = calculateFinalPrice(orderID);
 
-        System.out.println("Confirm and proceed to payment? (Y/N): ");
+        System.out.println("\nConfirm and proceed to payment? (Y/N): ");
         userReply = userInput.next();
         if(Objects.equals(userReply, "Y")){
-            payOrder.setFinalPaymentPrice(paymentPrice);
+
             OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
-            OrderInvoice invoice = InvoiceManager.convertOrderToInvoice(payOrder);
+            InvoiceManager iManager = new InvoiceManager();
+
+            payOrder.setFinalPaymentPrice(paymentPrice);
+            OrderInvoice invoice = iManager.convertOrderToInvoice(payOrder);
+            orderHelper.addToArray(invoice);
+            orderHelper.saveData();
         }
     }
 
     public double calculateFinalPrice(long orderID){
         Order payOrder;
         double finalPrice = 0;
+
         for(int i = 0; i < orderList.size(); i++)
         {
             if(orderList.get(i).getOrderID() == orderID){
                 payOrder = orderList.get(i);
+                double taxesValue = payOrder.getTotalPrice() * taxes;
+
                 if(payOrder.getCustomer().isMember()){
                     finalPrice = payOrder.getTotalPrice() * (1+taxes) * (1-discount);
-                    System.out.println("------------------------");
-                    System.out.println("    Goods & Service Tax: " + payOrder.getTotalPrice() * taxes);
-                    System.out.println("    MemberShip Discount: " + (payOrder.getTotalPrice() * taxes) * discount);
+                    System.out.println("-------------------------------------");
+                    double discountValue = payOrder.getTotalPrice() * discount;
+                    System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
+                    System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes);
-                    System.out.println("------------------------");
-                    System.out.println("    Goods & Service Tax: " + payOrder.getTotalPrice() * taxes);
+                    System.out.println("-------------------------------------");
+                    System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
                 }
             }
         }
-        System.out.println("Final payment Price = " + finalPrice);
+        System.out.printf("Final payment Price = $%.2f", finalPrice);
         return finalPrice;
     }
 }

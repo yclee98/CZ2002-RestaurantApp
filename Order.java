@@ -14,10 +14,10 @@ public class Order {
     private double totalPrice;
     private double finalPaymentPrice;
 
-    public Order(long sID, Customer customer, int tableNo) {
+    public Order(long staffID, Customer customer, int tableNo) {
         Random oIDgen = new Random();
         orderID = 10000000 + oIDgen.nextInt(90000000);
-        staffID = sID;
+        this.staffID = staffID;
         this.customer = customer;
         tableNumber = tableNo;
         LocalDateTime now = LocalDateTime.now();

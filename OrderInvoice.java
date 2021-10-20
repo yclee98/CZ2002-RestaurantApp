@@ -43,9 +43,7 @@ public class OrderInvoice {
         return orderDateTime;
     }
 
-    public void setOrderDateTime(String orderDateTime) {
-        this.orderDateTime = orderDateTime;
-    }
+    public void setOrderDateTime(String orderDateTime) {this.orderDateTime = orderDateTime;}
 
     public long getCustomerID() {
         return customerID;
@@ -84,7 +82,6 @@ public class OrderInvoice {
     public void setOrderitems(String orderitems) {
         this.orderitems = orderitems;
     }
-
 
     public String toCSVFormat() {
         return orderID + "," + staffID + "," + customerID + "," + tableNumber + "," + orderDateTime
