@@ -1,13 +1,12 @@
 public class Customer
 {
-
 	private long customerID;
 	private String customerName;
 	private boolean isMember;
 
 	public Customer(long custId, String custName, boolean mem)
 	{
-		customerId=custId;
+		customerID=custId;
 		customerName=custName;
 		isMember=mem;
 	}

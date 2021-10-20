@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import FlatFile.FlatFileAdapter;
 
 public class TestManager extends Manager {
@@ -66,13 +65,13 @@ public class TestManager extends Manager {
 
     public static void main(String[] args) {
         TestManager tm = new TestManager();
-        tm.addToArray(new Staff(11,"tim", 'm', "chief"));
-        tm.addToArray(new Staff(22,"mary", 'f', "waitress"));
-        tm.addToArray(new Staff(33,"john", 'm', "waiter"));
-        tm.saveData();
-        // tm.retrieveData();
-        // System.out.println(tm.allStaff.get(0).getStaffName());
-        // System.out.println(tm.allStaff.get(1).getStaffName());
+//        tm.addToArray(new Staff(11,"tim", 'm', "chef"));
+//        tm.addToArray(new Staff(22,"mary", 'f', "waitress"));
+//        tm.addToArray(new Staff(33,"john", 'm', "waiter"));
+//        tm.saveData();
+         tm.retrieveData();
+         System.out.println(tm.allStaff.get(0).getStaffName());
+         System.out.println(tm.allStaff.get(1).getStaffName());
     }
     
 }

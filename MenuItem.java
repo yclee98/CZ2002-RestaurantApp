@@ -1,5 +1,3 @@
-package oopProject;
-
 public class MenuItem {
 	
 	private String name;

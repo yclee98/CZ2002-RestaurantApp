@@ -1,5 +1,3 @@
-package oopProject;
-
 public class MenuCate {
 
 	private String catName;

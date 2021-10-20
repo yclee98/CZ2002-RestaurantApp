@@ -1,34 +1,33 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Order {
 
     private long orderID;
-    private double orderTotalPrice;
-    private ArrayList<MenuItems> orderItems = new ArrayList<MenuItems>();
-    private List<Integer> noIndividualItems = new ArrayList<>();
+    private ArrayList<OrderItems> orderItemList = new ArrayList<OrderItems>();
     private long staffID;
-    private int tableNum;
-    private LocalDateTime orderDateTime;
-    private long custID;
-    private int noOfItems;
+    private int tableNumber;
+    private String orderDateTime;
+    private Customer customer;
+    private double totalPrice;
+    private double finalPaymentPrice;
 
-    public Order(long sID, long cID, int tableNo){
+    public Order(long sID, Customer customer, int tableNo) {
         Random oIDgen = new Random();
         orderID = 10000000 + oIDgen.nextInt(90000000);
         staffID = sID;
-        custID = cID;
-        orderTotalPrice = 0;
+        this.customer = customer;
+        tableNumber = tableNo;
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        orderDateTime = now.format(format);
+        finalPaymentPrice = 0;
     }
 
     public long getOrderID() {
         return orderID;
-    }
-
-    public double getOrderTotalPrice() {
-        return orderTotalPrice;
     }
 
     public long getStaffID() {
@@ -39,62 +38,56 @@ public class Order {
         this.staffID = staffID;
     }
 
-    public void printOrder(long oID){
+    public Customer getCustomer(){ return customer; }
 
+    public int getTableNumber(){ return tableNumber; }
+
+    public String getOrderDateTime() { return orderDateTime; }
+
+    public ArrayList<OrderItems> getOrderItemList(){
+        return orderItemList;
     }
 
-    public void deAllocate(Table table){
-        table.setAllocated(false);
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void calPrice(boolean isMember){
-        orderTotalPrice = 0;
-        for(int i = 0; i < noOfItems; i++){
-            orderTotalPrice = orderTotalPrice + (orderItems.get(i).getPrice() * noIndividualItems.get(i));
-        }
-        // apply GST
-        orderTotalPrice = orderTotalPrice * 1.07;
-        if(isMember){
-            orderTotalPrice = orderTotalPrice * 0.90; // 10% discount
-        }
+    public double getFinalPaymentPrice(){return finalPaymentPrice;}
+
+    public void setFinalPaymentPrice(double finalPaymentPrice) {
+        this.finalPaymentPrice = finalPaymentPrice;
     }
 
-    public void additems(MenuItems item, int qty){
-        // check if item is already inside orderItems
+    public void addOrderItem(MenuItem orderItem, long quantity) {
+        // check if orderItem exists in the list
         boolean found = false;
-        for(int i = 0; i < noOfItems; i++){
-            if(orderItems.get(i).getName() == item.getName()){
-                noIndividualItems.set(i, (noIndividualItems.get(i) + qty));
+        for (int i = 0; i < orderItemList.size(); i++) {
+            // if item exists in the list, update it
+            if (orderItemList.get(i).getItem().getName() == orderItem.getName()) {
+                orderItemList.get(i).setQuantity(orderItemList.get(i).getQuantity() + quantity);
                 found = true;
                 break;
             }
         }
-        // if new menuitem to order, add new entry to order
-        if(!found){
-            orderItems.add(item);
-            noIndividualItems.add(qty);
+        // if not found, add new orderitem
+        if (!found) {
+            OrderItems newItem = new OrderItems(orderItem, quantity);
+            orderItemList.add(newItem);
+        }
+        totalPrice = totalPrice + orderItem.getPrice() * quantity;
+    }
+
+    public void removeOrderItem(int orderItemIndex, long quantity) {
+        // if user specified more quantity than recorded, Assume user wants to remove all of the item order
+        if(quantity >= orderItemList.get(orderItemIndex).getQuantity()){
+            orderItemList.remove(orderItemIndex);
+            totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * orderItemList.get(orderItemIndex).getQuantity();
+        }
+        else{
+            orderItemList.get(orderItemIndex).setQuantity(orderItemList.get(orderItemIndex).getQuantity() - quantity);
+            totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * quantity;
         }
     }
 
-    public void remItems(MenuItems item, int qty){
-        boolean found = false;
-        for(int i = 0; i < noOfItems; i++) {
-            if (orderItems.get(i).getName() == item.getName()) {
-                noIndividualItems.set(i, (noIndividualItems.get(i) - qty));
-                // if complete removal of menuitem -> don't want the item anymore
-                if(noIndividualItems.get(i) == 0){
-                    orderItems.remove(i);
-                }
-                found = true;
-                break;
-            }
-        }
-        if(!found){
-            System.out.println("Item not found in order!");
-        }
-    }
 
-    public void viewOrder(long oID){
-
-    }
 }
