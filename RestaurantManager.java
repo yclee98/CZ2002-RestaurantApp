@@ -1,6 +1,6 @@
 public class
-RestuarantManager{
-    public RestuarantManager(){
+RestaurantManager{
+    public RestaurantManager(){
 
     }
 

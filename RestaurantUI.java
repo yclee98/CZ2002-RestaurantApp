@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class RestuarantUI {
+public class RestaurantUI {
     private static Scanner userInput = new Scanner(System.in);
 
     public static void main(String[] args){
