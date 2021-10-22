@@ -12,6 +12,9 @@ public class Order {
     private String orderDateTime;
     private Customer customer;
     private double totalPrice;
+    private double discountValue;
+    private double gstValue;
+    private double serviceCharge;
     private double finalPaymentPrice;
 
     public Order(long staffID, Customer customer, int tableNo) {
@@ -24,6 +27,9 @@ public class Order {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         orderDateTime = now.format(format);
         finalPaymentPrice = 0;
+        discountValue = 0;
+        gstValue = 0;
+        serviceCharge = 0;
     }
 
     public long getOrderID() {
@@ -58,6 +64,30 @@ public class Order {
         this.finalPaymentPrice = finalPaymentPrice;
     }
 
+    public void setDiscountValue(double discountValue) {
+        this.discountValue = discountValue;
+    }
+
+    public void setGstValue(double gstValue) {
+        this.gstValue = gstValue;
+    }
+
+    public void setServiceCharge(double serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
+
+    public double getDiscountValue() {
+        return discountValue;
+    }
+
+    public double getGstValue() {
+        return gstValue;
+    }
+
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
     public void addOrderItem(MenuItem orderItem, long quantity) {
         // check if orderItem exists in the list
         boolean found = false;
@@ -88,4 +118,7 @@ public class Order {
             totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * quantity;
         }
     }
+
+
+
 }

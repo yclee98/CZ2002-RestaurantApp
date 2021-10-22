@@ -8,11 +8,14 @@ public class OrderInvoice {
     private String orderDateTime;
     private long customerID;
     private double totalPrice;
+    private double discount;
+    private double serviceCharge;
+    private double gST;
     private double finalPaymentPrice;
     private String orderitems;
 
     public OrderInvoice(long orderID, long staffID, long customerID, int tableNumber, String orderDateTime,
-                        String orderitems, double totalPrice, double finalPaymentPrice){
+                        String orderitems, double totalPrice, double gST, double serviceCharge, double discount, double finalPaymentPrice){
         this.orderID = orderID;
         this.staffID = staffID;
         this.tableNumber = tableNumber;
@@ -21,70 +24,58 @@ public class OrderInvoice {
         this.totalPrice = totalPrice;
         this.finalPaymentPrice = finalPaymentPrice;
         this.orderitems = orderitems;
+        this.discount = discount;
+        this.gST = gST;
+        this.serviceCharge = serviceCharge;
     }
 
     public long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(long orderID) {
-        this.orderID = orderID;
-    }
-
     public long getStaffID() {
         return staffID;
-    }
-
-    public void setStaffID(long staffID) {
-        this.staffID = staffID;
     }
 
     public String getOrderDateTime() {
         return orderDateTime;
     }
 
-    public void setOrderDateTime(String orderDateTime) {this.orderDateTime = orderDateTime;}
-
     public long getCustomerID() {
         return customerID;
-    }
-
-    public void setCustomerID(long customerID) {
-        this.customerID = customerID;
     }
 
     public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
-
     public int getTableNumber() {
         return tableNumber;
-    }
-
-    public void setTableNumber(int tableNumber) {
-        this.tableNumber = tableNumber;
     }
 
     public double getFinalPaymentPrice() {
         return finalPaymentPrice;
     }
 
-    public void setFinalPaymentPrice(double finalPaymentPrice) {
-        this.finalPaymentPrice = finalPaymentPrice;
-    }
-
-    public String getOrderitems() {
+    public String getOrderItems() {
         return orderitems;
     }
 
-    public void setOrderitems(String orderitems) {
-        this.orderitems = orderitems;
+    public double getDiscount() {
+        return discount;
+    }
+
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public double getGST() {
+        return gST;
     }
 
     public String toCSVFormat() {
         return orderID + "," + staffID + "," + customerID + "," + tableNumber + "," + orderDateTime
-                + "," + orderitems + "," + totalPrice + "," + finalPaymentPrice;
+                + "," + orderitems + "," + totalPrice + "," + gST + "," + serviceCharge + "," + discount + "," +
+                finalPaymentPrice;
     }
 }

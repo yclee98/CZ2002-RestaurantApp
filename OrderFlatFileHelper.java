@@ -14,7 +14,7 @@ public class OrderFlatFileHelper extends Manager{
             @Override
             public String getColumnsName() {
                 return "OrderID, StaffID, CustomerID, Table Number, date, " +
-                        "orderItems, totalPrice, paymentPrice";
+                        "orderItems, totalPrice, GST, Service, Member_Discount, paymentPrice";
             }
 
             @Override
@@ -30,16 +30,18 @@ public class OrderFlatFileHelper extends Manager{
             public void extractRow(String[] row) {
                 orderInvoices.add(new OrderInvoice(Long.parseLong(row[0]), Long.parseLong(row[1]),
                         Long.parseLong(row[2]), Integer.parseInt(row[3]), row[4], row[5],
-                        Double.parseDouble(row[6]), Double.parseDouble(row[7])));
+                        Double.parseDouble(row[6]), Double.parseDouble(row[7]), Double.parseDouble(row[8]),
+                        Double.parseDouble(row[9]), Double.parseDouble(row[10])));
             }
         });
     }
 
-    public void addToArray(OrderInvoice an){
-        orderInvoices.add(an);
+    public void addToArray(OrderInvoice invoice){
+        orderInvoices.add(invoice);
     }
     // OrderID, StaffID, CustomerID, Table Number, date,
     // orderItems, totalPrice, paymentPrice
+
     public static void main(String[] args){
         OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
 

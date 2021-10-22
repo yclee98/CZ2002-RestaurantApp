@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class OrderManager {
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private double discount = 0.1;
     private double taxes = 0.07;
-    private static DecimalFormat df = new DecimalFormat("0.00");
+    private double service = 0.05;
 
     public OrderManager(){}
 
@@ -100,14 +98,13 @@ public class OrderManager {
         System.out.println("\nConfirm and proceed to payment? (Y/N): ");
         userReply = userInput.next();
         if(Objects.equals(userReply, "Y")){
-
-            OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
             InvoiceManager iManager = new InvoiceManager();
 
             payOrder.setFinalPaymentPrice(paymentPrice);
-            OrderInvoice invoice = iManager.convertOrderToInvoice(payOrder);
-            orderHelper.addToArray(invoice);
-            orderHelper.saveData();
+            iManager.saveOrder(payOrder);
+//            OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
+//            orderHelper.addToArray(invoice);
+//            orderHelper.saveData();
         }
     }
 
@@ -120,19 +117,23 @@ public class OrderManager {
             if(orderList.get(i).getOrderID() == orderID){
                 payOrder = orderList.get(i);
                 double taxesValue = payOrder.getTotalPrice() * taxes;
-
+                double serviceValue = payOrder.getTotalPrice() * service;
+                payOrder.setServiceCharge(serviceValue);
+                payOrder.setGstValue(taxes);
                 if(payOrder.getCustomer().isMember()){
-                    finalPrice = payOrder.getTotalPrice() * (1+taxes) * (1-discount);
+                    finalPrice = payOrder.getTotalPrice() * (1+taxes+service) * (1-discount);
                     System.out.println("-------------------------------------");
                     double discountValue = payOrder.getTotalPrice() * discount;
                     System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
                     System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
+                    payOrder.setDiscountValue(discountValue);
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes);
                     System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
                 }
+
             }
         }
         System.out.printf("Final payment Price = $%.2f", finalPrice);
