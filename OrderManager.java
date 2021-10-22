@@ -7,6 +7,7 @@ public class OrderManager {
     private double discount = 0.1;
     private double taxes = 0.07;
     private double service = 0.05;
+    private Scanner userInput = new Scanner(System.in);
 
     public OrderManager(){}
 
@@ -26,7 +27,6 @@ public class OrderManager {
     }
 
     public void removeItemFromOrder(long orderID){
-        Scanner userInput = new Scanner(System.in);
         int removeItemIndex, quantity;
         boolean found = false;
         // find the corresponding order
@@ -44,6 +44,7 @@ public class OrderManager {
                         System.out.println("ERROR: Removing more than there is!");
                         break;
                     }
+                    break;
                 }
                 orderList.get(i).removeOrderItem(removeItemIndex-1, quantity);
                 System.out.print("Please verify ");
@@ -75,18 +76,20 @@ public class OrderManager {
     }
 
     public void settlePayment(long orderID){
-        Scanner userInput = new Scanner(System.in);
         String userReply;
         Order payOrder = null;
         double paymentPrice;
+        boolean found = false;
         for(int i = 0; i < orderList.size(); i++) {
             if (orderList.get(i).getOrderID() == orderID) {
+                found = true;
                 payOrder = orderList.get(i);
+                break;
             }
-            else{
-                System.out.println("ERROR: unable to find order");
-                return;
-            }
+        }
+        if(!found){
+            System.out.println("ERROR: Unable to find order");
+            return;
         }
         System.out.println("Paying for order: " + orderID);
         System.out.println("Please verify the order: ");

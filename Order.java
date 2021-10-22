@@ -110,12 +110,12 @@ public class Order {
     public void removeOrderItem(int orderItemIndex, long quantity) {
         // if user specified more quantity than recorded, Assume user wants to remove all of the item order
         if(quantity >= orderItemList.get(orderItemIndex).getQuantity()){
-            orderItemList.remove(orderItemIndex);
             totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * orderItemList.get(orderItemIndex).getQuantity();
+            orderItemList.remove(orderItemIndex);
         }
         else{
-            orderItemList.get(orderItemIndex).setQuantity(orderItemList.get(orderItemIndex).getQuantity() - quantity);
             totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * quantity;
+            orderItemList.get(orderItemIndex).setQuantity(orderItemList.get(orderItemIndex).getQuantity() - quantity);
         }
     }
 

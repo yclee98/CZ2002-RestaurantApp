@@ -2,7 +2,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InvoiceManager {
-    private ArrayList<OrderInvoice> invoiceList = new ArrayList<OrderInvoice>();
+
+    protected ArrayList<OrderInvoice> invoiceList;
+
+    public InvoiceManager(){
+        initializeInvoiceList();
+    }
+
     public OrderInvoice convertOrderToInvoice(Order orderToStore) {
         // convert all Orderitems to itemName and qty in string
         String orderItemStr = "";
@@ -61,8 +67,22 @@ public class InvoiceManager {
     public void saveOrder(Order paidOrder) {
         OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
         OrderInvoice newInvoice = convertOrderToInvoice(paidOrder);
-        invoiceList.add(newInvoice);
+        orderHelper.retrieveData();
         orderHelper.addToArray(newInvoice);
         orderHelper.saveData();
+    }
+
+    private void initializeInvoiceList(){
+        OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
+        orderHelper.retrieveData();
+        invoiceList = orderHelper.orderInvoices;
+    }
+
+    public void printAllInvoices(){
+        long invoiceIDs;
+        for(int i = 0; i < invoiceList.size(); i++){
+            invoiceIDs = invoiceList.get(i).getOrderID();
+            printInvoice(invoiceIDs);
+        }
     }
 }

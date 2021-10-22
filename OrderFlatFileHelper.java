@@ -3,7 +3,9 @@ import FlatFile.FlatFileAdapter;
 import java.util.ArrayList;
 
 public class OrderFlatFileHelper extends Manager{
-    ArrayList<OrderInvoice> orderInvoices = new ArrayList<OrderInvoice>();
+
+    protected ArrayList<OrderInvoice> orderInvoices = new ArrayList<OrderInvoice>();
+
     public void createFlatFileAdapter(){
         super.addFlatFileAdapter(new FlatFileAdapter(){
             @Override
@@ -53,9 +55,23 @@ public class OrderFlatFileHelper extends Manager{
         oManager.addItemToOrder(orderID, burger, 2);
         oManager.addItemToOrder(orderID, wrap, 2);
 
+
+        long orderID2 = oManager.createOrder(456, bob, 5);
+        oManager.addItemToOrder(orderID2, burger, 2);
+        oManager.addItemToOrder(orderID2, wrap, 2);
+
+        oManager.removeItemFromOrder(orderID2);
+
         oManager.settlePayment(orderID);
         InvoiceManager iManager = new InvoiceManager();
         iManager.printInvoice(orderID);
+
+        oManager.settlePayment(orderID2);
+        iManager.printInvoice(orderID2);
+
+//        System.out.println("Invoices in InvoiceList = " + iManager.invoiceList.size());
+
+        iManager.printAllInvoices();
 
 //        System.out.println(orderHelper.orderInvoices.get(0).getOrderID());
 //        System.out.println(orderHelper.orderInvoices.get(0).getStaffID());
