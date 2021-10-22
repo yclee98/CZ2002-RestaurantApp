@@ -39,8 +39,6 @@ public class OrderFlatFileHelper extends Manager{
     public void addToArray(OrderInvoice invoice){
         orderInvoices.add(invoice);
     }
-    // OrderID, StaffID, CustomerID, Table Number, date,
-    // orderItems, totalPrice, paymentPrice
 
     public static void main(String[] args){
         OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();

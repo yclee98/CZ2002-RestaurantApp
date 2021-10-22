@@ -53,7 +53,6 @@ public class OrderManager {
         if(!found){
             System.out.println("ERROR: Order not found!");
         }
-
     }
 
     public void viewOrder(long orderID){
@@ -91,20 +90,14 @@ public class OrderManager {
         }
         System.out.println("Paying for order: " + orderID);
         System.out.println("Please verify the order: ");
-
         viewOrder(orderID);
         paymentPrice = calculateFinalPrice(orderID);
-
         System.out.println("\nConfirm and proceed to payment? (Y/N): ");
         userReply = userInput.next();
         if(Objects.equals(userReply, "Y")){
             InvoiceManager iManager = new InvoiceManager();
-
             payOrder.setFinalPaymentPrice(paymentPrice);
             iManager.saveOrder(payOrder);
-//            OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
-//            orderHelper.addToArray(invoice);
-//            orderHelper.saveData();
         }
     }
 

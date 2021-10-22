@@ -2,7 +2,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InvoiceManager {
-
+    private ArrayList<OrderInvoice> invoiceList = new ArrayList<OrderInvoice>();
     public OrderInvoice convertOrderToInvoice(Order orderToStore) {
         // convert all Orderitems to itemName and qty in string
         String orderItemStr = "";
@@ -60,7 +60,9 @@ public class InvoiceManager {
 
     public void saveOrder(Order paidOrder) {
         OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
-        orderHelper.addToArray(convertOrderToInvoice(paidOrder));
+        OrderInvoice newInvoice = convertOrderToInvoice(paidOrder);
+        invoiceList.add(newInvoice);
+        orderHelper.addToArray(newInvoice);
         orderHelper.saveData();
     }
 }
