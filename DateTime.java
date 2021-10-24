@@ -5,6 +5,9 @@ import java.util.Calendar;
  * This class implement 3 static function of date time and epoch time
  * Epoch is the number of miliseconds that have elapsed since January 1, 1970 and 
  * it is stored as a long variable
+ * In epoch:
+ * 1 day = 86400000 miliseconds
+ * 1 month = 2678400000 miliseconds
  */
 public class DateTime {
     /**
