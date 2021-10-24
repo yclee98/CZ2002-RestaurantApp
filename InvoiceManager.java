@@ -14,7 +14,7 @@ public class InvoiceManager {
 
             orderItemStr = orderItemStr.concat(itemNameStr + "/" + itemQtyStr + "|");
         }
-
+        
         return new OrderInvoice(orderToStore.getOrderID(), orderToStore.getStaffID(),
                 orderToStore.getCustomer().getCustomerID(), orderToStore.getTableNumber(),
                 orderToStore.getOrderDateTime(), orderItemStr, orderToStore.getTotalPrice(),
@@ -31,7 +31,8 @@ public class InvoiceManager {
                 System.out.println("Customer ID: " + orderHelper.orderInvoices.get(i).getCustomerID());
                 System.out.println("Staff ID: " + orderHelper.orderInvoices.get(i).getStaffID());
                 System.out.println("Table Number: " + orderHelper.orderInvoices.get(i).getTableNumber());
-                System.out.println("Date & Time: " + orderHelper.orderInvoices.get(i).getOrderDateTime());
+                //*************change to display date time in string format from long
+                System.out.println("Date & Time: " + DateTime.epochToDate(orderHelper.orderInvoices.get(i).getOrderDateTime(), true));
                 System.out.println("============= Items ==============");
                 ArrayList<String> orderItems = unpackOrderItemStr(orderHelper.orderInvoices.get(i).getOrderItems());
                 for (int j = 0; j < orderItems.size(); j++) {

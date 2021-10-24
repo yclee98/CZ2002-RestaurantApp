@@ -1,11 +1,10 @@
-import java.util.ArrayList;
-
 public class OrderInvoice {
 
     private long orderID;
     private long staffID;
     private int tableNumber;
-    private String orderDateTime;
+    //*************private String orderDateTime; change to long
+    private long orderDateTime;
     private long customerID;
     private double totalPrice;
     private double discount;
@@ -14,7 +13,8 @@ public class OrderInvoice {
     private double finalPaymentPrice;
     private String orderitems;
 
-    public OrderInvoice(long orderID, long staffID, long customerID, int tableNumber, String orderDateTime,
+    //*************change to datetime to long in constructor
+    public OrderInvoice(long orderID, long staffID, long customerID, int tableNumber, long orderDateTime, 
                         String orderitems, double totalPrice, double gST, double serviceCharge, double discount, double finalPaymentPrice){
         this.orderID = orderID;
         this.staffID = staffID;
@@ -36,9 +36,9 @@ public class OrderInvoice {
     public long getStaffID() {
         return staffID;
     }
-
-    public String getOrderDateTime() {
-        return orderDateTime;
+    //*************change to return long
+    public long getOrderDateTime() {
+        return orderDateTime; 
     }
 
     public long getCustomerID() {

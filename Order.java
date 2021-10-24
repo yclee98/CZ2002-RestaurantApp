@@ -9,7 +9,8 @@ public class Order {
     private ArrayList<OrderItems> orderItemList = new ArrayList<OrderItems>();
     private long staffID;
     private int tableNumber;
-    private String orderDateTime;
+    //*************private String orderDateTime; change to long
+    private long orderDateTime;
     private Customer customer;
     private double totalPrice;
     private double discountValue;
@@ -23,9 +24,11 @@ public class Order {
         this.staffID = staffID;
         this.customer = customer;
         tableNumber = tableNo;
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        orderDateTime = now.format(format);
+        //*************change orderDatetime to store epoch time in long 
+        // LocalDateTime now = LocalDateTime.now();
+        // DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        // orderDateTime = now.format(format);
+        orderDateTime = DateTime.getEpochNow();
         finalPaymentPrice = 0;
         discountValue = 0;
         gstValue = 0;
@@ -48,7 +51,10 @@ public class Order {
 
     public int getTableNumber(){ return tableNumber; }
 
-    public String getOrderDateTime() { return orderDateTime; }
+    //*************change to long
+    public long getOrderDateTime() { 
+        return orderDateTime; 
+    }
 
     public ArrayList<OrderItems> getOrderItemList(){
         return orderItemList;
