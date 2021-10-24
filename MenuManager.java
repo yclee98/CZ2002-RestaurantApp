@@ -1,10 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+package RestaurantProject;
 
-public class MenuManager {
+import java.util.ArrayList;
+
+import RestaurantProject.FlatFile.FlatFileAdapter;
+
+public class MenuManager extends Manager {
 	
-	private List<MenuItem> menuList = new ArrayList<MenuItem>();
-	private List<MenuCate> cateList = new ArrayList<MenuCate>();
+	public ArrayList<MenuItem> menuList = new ArrayList<MenuItem>();
+	
+	public PromoManager promo = new PromoManager();
+	
+	public CateManager cate = new CateManager();
 	
 	public MenuManager() {
 	}
@@ -16,11 +22,20 @@ public class MenuManager {
 		menuList.add(temp);
         
     }
+	
+	public ArrayList<MenuItem> getMenuList(){
+		return menuList;
+	}
 
     public void viewAllMenuItems() {
     	//Printing names based on creation time
     	for(int i=0; i < menuList.size(); i++) {
-			System.out.println(menuList.get(i).getName());
+    		System.out.println("--------------------");
+			System.out.printf((i+1)+ ". " + menuList.get(i).getName() + " | $%.2f\n", menuList.get(i).getPrice());
+			System.out.printf("ID: %.0f\n", menuList.get(i).getItemID());
+			System.out.println(menuList.get(i).getItemCate().getCatName());
+			System.out.println(menuList.get(i).getDescription());
+			System.out.println("--------------------");
 		}
     }
 
@@ -107,8 +122,8 @@ public class MenuManager {
 			}
 		}
     	
-    	if(found) System.out.println(foundItem.getItemID() + " removed.");
-    	else System.out.println(foundItem.getItemID() + " not found.");
+    	if(found) System.out.println("ID " + itemId + " removed.");
+    	else System.out.println("ID " + itemId + " not found.");
     	
     	foundItem = null; //removing the pointer, the item will be deleted by garbage collector
     }
@@ -118,32 +133,24 @@ public class MenuManager {
     	MenuItem foundItem = null;
     	
     	for(int i=0; i < menuList.size(); i++) {
-			if(menuList.get(i).getName() == itemName) {
-				found = true; //found item ID
+			if(menuList.get(i).getName().equals(itemName)){
+				found = true; //found item name
 				foundItem = menuList.get(i);
 				menuList.remove(i); //remove from menuList
 				break; //exit for loop
 			}
 		}
     	
-    	if(found) System.out.println(foundItem.getItemID() + " removed.");
-    	else System.out.println(foundItem.getItemID() + " not found.");
+    	if(found) System.out.println(itemName + " removed.");
+    	else System.out.println(itemName + " not found.");
     	
     	foundItem = null; //removing the pointer, the item will be deleted by garbage collector
     }
-
-    public void createMenuCate(String catName, long catID) {
+    
+    public boolean checkItemExists(String itemName) {
     	
-    	MenuCate temp = new MenuCate(catName, catID);
-    	
-    	cateList.add(temp); //add this category to the list
-    	
-    }
-
-    public boolean checkCateExists(String catName) {
-    	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatName().equals(catName)) {
+    	for(int i=0; i < menuList.size(); i++) {
+    		if(menuList.get(i).getName().equals(itemName)) {
     			return true; //exists
     		}
     	}
@@ -152,10 +159,10 @@ public class MenuManager {
     	
     }
     
-    public boolean checkCateExists(long catID) {
+    public boolean checkItemExists(long itemID) {
     	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatID() == catID) {
+    	for(int i=0; i < menuList.size(); i++) {
+    		if(menuList.get(i).getItemID() == itemID) {
     			return true; //exists
     		}
     	}
@@ -164,36 +171,64 @@ public class MenuManager {
     	
     }
     
-    public MenuCate returnMenuCate(String catName) {
+    public void populatePromoList(PromoSetMeal promoItem) {
     	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatName().equals(catName)) {
-    			return cateList.get(i); //exists
+    	for(int i=0; i < promoItem.getItemNameList().size(); i++) {
+    		if(checkItemExists(promoItem.getItemNameList().get(i))) { //MenuItem name exists in the menu
+    			promoItem.addItem(returnIndividualMenuItem(promoItem.getItemNameList().get(i)));
+    			System.out.println(promoItem.getItemNameList().get(i) + " added.");
     		}
+    		else {
+    			System.out.println(promoItem.getItemNameList().get(i) + " not found.");
+    		}
+    		
     	}
-
-    	return null; //does not exist
     	
     }
     
-    public MenuCate returnMenuCate(long catID) {
-    	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatID() == catID) {
-    			return cateList.get(i); //exists
+    public void populateAllPromos() {
+
+    	for(int i=0; i < promo.getPromoList().size(); i++) {
+    		
+    		for(int j=0; j < promo.getPromoList().get(i).getItemNameList().size(); j++) {
+    		
+    			promo.getPromoList().get(i).addItem(
+    					returnIndividualMenuItem(promo.getPromoList().get(i).getItemNameList().get(j)));
     		}
+    		
     	}
-
-    	return null; //does not exist
-    	
     }
 
-    public void viewAllMenuCate() {
-    	//Printing names based on creation time
-    	System.out.println(cateList.size());
-    	for(int i=0; i < cateList.size(); i++) {
-			System.out.println(cateList.get(i).getCatName());
-		}
-    }
+    
+    @Override
+    public void createFlatFileAdapter() {
+        super.addFlatFileAdapter(new FlatFileAdapter(){
+            @Override
+            public String getFileName() {
+                return "menu.csv";
+            }
 
+            @Override
+            public String getColumnsName() {
+                return "Item ID,Item Name,Price,Category,Description";
+            }
+
+            @Override
+            public String insertRow(int index) {
+                try{
+                    return menuList.get(index).toCSVFormat();
+                }catch (Exception e){
+                    return null;
+                }
+            }
+
+            @Override
+            public void extractRow(String[] row) {
+            	
+                createMenuItem(row[1], row[4], Float.parseFloat(row[2]), 
+                		Long.parseLong(row[0]), cate.returnMenuCate(row[3]));                
+            }
+        });  
+    
+    }
 }
