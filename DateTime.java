@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.Calendar;
 /**
  * This class implement 3 static function of date time and epoch time
@@ -29,17 +30,25 @@ public class DateTime {
         Calendar cal = Calendar.getInstance();
         cal.clear();
         cal.set(year, month-1, day);
-        Date test = cal.getTime();
-        return test.getTime(); 
+        Date toEpoch = cal.getTime();
+        return toEpoch.getTime(); 
+    }
+
+    public static long dateTimeToEpoch(int day, int month, int year, int hourOfDay, int minute){
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(year, month-1, day, hourOfDay, minute);
+        Date toEpoch = cal.getTime();
+        return toEpoch.getTime(); 
     }
 
     /**
      * Convert a long epoch time to a human readable string date time
-     * @param l, the epoch time in long
+     * @param epochTime, the epoch time in long
      * @param time, a boolean to indicate if time is to be included 
      * @return
      */
-    public static String epochToDate(Long l, boolean time){
+    public static String epochToDate(Long epochTime, boolean time){
         SimpleDateFormat formatter;
         if(time == true){
             formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -48,7 +57,13 @@ public class DateTime {
             formatter = new SimpleDateFormat("dd-MM-yyyy");
         }
         
-        Date dateTime = new Date(l);
+        Date dateTime = new Date(epochTime);
         return formatter.format(dateTime);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Long datetime = dateTimeToEpoch(28, 10, 2021, 23, 44);
+        System.out.println(epochToDate(datetime, true));
+
     }
 }
