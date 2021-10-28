@@ -33,7 +33,15 @@ public class DateTime {
         Date toEpoch = cal.getTime();
         return toEpoch.getTime(); 
     }
-
+    /**
+     * Take in day month year hour and minute to convert into epoch
+     * @param day
+     * @param month
+     * @param year
+     * @param hourOfDay
+     * @param minute
+     * @return
+     */
     public static long dateTimeToEpoch(int day, int month, int year, int hourOfDay, int minute){
         Calendar cal = Calendar.getInstance();
         cal.clear();

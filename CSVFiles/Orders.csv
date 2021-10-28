@@ -1,3 +1,0 @@
-OrderID, StaffID, CustomerID, Table Number, date, orderItems, totalPrice, GST, Service, Member_Discount, paymentPrice
-123,456,789,4,1631635200000,burger/2|fries/2|milkshake/2|,12.0,14.0,1.0,2.0,3.0
-123,456,789,4,1635270785756,burger/2|fries/2|milkshake/2|,12.0,14.0,1.0,2.0,3.0

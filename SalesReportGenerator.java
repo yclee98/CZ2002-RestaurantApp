@@ -41,9 +41,10 @@ public class SalesReportGenerator {
         ArrayList<SaleReportItem> saleReportItems = new ArrayList<>();
         ArrayList<String[]> orderItems;
         int index;
-        double totalRevenue=0;
+        double[] dataArray = new double[]{0,0,0,0,0}; //0: Total price, 1: GST, 2: Service Charge, 3:discount, 4:final payment
         Long endDate;
         Long orderDateTime;
+
         if(period == Period.Day){
             endDate=startDate + 86400000L; //add in 1 day
         }
@@ -60,7 +61,13 @@ public class SalesReportGenerator {
 
             if(orderDateTime>=startDate && orderDateTime<=endDate){ //if invoice date between startdate and enddate
                 System.out.println("Adding invoice " + orderInvoice.getOrderID() + " @ " +DateTime.epochToDate(orderDateTime, true));//remove
-                totalRevenue+=orderInvoice.getFinalPaymentPrice();
+
+                dataArray[0]+=orderInvoice.getTotalPrice();
+                dataArray[1]+=orderInvoice.getGST();
+                dataArray[2]+=orderInvoice.getServiceCharge();
+                dataArray[3]+=orderInvoice.getDiscount();
+                dataArray[4]+=orderInvoice.getFinalPaymentPrice();
+
                 orderItems = unpackOrderItemStr(orderInvoice.getOrderItems());
                 
                 for(String[] item: orderItems){
@@ -75,20 +82,28 @@ public class SalesReportGenerator {
             }
             
         }
-        printReport(saleReportItems, totalRevenue);
+        printReport(saleReportItems, dataArray);
         
     }
-    //https://www.homeandlearn.co.uk/java/java_formatted_strings.html
-    public void printReport(ArrayList<SaleReportItem> saleReportItems, double totalRevenue){
+    
+    public void printReport(ArrayList<SaleReportItem> saleReportItems,double[] dataArray){
         Collections.sort(saleReportItems);
-        System.out.println("----------------------------------");
-        System.out.printf("%-20s%s\n", "Name", "Quantity Sold");
-        System.out.println("----------------------------------");
+        System.out.println("------------------------------------------------");
+        System.out.printf("%-20s%-20s\n", "Name", "Quantity Sold");
+        System.out.println("------------------------------------------------");
+
         for(SaleReportItem i: saleReportItems){
             System.out.printf("%-20s%02d\n", i.getName(), i.getQuantity());
         }
-        System.out.println("----------------------------------");
-        System.out.printf("%-20s$%.2f\n","Total Revenue", totalRevenue);
+
+        System.out.println("------------------------------------------------");
+        System.out.printf("%-40s$%.2f\n","Total Sales", dataArray[0]);
+        System.out.printf("%-40s$%.2f\n","Total GST", dataArray[1]);
+        System.out.printf("%-40s$%.2f\n","Total Service Charge", dataArray[2]);
+        System.out.printf("%-40s($%.2f)\n","Total Discount", dataArray[3]);
+        double cal = dataArray[0] + dataArray[1] + dataArray[2] - dataArray[3];
+        System.out.printf("%-40s$%.2f\n","Total Revenue cal", cal);
+        System.out.printf("%-40s$%.2f\n","Total Revenue", dataArray[4]);
     }
 
     public ArrayList<String[]> unpackOrderItemStr(String orderItemStr) {
