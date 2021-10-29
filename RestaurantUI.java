@@ -71,135 +71,21 @@ public class RestaurantUI {
             userInput.nextLine(); //clear \n buffer
             System.out.println();
             
-            int choice;
-            
             switch(option){
             	case 1: //Menu Options
             		
-            		do {
-            			System.out.println("*****Menu Options*****");
-                		System.out.println("1. View Menu");
-                		System.out.println("2. Create Menu Item");
-                        System.out.println("3. Update Menu Item");
-                        System.out.println("4. Remove Menu Item");
-                        System.out.println("5. Save Menu");
-                        System.out.println("6. Load Menu");
-                        System.out.println("7. Back");
-                        choice = userInput.nextInt();
-                        userInput.nextLine(); //clear \n buffer
-                        System.out.println();
-                        
-                        switch(choice) {
-                        	case 1: //View Menu
-	                        	menu.viewAllMenuItems();
-	                            break;
-                        	case 2: //Create Menu Item
-                        		createMenuItem();
-                        		break;
-                        	case 3: //Update Menu Item
-                        		
-                        		break;
-                        	case 4: //Remove Menu Item
-                        		removeMenuItem();
-                        		break;
-                        	case 5: //Save Menu
-                        		menu.saveData();
-                        		break;
-                        	case 6: //Load Menu
-                        		menu.getMenuList().clear();
-                            	menu.retrieveData();
-                        		break;
-                        	default:
-                        		break;
-                        }
-                        
-            		}while(choice > 0 && choice < 7);
+            		menu.menuOptions();
             		
             		break;
                 case 2: //Promotion Options
                 	
-            		do {
-            			System.out.println("*****Promotion Options*****");
-                		System.out.println("1. View Promotions");
-                		System.out.println("2. Create Promotion");
-                        System.out.println("3. Update Promotion");
-                        System.out.println("4. Remove Promotion");
-                        System.out.println("5. Save Promotion");
-                        System.out.println("6. Load Promotion");
-                        System.out.println("7. Back");
-                        choice = userInput.nextInt();
-                        userInput.nextLine(); //clear \n buffer
-                        System.out.println();
-                        
-                        switch(choice) {
-                        	case 1: //View Promotions
-	                        	menu.promo.viewAllPromo();
-	                            break;
-                        	case 2: //Create Promotion
-                        		createPromotion();
-                        		break;
-                        	case 3: //Update Promotion
-                        		
-                        		break;
-                        	case 4: //Remove Promotion
-                        		removePromotion();
-                        		break;
-                        	case 5: //Save Promotions
-                        		menu.promo.saveData();
-                        		break;
-                        	case 6: //Load Promotions
-                        		menu.promo.getPromoList().clear();
-                            	menu.promo.retrieveData();
-                            	menu.populateAllPromos();
-                        		break;
-                        	default:
-                        		break;
-                        }
-                        
-            		}while(choice > 0 && choice < 7);
+            		menu.promotionOptions();
             		
             		break;
 
                 case 3: //Category Options
                 	
-                	do {
-            			System.out.println("*****Category Options*****");
-                		System.out.println("1. View Categories");
-                		System.out.println("2. Create Category");
-                        System.out.println("3. Update Category");
-                        System.out.println("4. Remove Category");
-                        System.out.println("5. Save Categories");
-                        System.out.println("6. Load Categories");
-                        System.out.println("7. Back");
-                        choice = userInput.nextInt();
-                        userInput.nextLine(); //clear \n buffer
-                        System.out.println();
-                        
-                        switch(choice) {
-                        	case 1: //View Categories
-                        		menu.cate.viewAllMenuCate();
-	                            break;
-                        	case 2: //Create Category
-                        		createCate();
-                        		break;
-                        	case 3: //Update Category
-                        		
-                        		break;
-                        	case 4: //Remove Category
-                        		
-                        		break;
-                        	case 5: //Save Categories
-                        		menu.cate.saveData();
-                        		break;
-                        	case 6: //Load Categories
-                        		menu.cate.getCateList().clear();
-                            	menu.cate.retrieveData();
-                        		break;
-                        	default:
-                        		break;
-                        }
-                        
-            		}while(choice > 0 && choice < 7);
+                	menu.categoryOptions();
             		
             		break;
                 
@@ -210,141 +96,6 @@ public class RestaurantUI {
         }while(option>0 && option<4);
     }
     
-    private static void createMenuItem() {
-    	
-    	System.out.println("Enter the name of the menu item");
-		String name = userInput.nextLine();
-		
-		System.out.println("Enter the description of the menu item");
-		String description = userInput.nextLine();
-		
-		System.out.println("Enter the price of the menu item");
-		float price = userInput.nextFloat();
-		userInput.nextLine(); //clear \n buffer
-		
-		System.out.println("Enter the itemID of the menu item");
-		long itemID = userInput.nextInt();
-		userInput.nextLine(); //clear \n buffer
-		
-		System.out.println("Enter the category of the menu item");
-		String itemCate = userInput.nextLine();
-		
-		if(menu.cate.checkCateExists(itemCate)) {
-			menu.createMenuItem(name, description, price, itemID, 
-					menu.cate.returnMenuCate(itemCate));
-			System.out.println(name + " created.");
-		}
-		else {
-			System.out.println(itemCate + " does not exist.");
-		}
-    }
-    
-    private static void removeMenuItem() {
-    	
-    	System.out.println("*****Remove Menu Item*****");
-        System.out.println("Select an option");
-        System.out.println("1. Remove by Name"); 
-        System.out.println("2. Remove by ID");
-        System.out.println("3. Back");
-        
-        int option = userInput.nextInt();
-        userInput.nextLine(); //clear \n buffer
-        System.out.println();
-        
-        switch(option) {
-        case 1: //By Name
-        	System.out.println("Enter the name of the menu item");
-			String name = userInput.nextLine();
-			menu.removeMenuItem(name);
-        	break;
-        case 2: //By ID
-        	System.out.println("Enter the ID of the menu item");
-			long itemID = userInput.nextLong();
-			menu.removeMenuItem(itemID);
-			userInput.nextLine(); //clear \n buffer
-        	break;
-        default:
-        	break;
-        }
-    }
-
-    private static void createPromotion() {
-    	System.out.println("Enter the name of the promotion set");
-		String promoName = userInput.nextLine();
-		System.out.println("Enter the price of the promotion set");
-		float price = userInput.nextFloat();
-		userInput.nextLine(); //clear \n buffer
-		
-		menu.promo.createPromoSetMeal(promoName, price);
-		
-		int option;
-		
-		do {
-			System.out.println("*****Add Promotion Item*****");
-            System.out.println("Select an option");
-            System.out.println("1. Add by Name"); 
-            System.out.println("2. Add by ID");
-            System.out.println("3. End");
-            
-            option = userInput.nextInt();
-            userInput.nextLine(); //clear \n buffer
-            System.out.println();
-            
-            switch(option) {
-            case 1: //By Name
-            	System.out.println("Enter the name of the menu item");
-				String name = userInput.nextLine();
-				
-				if(menu.checkItemExists(name)) { //if the item exists
-					menu.promo.returnPromo(promoName).addItem(menu.returnIndividualMenuItem(name));
-					System.out.println(name + " added.");
-				}
-				else {
-					System.out.println(name + " not found.");
-				}
-            	break;
-            case 2: //By ID
-            	System.out.println("Enter the ID of the menu item");
-				long itemID = userInput.nextLong();
-				userInput.nextLine(); //clear \n buffer
-				
-				if(menu.checkItemExists(itemID)) { //if the item exists
-					menu.promo.returnPromo(promoName).addItem(menu.returnIndividualMenuItem(itemID));
-					System.out.println("ID " + itemID + " added.");
-				}
-				else {
-					System.out.println("ID " + itemID + " not found.");
-				}
-				
-            	break;
-            default:
-            	break;
-            }
-		} while(option > 0 && option < 3);
-    }
-    
-    private static void removePromotion() {
-    	System.out.println("Enter the name of the promotion set");
-		String name = userInput.nextLine();
-    	menu.promo.removePromo(name);
-    }
-    
-    private static void createCate() {
-    	System.out.println("Enter the category name");
-		String catName = userInput.nextLine();
-		
-		System.out.println("Enter the category ID");
-		long catID = userInput.nextLong();
-		userInput.nextLine(); //clear \n buffer
-		
-		if(menu.cate.checkCateExists(catName) || menu.cate.checkCateExists(catID)) {
-			System.out.println("Error! Category Name/ID already exists.");
-		}
-		else {
-			menu.cate.createMenuCate(catID, catName);
-			System.out.println(catName + ": ID " + catID+ " created.");
-		}
-    }
     
     private static void orderPage(){
         int option;
