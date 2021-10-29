@@ -86,4 +86,9 @@ public class InvoiceManager {
             printInvoice(invoiceIDs);
         }
     }
+
+    public void viewSaleReport(){
+        SalesReportGenerator salesReportGenerator = new SalesReportGenerator();
+        salesReportGenerator.viewSaleReport(invoiceList);
+    }
 }
