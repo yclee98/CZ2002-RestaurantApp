@@ -66,4 +66,9 @@ public class InvoiceManager {
         orderHelper.addToArray(newInvoice);
         orderHelper.saveData();
     }
+
+    public void viewSaleReport(){
+        SalesReportGenerator salesReportGenerator = new SalesReportGenerator();
+        salesReportGenerator.viewSaleReport(invoiceList);
+    }
 }
