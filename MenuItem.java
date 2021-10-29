@@ -1,4 +1,8 @@
-public class MenuItem {
+package RestaurantProject;
+
+import RestaurantProject.FlatFile.CSVFormat;
+
+public class MenuItem implements CSVFormat{
 	
 	private String name;
 	private String description;
@@ -57,5 +61,13 @@ public class MenuItem {
 		this.itemCate = itemCate;
 	} 
 	
+	@Override
+    public String toCSVFormat() {
+        return itemID + "," +
+            name + "," +
+            price + "," +
+            itemCate.getCatName() + "," +
+            description; 
+    }
 
 }

@@ -1,13 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+package RestaurantProject;
 
-public class promoSetMeal {
+import java.util.ArrayList;
+
+import RestaurantProject.FlatFile.CSVFormat;
+
+public class PromoSetMeal implements CSVFormat{
 	
 	private String name;
-	private List<MenuItem> mealItems = new ArrayList<MenuItem>();
+	private ArrayList<MenuItem> mealItems = new ArrayList<MenuItem>();
+	private ArrayList<String> itemNameList = new ArrayList<String>();
 	private float price;
 	
-	public promoSetMeal(String name, float price){
+	public PromoSetMeal(String name, float price){
 		
 		this.name = name;
 		this.price = price;
@@ -30,9 +34,30 @@ public class promoSetMeal {
 		this.price = price;
 	}
 	
+	public ArrayList<MenuItem> getMealItems(){
+		return mealItems;
+	}
+	
+	public void setMealItems(ArrayList<MenuItem> mealItemList) {
+		//effectively replaces the old ArrayList with the newly input one
+		mealItems.clear(); //clear all items
+		mealItems.addAll(mealItemList); //add all items from the given list
+	}
+	
+	public ArrayList<String> getItemNameList(){
+		return itemNameList;
+	}
+	
+	public void setItemNameList(ArrayList<String> itemList) {
+		//effectively replaces the old ArrayList with the newly input one
+		itemNameList.clear(); //clear all items
+		itemNameList.addAll(itemList); //add all items from the given list
+	}
+	
 	public void addItem(MenuItem newItem) {
 		
 		mealItems.add(newItem);
+		//itemNameList.add(newItem.getName());
 	}
 	
 	public boolean doesIncludeItem(String itemName) {
@@ -88,18 +113,26 @@ public class promoSetMeal {
 		
 	}
 	
-	public void printDescriptions() {
+	public void mealItemstoNameList() {
+		
+		itemNameList.clear();
 		
 		for(int i=0; i < mealItems.size(); i++) {
-			System.out.println(mealItems.get(i).getDescription());
+			itemNameList.add(mealItems.get(i).getName());
 		}
 	}
 	
-	public void printNames() {
+	
+	@Override
+    public String toCSVFormat() {
 		
-		for(int i=0; i < mealItems.size(); i++) {
-			System.out.println(mealItems.get(i).getName());
-		}
-	}
+		mealItemstoNameList();
+		
+		String itemNameListtoString = String.join("|", itemNameList);
+		
+        return name + "," +
+        		price + "," +
+        		itemNameListtoString; 
+    }
 
 }

@@ -1,9 +1,13 @@
-public class MenuCate {
+package RestaurantProject;
+
+import RestaurantProject.FlatFile.CSVFormat;
+
+public class MenuCate implements CSVFormat{
 
 	private String catName;
 	private long catID;
 	
-	public MenuCate(String catName, long catID) {
+	public MenuCate(long catID, String catName) {
 		this.catName = catName;
 		this.catID = catID;
 		
@@ -24,4 +28,11 @@ public class MenuCate {
 	public void setCatID(long catID) {
 		this.catID = catID;
 	}
+	
+	@Override
+    public String toCSVFormat() {
+        return catID + "," +
+        		catName; 
+    }
+
 }
