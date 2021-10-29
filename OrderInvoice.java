@@ -1,4 +1,5 @@
-public class OrderInvoice {
+import FlatFile.CSVFormat;
+public class OrderInvoice implements CSVFormat{
 
     private long orderID;
     private long staffID;

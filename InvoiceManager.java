@@ -51,6 +51,7 @@ public class InvoiceManager {
                 System.out.printf("Member Discount:   -$%.2f\n", orderHelper.orderInvoices.get(i).getDiscount());
                 System.out.printf("Payment Price:      $%.2f\n", orderHelper.orderInvoices.get(i).getFinalPaymentPrice());
                 System.out.println("==================================");
+                return;
             }
         }
     }
