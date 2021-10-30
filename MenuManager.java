@@ -9,130 +9,15 @@ public class MenuManager extends Manager {
 	
 	private static Scanner menuInput = new Scanner(System.in);
 	
-	private ArrayList<MenuItem> menuList = new ArrayList<MenuItem>();
+	public ItemManager item = new ItemManager();
 	
-	private PromoManager promo = new PromoManager();
+	public PromoManager promo = new PromoManager();
 	
-	private CateManager cate = new CateManager();
+	public CateManager cate = new CateManager();
 	
 	public MenuManager() {
 	}
-	
-	public void createMenuItem(String name, String description, 
-			float price, long itemID, MenuCate itemCate) {
-		MenuItem temp = new MenuItem(name, description, price, itemID, itemCate);
-		
-		menuList.add(temp);
-        
-    }
-	
-	public ArrayList<MenuItem> getMenuList(){
-		return menuList;
-	}
 
-	//Viewing Items from List
-	
-    public void viewAllMenuItems() {
-    	//Printing names based on creation time
-    	for(int i=0; i < menuList.size(); i++) {
-    		System.out.println("--------------------");
-			System.out.printf((i+1)+ ". " + menuList.get(i).getName() + " | $%.2f\n", menuList.get(i).getPrice());
-			System.out.printf("ID: %.0f\n", menuList.get(i).getItemID());
-			System.out.println(menuList.get(i).getItemCate().getCatName());
-			System.out.println(menuList.get(i).getDescription());
-			System.out.println("--------------------");
-		}
-    	
-    	System.out.println();
-    }
-
-    public void viewIndividualMenuItem(long itemId){
-    	
-    	if(!checkItemExists(itemId)) {
-    		System.out.println("ID " + itemId + " not found.");
-    		System.out.println();
-    		return;
-    	}
-    	
-    	MenuItem foundItem = returnIndividualMenuItem(itemId);
-    	
-    	System.out.println("--------------------");
-		System.out.printf(foundItem.getName() + " | $%.2f\n", foundItem.getPrice());
-		System.out.printf("ID: %.0f\n", foundItem.getItemID());
-		System.out.println(foundItem.getItemCate().getCatName());
-		System.out.println(foundItem.getDescription());
-		System.out.println("--------------------");
-		
-		System.out.println();
-    }
-    
-    public void viewIndividualMenuItem(String itemName){
-    	
-    	if(!checkItemExists(itemName)) {
-    		System.out.println(itemName + " not found.");
-    		System.out.println();
-    		return;
-    	}
-    	
-    	MenuItem foundItem = returnIndividualMenuItem(itemName);
-    	
-    	System.out.println("--------------------");
-		System.out.printf(foundItem.getName() + " | $%.2f\n", foundItem.getPrice());
-		System.out.printf("ID: %.0f\n", foundItem.getItemID());
-		System.out.println(foundItem.getItemCate().getCatName());
-		System.out.println(foundItem.getDescription());
-		System.out.println("--------------------");
-		
-		System.out.println();
-    	
-    }
-
-    public MenuItem returnIndividualMenuItem(long itemId){
-    	
-    	for(int i=0; i < menuList.size(); i++) {
-			if(menuList.get(i).getItemID() == itemId) {
-				return menuList.get(i); //found
-			}
-		}
-    	
-    	return null; //returns null if not found
-    }
-    
-    public MenuItem returnIndividualMenuItem(String itemName){
-    	
-    	for(int i=0; i < menuList.size(); i++) {
-			if(menuList.get(i).getName().equals(itemName)) {
-				return menuList.get(i); //found
-			}
-		}
-    	
-    	return null; //returns null if not found
-    }
-    
-    public boolean checkItemExists(String itemName) {
-    	
-    	for(int i=0; i < menuList.size(); i++) {
-    		if(menuList.get(i).getName().equals(itemName)) {
-    			return true; //exists
-    		}
-    	}
-
-    	return false; //does not exist
-    	
-    }
-    
-    public boolean checkItemExists(long itemID) {
-    	
-    	for(int i=0; i < menuList.size(); i++) {
-    		if(menuList.get(i).getItemID() == itemID) {
-    			return true; //exists
-    		}
-    	}
-
-    	return false; //does not exist
-    	
-    }
-   
     //Editing Items in List
     
     public void updateMenuItem(MenuItem foundItem){
@@ -141,7 +26,7 @@ public class MenuManager extends Manager {
     	
     	do {
     		System.out.println("*****Update Menu Item*****");
-        	viewIndividualMenuItem(foundItem.getName());
+        	item.viewIndividualMenuItem(foundItem.getName());
             System.out.println("Select an option to edit");
             System.out.println("1. Name"); 
             System.out.println("2. Price");
@@ -159,7 +44,7 @@ public class MenuManager extends Manager {
             	System.out.println("Enter new Name:");
             	String name = menuInput.nextLine();
             	
-            	if(checkItemExists(name)) { //already has an item named this
+            	if(item.checkItemExists(name)) { //already has an item named this
             		System.out.println("Menu Item called " + name + " already exists!");
             		System.out.println("Name not updated.");
                 	System.out.println();
@@ -186,7 +71,7 @@ public class MenuManager extends Manager {
             	long itemId = menuInput.nextLong();
             	menuInput.nextLine(); //clear \n buffer
             	
-            	if(checkItemExists(itemId)) { //already has an item with this ID
+            	if(item.checkItemExists(itemId)) { //already has an item with this ID
             		System.out.println("Menu Item with ID " + itemId + " already exists!");
             		System.out.println("Item ID not updated.");
                 	System.out.println();
@@ -262,7 +147,7 @@ public class MenuManager extends Manager {
  
     public void removeMenuItem(long itemId){
     	
-    	if(!checkItemExists(itemId)) {
+    	if(!item.checkItemExists(itemId)) {
     		System.out.println("ID " + itemId + " not found.");
     		System.out.println();
     		return;
@@ -272,10 +157,9 @@ public class MenuManager extends Manager {
     		
     }
 
-    
     public void removeMenuItem(String itemName){
     	
-    	if(!checkItemExists(itemName)) {
+    	if(!item.checkItemExists(itemName)) {
     		System.out.println(itemName + " not found.");
     		System.out.println();
     		return;
@@ -374,14 +258,14 @@ public class MenuManager extends Manager {
     		int i;
         	MenuItem foundItem = null;
         	
-        	for(i=0; i < menuList.size(); i++) {
-    			if(menuList.get(i).getName().equals(itemName)){
-    				foundItem = menuList.get(i);
+        	for(i=0; i < item.getItemList().size(); i++) {
+    			if(item.getItemList().get(i).getName().equals(itemName)){
+    				foundItem = item.getItemList().get(i);
     				break; //exit for loop
     			}
     		}
         	
-    		menuList.remove(i); //remove from menuList
+        	item.getItemList().remove(i); //remove from menuList
     		System.out.println(itemName + " removed.");
     		System.out.println();
         	
@@ -431,7 +315,7 @@ public class MenuManager extends Manager {
                 case 2: //Remove Menu Item
                 	
                 	for(int i=0; i < foundPromos.size(); i++) {
-                		promo.returnPromo(foundPromos.get(i)).removeItem(returnIndividualMenuItem(itemId).getName());
+                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemId).getName());
                 	}
                 	remove = true;
                 	break;
@@ -461,7 +345,7 @@ public class MenuManager extends Manager {
                 case 2: //Remove Menu Item
                 	
                 	for(int i=0; i < foundPromos.size(); i++) {
-                		promo.returnPromo(foundPromos.get(i)).removeItem(returnIndividualMenuItem(itemId).getName());
+                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemId).getName());
                 	}
                 	remove = true;
                 	break;
@@ -478,14 +362,14 @@ public class MenuManager extends Manager {
     		int i;
         	MenuItem foundItem = null;
         	
-        	for(i=0; i < menuList.size(); i++) {
-    			if(menuList.get(i).getItemID() == itemId){
-    				foundItem = menuList.get(i);
+        	for(i=0; i < item.getItemList().size(); i++) {
+    			if(item.getItemList().get(i).getItemID() == itemId){
+    				foundItem = item.getItemList().get(i);
     				break; //exit for loop
     			}
     		}
         	
-    		menuList.remove(i); //remove from menuList
+        	item.getItemList().remove(i); //remove from menuList
     		System.out.println("ID " + itemId + " removed.");
     		System.out.println();
         	
@@ -497,8 +381,8 @@ public class MenuManager extends Manager {
     public void populatePromoList(PromoSetMeal promoItem) {
     	
     	for(int i=0; i < promoItem.getItemNameList().size(); i++) {
-    		if(checkItemExists(promoItem.getItemNameList().get(i))) { //MenuItem name exists in the menu
-    			promoItem.addItem(returnIndividualMenuItem(promoItem.getItemNameList().get(i)));
+    		if(item.checkItemExists(promoItem.getItemNameList().get(i))) { //MenuItem name exists in the menu
+    			promoItem.addItem(item.returnIndividualMenuItem(promoItem.getItemNameList().get(i)));
     			System.out.println(promoItem.getItemNameList().get(i) + " added.");
     		}
     		else {
@@ -516,7 +400,7 @@ public class MenuManager extends Manager {
     		for(int j=0; j < promo.getPromoList().get(i).getItemNameList().size(); j++) {
     		
     			promo.getPromoList().get(i).addItem(
-    					returnIndividualMenuItem(promo.getPromoList().get(i).getItemNameList().get(j)));
+    					item.returnIndividualMenuItem(promo.getPromoList().get(i).getItemNameList().get(j)));
     		}
     		
     	}
@@ -572,7 +456,7 @@ public class MenuManager extends Manager {
             
             switch(choice) {
             	case 1: //View Menu
-                	viewAllMenuItems();
+                	item.viewAllMenuItems();
                     break;
             	case 2: //Create Menu Item
             		menuOptionsCreate();
@@ -585,13 +469,13 @@ public class MenuManager extends Manager {
             		break;
             	case 5: //Save Menu
             		saveData();
-            		System.out.println("Menu Saved.");
+            		System.out.println("Menu Items Saved.");
             		System.out.println();
             		break;
             	case 6: //Load Menu
-            		getMenuList().clear();
+            		item.getItemList().clear();
                 	retrieveData();
-                	System.out.println("Menu Loaded.");
+                	System.out.println("Menu Items Loaded.");
                 	System.out.println();
             		break;
             	default:
@@ -621,7 +505,7 @@ public class MenuManager extends Manager {
 		String itemCate = menuInput.nextLine();
 		
 		if(cate.checkCateExists(itemCate)) {
-			createMenuItem(name, description, price, itemID, 
+			item.createMenuItem(name, description, price, itemID, 
 					cate.returnMenuCate(itemCate));
 			System.out.println(name + " created.");
 		}
@@ -652,13 +536,13 @@ public class MenuManager extends Manager {
 			String name = menuInput.nextLine();
 			System.out.println();
 			
-			if(!checkItemExists(name)) {
+			if(!item.checkItemExists(name)) {
 	    		System.out.println(name + " not found.");
 	    		System.out.println();
 	    		break;
 	    	}
 	    	
-	    	foundItem = returnIndividualMenuItem(name);
+	    	foundItem = item.returnIndividualMenuItem(name);
 			
 			updateMenuItem(foundItem);
 			System.out.println();
@@ -669,13 +553,13 @@ public class MenuManager extends Manager {
 			menuInput.nextLine(); //clear \n buffer
 			System.out.println();
 			
-			if(!checkItemExists(itemID)) {
+			if(!item.checkItemExists(itemID)) {
 	    		System.out.println("ID " + itemID + " not found.");
 	    		System.out.println();
 	    		break;
 	    	}
 	    	
-	    	foundItem = returnIndividualMenuItem(itemID);
+	    	foundItem = item.returnIndividualMenuItem(itemID);
 			
 			updateMenuItem(foundItem);
 			System.out.println();
@@ -801,8 +685,8 @@ public class MenuManager extends Manager {
             	System.out.println("Enter Name of the Item to Add");
 				String name = menuInput.nextLine();
 				
-				if(checkItemExists(name)) { //if the item exists
-					promo.returnPromo(promoName).addItem(returnIndividualMenuItem(name));
+				if(item.checkItemExists(name)) { //if the item exists
+					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(name));
 					System.out.println(name + " added.");
 				}
 				else {
@@ -816,8 +700,8 @@ public class MenuManager extends Manager {
 				long itemID = menuInput.nextLong();
 				menuInput.nextLine(); //clear \n buffer
 				
-				if(checkItemExists(itemID)) { //if the item exists
-					promo.returnPromo(promoName).addItem(returnIndividualMenuItem(itemID));
+				if(item.checkItemExists(itemID)) { //if the item exists
+					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(itemID));
 					System.out.println("ID " + itemID + " added.");
 				}
 				else {
@@ -1202,10 +1086,10 @@ public class MenuManager extends Manager {
     	
     	ArrayList<String> foundItems = new ArrayList<String>();
     	
-    	for(int i=0; i < menuList.size(); i++) {
+    	for(int i=0; i < item.getItemList().size(); i++) {
     		
-    		if(menuList.get(i).getItemCate().getCatName().equals(cateName)) { //look for the cate
-    			foundItems.add(menuList.get(i).getName()); //add this menu item to the list
+    		if(item.getItemList().get(i).getItemCate().getCatName().equals(cateName)) { //look for the cate
+    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
     		}
     	}
     	
@@ -1216,10 +1100,10 @@ public class MenuManager extends Manager {
     	
     	ArrayList<String> foundItems = new ArrayList<String>();
     	
-    	for(int i=0; i < menuList.size(); i++) {
+    	for(int i=0; i < item.getItemList().size(); i++) {
     		
-    		if(menuList.get(i).getItemCate().getCatID() == cateID) { //look for the cate
-    			foundItems.add(menuList.get(i).getName()); //add this menu item to the list
+    		if(item.getItemList().get(i).getItemCate().getCatID() == cateID) { //look for the cate
+    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
     		}
     	}
     	
@@ -1244,7 +1128,7 @@ public class MenuManager extends Manager {
             @Override
             public String insertRow(int index) {
                 try{
-                    return menuList.get(index).toCSVFormat();
+                    return item.getItemList().get(index).toCSVFormat();
                 }catch (Exception e){
                     return null;
                 }
@@ -1253,7 +1137,7 @@ public class MenuManager extends Manager {
             @Override
             public void extractRow(String[] row) {
             	
-                createMenuItem(row[1], row[4], Float.parseFloat(row[2]), 
+                item.createMenuItem(row[1], row[4], Float.parseFloat(row[2]), 
                 		Long.parseLong(row[0]), cate.returnMenuCate(row[3]));
             }
         });  

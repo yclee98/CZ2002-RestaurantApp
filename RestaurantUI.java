@@ -1,14 +1,11 @@
 package RestaurantProject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class RestaurantUI {
     private static Scanner userInput = new Scanner(System.in);
     
 	public static MenuManager menu = new MenuManager();
-	public static ArrayList<MenuCate> cateList = new ArrayList<MenuCate>();
 
     public static void main(String[] args){
     	
@@ -63,10 +60,12 @@ public class RestaurantUI {
         do{
             System.out.println("*****Menu Items/Promotion*****");
             System.out.println("Select an option");
-            System.out.println("1. Menu Options");
-            System.out.println("2. Promotion Options");
+            System.out.println("1. Menu Item Options");
+            System.out.println("2. Promotion Set Options");
             System.out.println("3. Category Options");
-            System.out.println("4. Back");
+            System.out.println("4. Save Menu");
+            System.out.println("5. Load Menu");
+            System.out.println("6. Back");
             option = userInput.nextInt();
             userInput.nextLine(); //clear \n buffer
             System.out.println();
@@ -88,12 +87,37 @@ public class RestaurantUI {
                 	menu.categoryOptions();
             		
             		break;
-                
+                case 4: //Save All
+                	menu.cate.saveData(); //save categories
+                	menu.saveData(); //save menu items
+                	menu.promo.saveData(); //save promotions
+                	
+                	System.out.println("Menu Saved.");
+            		System.out.println();
+            		break;
+                case 5:
+                	
+                	//load categories
+                	menu.cate.getCateList().clear();
+                	menu.cate.retrieveData(); 
+                	
+                	//load menu items
+                	menu.item.getItemList().clear();
+                	menu.retrieveData(); 
+                	
+                	//load promotions
+                	menu.promo.getPromoList().clear();
+                	menu.promo.retrieveData();
+                	menu.populateAllPromos();
+                	
+                	System.out.println("Menu Loaded.");
+            		System.out.println();
+            		break;
         		default:
         			break;
             }
 
-        }while(option>0 && option<4);
+        }while(option>0 && option<6);
     }
     
     
