@@ -57,7 +57,19 @@ public class PromoSetMeal implements CSVFormat{
 	public void addItem(MenuItem newItem) {
 		
 		mealItems.add(newItem);
-		//itemNameList.add(newItem.getName());
+	}
+	
+	public void removeItem(String itemName) {
+		
+		int i;
+		
+		for(i=0; i < mealItems.size(); i++) {
+			
+			if(mealItems.get(i).getName().equals(itemName)) {
+				mealItems.remove(i);
+			}
+		}
+
 	}
 	
 	public boolean doesIncludeItem(String itemName) {

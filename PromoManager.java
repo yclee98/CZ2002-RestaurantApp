@@ -77,6 +77,8 @@ public class PromoManager extends Manager{
 			}
 			System.out.println("--------------------");
 		}
+    	
+    	System.out.println();
     }
 	
 	public void removePromo(String promoName){
@@ -96,6 +98,28 @@ public class PromoManager extends Manager{
     	else System.out.println(promoName + " not found.");
     	
     	foundPromo = null; //removing the pointer, the promo will be deleted by garbage collector
+    }
+	
+	public void viewIndividualPromo(String promoName){
+    	
+    	if(!checkPromoExists(promoName)) {
+    		System.out.println(promoName + " not found.");
+    		System.out.println();
+    		return;
+    	}
+    	
+    	PromoSetMeal foundPromo = returnPromo(promoName);
+    	
+    	System.out.println("--------------------");
+		System.out.printf(foundPromo.getName() + " | $%.2f\n", foundPromo.getPrice());
+		
+		for(int j=0; j < foundPromo.getMealItems().size(); j++) {
+			System.out.println((j+1) + ". " + foundPromo.getMealItems().get(j).getName());
+		}
+		System.out.println("--------------------");
+		
+		System.out.println();
+    	
     }
 	
 	@Override
