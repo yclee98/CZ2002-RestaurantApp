@@ -7,12 +7,16 @@ import RestaurantProject.FlatFile.FlatFileAdapter;
 
 public class CateManager extends Manager{
 	
-	private static Scanner cateInput = new Scanner(System.in);
+	private Scanner cateInput = new Scanner(System.in);
 	
 	private ArrayList<MenuCate> cateList = new ArrayList<MenuCate>();
 	
 	public CateManager() {
 		
+	}
+	
+	public ArrayList<MenuCate> getCateList() {
+		return cateList;
 	}
 	
 	public void createMenuCate(long catID, String catName) {
@@ -121,38 +125,34 @@ public class CateManager extends Manager{
     	
     	System.out.println();
 	}
-	
-	 
-	public ArrayList<MenuCate> getCateList() {
-			return cateList;
+
+	public void viewAllMenuCate() {
+	    	//Printing names based on creation time
+	    	for(int i=0; i < cateList.size(); i++) {
+	    		System.out.println("--------------------");
+				System.out.println(cateList.get(i).getCatName() + " | ID: " + cateList.get(i).getCatID());
+				System.out.println("--------------------");
+			}
+	    	
+	    	System.out.println();
 	}
-
-
-    public boolean checkCateExists(String catName) {
+	
+	public void viewIndividualMenuCate(String catName) {
     	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatName().equals(catName)) {
-    			return true; //exists
-    		}
+    	if(!checkCateExists(catName)) {
+    		System.out.println(catName + " not found.");
+    		System.out.println();
+    		return;
     	}
-
-    	return false; //does not exist
     	
+    	MenuCate foundCate = returnMenuCate(catName);
+    	
+    	System.out.println("--------------------");
+		System.out.println(foundCate.getCatName() + " | ID: " + foundCate.getCatID());
+		System.out.println("--------------------");
     }
-    
-    public boolean checkCateExists(long catID) {
-    	
-    	for(int i=0; i < cateList.size(); i++) {
-    		if(cateList.get(i).getCatID() == catID) {
-    			return true; //exists
-    		}
-    	}
 
-    	return false; //does not exist
-    	
-    }
-    
-    public MenuCate returnMenuCate(String catName) {
+	public MenuCate returnMenuCate(String catName) {
     	
     	for(int i=0; i < cateList.size(); i++) {
     		if(cateList.get(i).getCatName().equals(catName)) {
@@ -176,30 +176,28 @@ public class CateManager extends Manager{
     	
     }
     
-    public void viewIndividualMenuCate(String cateName) {
+    public boolean checkCateExists(String catName) {
     	
-    	if(!checkCateExists(cateName)) {
-    		System.out.println(cateName + " not found.");
-    		System.out.println();
-    		return;
-    	}
-    	
-    	MenuCate foundCate = returnMenuCate(cateName);
-    	
-    	System.out.println("--------------------");
-		System.out.println(foundCate.getCatName() + " | ID: " + foundCate.getCatID());
-		System.out.println("--------------------");
-    }
-
-    public void viewAllMenuCate() {
-    	//Printing names based on creation time
     	for(int i=0; i < cateList.size(); i++) {
-    		System.out.println("--------------------");
-			System.out.println(cateList.get(i).getCatName() + " | ID: " + cateList.get(i).getCatID());
-			System.out.println("--------------------");
-		}
+    		if(cateList.get(i).getCatName().equals(catName)) {
+    			return true; //exists
+    		}
+    	}
+
+    	return false; //does not exist
     	
-    	System.out.println();
+    }
+    
+    public boolean checkCateExists(long catID) {
+    	
+    	for(int i=0; i < cateList.size(); i++) {
+    		if(cateList.get(i).getCatID() == catID) {
+    			return true; //exists
+    		}
+    	}
+
+    	return false; //does not exist
+    	
     }
     
     @Override

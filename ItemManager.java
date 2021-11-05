@@ -9,6 +9,10 @@ public class ItemManager {
 	public ItemManager() {
 	}
 	
+	public ArrayList<MenuItem> getItemList(){
+		return itemList;
+	}
+	
 	public void createMenuItem(String name, String description, 
 			float price, long itemID, MenuCate itemCate) {
 		MenuItem temp = new MenuItem(name, description, price, itemID, itemCate);
@@ -16,10 +20,6 @@ public class ItemManager {
 		itemList.add(temp);
         
     }
-	
-	public ArrayList<MenuItem> getItemList(){
-		return itemList;
-	}
 
 	//Viewing Items from List
 	

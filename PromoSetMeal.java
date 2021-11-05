@@ -59,6 +59,37 @@ public class PromoSetMeal implements CSVFormat{
 		mealItems.add(newItem);
 	}
 	
+	public int changeItem(MenuItem newItem, MenuItem oldItem) { //must pass in MenuItem objects
+		
+		if(!mealItems.contains(oldItem)) {
+			
+			System.out.println(
+					oldItem.getName() + 
+					" not found.");
+			
+			return 0; //return 0 to indicate failure
+		}
+		
+		for(int i=0; i< mealItems.size(); i++) {
+			
+			if(mealItems.get(i).getName().equals(oldItem.getName())) {
+				
+				mealItems.set(i, newItem);
+				
+			}
+		}
+		
+		System.out.println(
+				oldItem.getName() + 
+				" successfully changed to " + 
+				newItem.getName() + ".");
+		
+		return 1; //return 1 to indicate success
+		
+		
+		
+	}
+	
 	public void removeItem(String itemName) {
 		
 		int i;
@@ -93,38 +124,7 @@ public class PromoSetMeal implements CSVFormat{
 
     	return false; //not found
 	}
-	
-	public int changeItem(MenuItem newItem, MenuItem oldItem) { //must pass in MenuItem objects
-		
-		if(!mealItems.contains(oldItem)) {
-			
-			System.out.println(
-					oldItem.getName() + 
-					" not found.");
-			
-			return 0; //return 0 to indicate failure
-		}
-		
-		for(int i=0; i< mealItems.size(); i++) {
-			
-			if(mealItems.get(i).getName().equals(oldItem.getName())) {
-				
-				mealItems.set(i, newItem);
-				
-			}
-		}
-		
-		System.out.println(
-				oldItem.getName() + 
-				" successfully changed to " + 
-				newItem.getName() + ".");
-		
-		return 1; //return 1 to indicate success
-		
-		
-		
-	}
-	
+
 	public void mealItemstoNameList() {
 		
 		itemNameList.clear();

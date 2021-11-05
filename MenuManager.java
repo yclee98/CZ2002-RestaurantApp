@@ -7,7 +7,7 @@ import RestaurantProject.FlatFile.FlatFileAdapter;
 
 public class MenuManager extends Manager {
 	
-	private static Scanner menuInput = new Scanner(System.in);
+	private Scanner menuInput = new Scanner(System.in);
 	
 	public ItemManager item = new ItemManager();
 	
@@ -18,7 +18,7 @@ public class MenuManager extends Manager {
 	public MenuManager() {
 	}
 
-    //Editing Items in List
+    //Menu Item Functions
     
     public void updateMenuItem(MenuItem foundItem){
     	
@@ -68,18 +68,18 @@ public class MenuManager extends Manager {
             	break;
             case 3: //ID
             	System.out.println("Enter new Item ID:");
-            	long itemId = menuInput.nextLong();
+            	long itemID = menuInput.nextLong();
             	menuInput.nextLine(); //clear \n buffer
             	
-            	if(item.checkItemExists(itemId)) { //already has an item with this ID
-            		System.out.println("Menu Item with ID " + itemId + " already exists!");
+            	if(item.checkItemExists(itemID)) { //already has an item with this ID
+            		System.out.println("Menu Item with ID " + itemID + " already exists!");
             		System.out.println("Item ID not updated.");
                 	System.out.println();
             	}
             	else {
-            		foundItem.setItemID(itemId);
+            		foundItem.setItemID(itemID);
                 	
-                	System.out.println("Item ID updated to " + itemId + ".");
+                	System.out.println("Item ID updated to " + itemID + ".");
                 	System.out.println();
             	}
             	break;
@@ -145,15 +145,15 @@ public class MenuManager extends Manager {
         
     }
  
-    public void removeMenuItem(long itemId){
+    public void removeMenuItem(long itemID){
     	
-    	if(!item.checkItemExists(itemId)) {
-    		System.out.println("ID " + itemId + " not found.");
+    	if(!item.checkItemExists(itemID)) {
+    		System.out.println("ID " + itemID + " not found.");
     		System.out.println();
     		return;
     	}
     	
-    	removeMenuItemfromPromo(itemId, true);
+    	removeMenuItemfromPromo(itemID, true);
     		
     }
 
@@ -273,9 +273,9 @@ public class MenuManager extends Manager {
     	}
     }
 
-    public void removeMenuItemfromPromo(long itemId, boolean allowCancel) {
+    public void removeMenuItemfromPromo(long itemID, boolean allowCancel) {
     	
-    	ArrayList<String> foundPromos = new ArrayList<String>(returnPromoWithMenuItem(itemId));
+    	ArrayList<String> foundPromos = new ArrayList<String>(returnPromoWithMenuItem(itemID));
     	
     	boolean remove = true;
     	
@@ -284,7 +284,7 @@ public class MenuManager extends Manager {
     	}
     	else { //menu item is in at least 1 promo set
     		
-    		System.out.println("ID " + itemId + " was found in these Promotion Sets:");
+    		System.out.println("ID " + itemID + " was found in these Promotion Sets:");
     		
     		for(int i=0; i < foundPromos.size(); i++) {
     			System.out.println((i+1) + ". " + foundPromos.get(i));
@@ -315,7 +315,7 @@ public class MenuManager extends Manager {
                 case 2: //Remove Menu Item
                 	
                 	for(int i=0; i < foundPromos.size(); i++) {
-                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemId).getName());
+                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemID).getName());
                 	}
                 	remove = true;
                 	break;
@@ -345,7 +345,7 @@ public class MenuManager extends Manager {
                 case 2: //Remove Menu Item
                 	
                 	for(int i=0; i < foundPromos.size(); i++) {
-                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemId).getName());
+                		promo.returnPromo(foundPromos.get(i)).removeItem(item.returnIndividualMenuItem(itemID).getName());
                 	}
                 	remove = true;
                 	break;
@@ -363,19 +363,20 @@ public class MenuManager extends Manager {
         	MenuItem foundItem = null;
         	
         	for(i=0; i < item.getItemList().size(); i++) {
-    			if(item.getItemList().get(i).getItemID() == itemId){
+    			if(item.getItemList().get(i).getItemID() == itemID){
     				foundItem = item.getItemList().get(i);
     				break; //exit for loop
     			}
     		}
         	
         	item.getItemList().remove(i); //remove from menuList
-    		System.out.println("ID " + itemId + " removed.");
+    		System.out.println("ID " + itemID + " removed.");
     		System.out.println();
         	
         	foundItem = null; //removing the pointer, the item will be deleted by garbage collector
     	}
     }
+    
     //Promotion Functions
     
     public void populatePromoList(PromoSetMeal promoItem) {
@@ -406,6 +407,56 @@ public class MenuManager extends Manager {
     	}
     }
 
+    public void addPromotionItem(String promoName) {
+    	int option;
+		
+		do {
+			System.out.println("*****Add Promotion Item*****");
+            System.out.println("Select an option");
+            System.out.println("1. Add by Name"); 
+            System.out.println("2. Add by ID");
+            System.out.println("3. End");
+            
+            option = menuInput.nextInt();
+            menuInput.nextLine(); //clear \n buffer
+            System.out.println();
+            
+            switch(option) {
+            case 1: //By Name
+            	System.out.println("Enter Name of the Item to Add");
+				String name = menuInput.nextLine();
+				
+				if(item.checkItemExists(name)) { //if the item exists
+					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(name));
+					System.out.println(name + " added.");
+				}
+				else {
+					System.out.println(name + " not found.");
+				}
+				
+        		System.out.println();
+            	break;
+            case 2: //By ID
+            	System.out.println("Enter ID of the Item to Add");
+				long itemID = menuInput.nextLong();
+				menuInput.nextLine(); //clear \n buffer
+				
+				if(item.checkItemExists(itemID)) { //if the item exists
+					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(itemID));
+					System.out.println("ID " + itemID + " added.");
+				}
+				else {
+					System.out.println("ID " + itemID + " not found.");
+				}
+				
+        		System.out.println();
+            	break;
+            default:
+            	break;
+            }
+		} while(option > 0 && option < 3);
+    }
+
     public ArrayList<String> returnPromoWithMenuItem(String itemName){
     	
     	ArrayList<String> foundPromos = new ArrayList<String>();
@@ -420,19 +471,170 @@ public class MenuManager extends Manager {
     	return foundPromos;
     }
     
-    public ArrayList<String> returnPromoWithMenuItem(long itemId){
+    public ArrayList<String> returnPromoWithMenuItem(long itemID){
     	
     	ArrayList<String> foundPromos = new ArrayList<String>();
     	
     	for(int i=0; i < promo.getPromoList().size(); i++) {
     		
-    		if(promo.getPromoList().get(i).doesIncludeItem(itemId)) { //look for this menu item in the promo
+    		if(promo.getPromoList().get(i).doesIncludeItem(itemID)) { //look for this menu item in the promo
     			foundPromos.add(promo.getPromoList().get(i).getName()); //add this promo to the list
     		}
     	}
     	
     	return foundPromos;
     }
+    
+    //Category Functions
+    
+    public void deleteMenuCate(String cateName) {
+		
+		if(!cate.checkCateExists(cateName)) {
+    		System.out.println(cateName + " not found.");
+    		System.out.println();
+    		return;
+    	}
+    	
+    	ArrayList<String> foundItems = new ArrayList<String>(returnMenuItemWithMenuCate(cateName));
+    	
+    	boolean remove = true;
+    	
+    	if(foundItems.size() == 0) { //menu item is not in a menu item at all
+    		remove = true;
+    	}
+    	else { //menu item is in at least 1 menu item set
+    		
+    		System.out.println(cateName + " was found in these Menu Items:");
+    		
+    		for(int i=0; i < foundItems.size(); i++) {
+    			System.out.println((i+1) + ". " + foundItems.get(i));
+    		}
+    		
+    		System.out.println();
+    		
+    		System.out.println("*****Decide what to do with the Menu Items*****");
+            System.out.println("Select an option");
+            System.out.println("1. Remove the Menu Items"); 
+            System.out.println("2. Cancel Removal of Category");
+            
+            int option = menuInput.nextInt();
+            menuInput.nextLine(); //clear \n buffer
+            System.out.println();
+            
+            switch(option) {
+            case 1: //Remove Category
+            	
+            	for(int i=0; i < foundItems.size(); i++) {
+            		
+            		removeMenuItemfromPromo(foundItems.get(i), false);
+            	}
+            	remove = true;
+            	break;
+            default:
+            	remove = false;
+            	break;
+            }
+    		
+    	}
+    	
+    	if(remove) { //if chose to remove category
+    		
+    		MenuCate foundCate = cate.returnMenuCate(cateName);
+    		
+    		cate.removeMenuCate(cateName);
+        	
+        	foundCate = null; //removing the pointer, the item will be deleted by garbage collector
+    	}
+	}
+	
+	public void deleteMenuCate(long cateID) {
+		
+		if(!cate.checkCateExists(cateID)) {
+    		System.out.println("Category ID " + cateID + " not found.");
+    		System.out.println();
+    		return;
+    	}
+    	
+    	ArrayList<String> foundItems = new ArrayList<String>(returnMenuItemWithMenuCate(cateID));
+    	
+    	boolean remove = true;
+    	
+    	if(foundItems.size() == 0) { //menu item is not in a menu item at all
+    		remove = true;
+    	}
+    	else { //menu item is in at least 1 menu item set
+    		
+    		System.out.println("Category ID " + cateID + " was found in these Menu Items:");
+    		
+    		for(int i=0; i < foundItems.size(); i++) {
+    			System.out.println((i+1) + ". " + foundItems.get(i));
+    		}
+    		
+    		System.out.println();
+    		
+    		System.out.println("*****Decide what to do with the Menu Items*****");
+            System.out.println("Select an option");
+            System.out.println("1. Remove the Menu Items"); 
+            System.out.println("2. Cancel Removal of Category");
+            
+            int option = menuInput.nextInt();
+            menuInput.nextLine(); //clear \n buffer
+            System.out.println();
+            
+            switch(option) {
+            case 1: //Remove Category
+            	
+            	for(int i=0; i < foundItems.size(); i++) {
+            		
+            		removeMenuItemfromPromo(foundItems.get(i), false);
+            	}
+            	remove = true;
+            	break;
+            default:
+            	remove = false;
+            	break;
+            }
+    		
+    	}
+    	
+    	if(remove) { //if chose to remove category
+    		
+    		MenuCate foundCate = cate.returnMenuCate(cateID);
+    		
+    		cate.removeMenuCate(cateID);
+        	
+        	foundCate = null; //removing the pointer, the item will be deleted by garbage collector
+    	}
+	}
+	
+	public ArrayList<String> returnMenuItemWithMenuCate(String cateName){
+    	
+    	ArrayList<String> foundItems = new ArrayList<String>();
+    	
+    	for(int i=0; i < item.getItemList().size(); i++) {
+    		
+    		if(item.getItemList().get(i).getItemCate().getCatName().equals(cateName)) { //look for the cate
+    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
+    		}
+    	}
+    	
+    	return foundItems;
+    }
+	
+	public ArrayList<String> returnMenuItemWithMenuCate(long cateID){
+    	
+    	ArrayList<String> foundItems = new ArrayList<String>();
+    	
+    	for(int i=0; i < item.getItemList().size(); i++) {
+    		
+    		if(item.getItemList().get(i).getItemCate().getCatID() == cateID) { //look for the cate
+    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
+    		}
+    	}
+    	
+    	return foundItems;
+    }
+    
     
     //UI Functions
     //Menu Items
@@ -666,56 +868,6 @@ public class MenuManager extends Manager {
 		addPromotionItem(promoName);
     }
     
-    public void addPromotionItem(String promoName) {
-    	int option;
-		
-		do {
-			System.out.println("*****Add Promotion Item*****");
-            System.out.println("Select an option");
-            System.out.println("1. Add by Name"); 
-            System.out.println("2. Add by ID");
-            System.out.println("3. End");
-            
-            option = menuInput.nextInt();
-            menuInput.nextLine(); //clear \n buffer
-            System.out.println();
-            
-            switch(option) {
-            case 1: //By Name
-            	System.out.println("Enter Name of the Item to Add");
-				String name = menuInput.nextLine();
-				
-				if(item.checkItemExists(name)) { //if the item exists
-					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(name));
-					System.out.println(name + " added.");
-				}
-				else {
-					System.out.println(name + " not found.");
-				}
-				
-        		System.out.println();
-            	break;
-            case 2: //By ID
-            	System.out.println("Enter ID of the Item to Add");
-				long itemID = menuInput.nextLong();
-				menuInput.nextLine(); //clear \n buffer
-				
-				if(item.checkItemExists(itemID)) { //if the item exists
-					promo.returnPromo(promoName).addItem(item.returnIndividualMenuItem(itemID));
-					System.out.println("ID " + itemID + " added.");
-				}
-				else {
-					System.out.println("ID " + itemID + " not found.");
-				}
-				
-        		System.out.println();
-            	break;
-            default:
-            	break;
-            }
-		} while(option > 0 && option < 3);
-    }
-
     public void promotionOptionsUpdate() {
 
     	System.out.println("Enter Name of the Promotion Set to Update");
@@ -962,154 +1114,6 @@ public class MenuManager extends Manager {
         }
 	}
 	
-	public void deleteMenuCate(String cateName) {
-		
-		if(!cate.checkCateExists(cateName)) {
-    		System.out.println(cateName + " not found.");
-    		System.out.println();
-    		return;
-    	}
-    	
-    	ArrayList<String> foundItems = new ArrayList<String>(returnMenuItemWithMenuCate(cateName));
-    	
-    	boolean remove = true;
-    	
-    	if(foundItems.size() == 0) { //menu item is not in a menu item at all
-    		remove = true;
-    	}
-    	else { //menu item is in at least 1 menu item set
-    		
-    		System.out.println(cateName + " was found in these Menu Items:");
-    		
-    		for(int i=0; i < foundItems.size(); i++) {
-    			System.out.println((i+1) + ". " + foundItems.get(i));
-    		}
-    		
-    		System.out.println();
-    		
-    		System.out.println("*****Decide what to do with the Menu Items*****");
-            System.out.println("Select an option");
-            System.out.println("1. Remove the Menu Items"); 
-            System.out.println("2. Cancel Removal of Category");
-            
-            int option = menuInput.nextInt();
-            menuInput.nextLine(); //clear \n buffer
-            System.out.println();
-            
-            switch(option) {
-            case 1: //Remove Category
-            	
-            	for(int i=0; i < foundItems.size(); i++) {
-            		
-            		removeMenuItemfromPromo(foundItems.get(i), false);
-            	}
-            	remove = true;
-            	break;
-            default:
-            	remove = false;
-            	break;
-            }
-    		
-    	}
-    	
-    	if(remove) { //if chose to remove category
-    		
-    		MenuCate foundCate = cate.returnMenuCate(cateName);
-    		
-    		cate.removeMenuCate(cateName);
-        	
-        	foundCate = null; //removing the pointer, the item will be deleted by garbage collector
-    	}
-	}
-	
-	public void deleteMenuCate(long cateID) {
-		
-		if(!cate.checkCateExists(cateID)) {
-    		System.out.println("Category ID " + cateID + " not found.");
-    		System.out.println();
-    		return;
-    	}
-    	
-    	ArrayList<String> foundItems = new ArrayList<String>(returnMenuItemWithMenuCate(cateID));
-    	
-    	boolean remove = true;
-    	
-    	if(foundItems.size() == 0) { //menu item is not in a menu item at all
-    		remove = true;
-    	}
-    	else { //menu item is in at least 1 menu item set
-    		
-    		System.out.println("Category ID " + cateID + " was found in these Menu Items:");
-    		
-    		for(int i=0; i < foundItems.size(); i++) {
-    			System.out.println((i+1) + ". " + foundItems.get(i));
-    		}
-    		
-    		System.out.println();
-    		
-    		System.out.println("*****Decide what to do with the Menu Items*****");
-            System.out.println("Select an option");
-            System.out.println("1. Remove the Menu Items"); 
-            System.out.println("2. Cancel Removal of Category");
-            
-            int option = menuInput.nextInt();
-            menuInput.nextLine(); //clear \n buffer
-            System.out.println();
-            
-            switch(option) {
-            case 1: //Remove Category
-            	
-            	for(int i=0; i < foundItems.size(); i++) {
-            		
-            		removeMenuItemfromPromo(foundItems.get(i), false);
-            	}
-            	remove = true;
-            	break;
-            default:
-            	remove = false;
-            	break;
-            }
-    		
-    	}
-    	
-    	if(remove) { //if chose to remove category
-    		
-    		MenuCate foundCate = cate.returnMenuCate(cateID);
-    		
-    		cate.removeMenuCate(cateID);
-        	
-        	foundCate = null; //removing the pointer, the item will be deleted by garbage collector
-    	}
-	}
-	
-	public ArrayList<String> returnMenuItemWithMenuCate(String cateName){
-    	
-    	ArrayList<String> foundItems = new ArrayList<String>();
-    	
-    	for(int i=0; i < item.getItemList().size(); i++) {
-    		
-    		if(item.getItemList().get(i).getItemCate().getCatName().equals(cateName)) { //look for the cate
-    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
-    		}
-    	}
-    	
-    	return foundItems;
-    }
-	
-	public ArrayList<String> returnMenuItemWithMenuCate(long cateID){
-    	
-    	ArrayList<String> foundItems = new ArrayList<String>();
-    	
-    	for(int i=0; i < item.getItemList().size(); i++) {
-    		
-    		if(item.getItemList().get(i).getItemCate().getCatID() == cateID) { //look for the cate
-    			foundItems.add(item.getItemList().get(i).getName()); //add this menu item to the list
-    		}
-    	}
-    	
-    	return foundItems;
-    }
-    
 	//FlatFile
 	
     @Override

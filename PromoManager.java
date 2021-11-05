@@ -8,10 +8,19 @@ import RestaurantProject.FlatFile.FlatFileAdapter;
 
 public class PromoManager extends Manager{
 	
-	public ArrayList<PromoSetMeal> promoList = new ArrayList<PromoSetMeal>();
+	private ArrayList<PromoSetMeal> promoList = new ArrayList<PromoSetMeal>();
 
-	public PromoManager() {
-		
+	public PromoManager() {	
+	}
+	
+	public ArrayList<PromoSetMeal> getPromoList(){
+		return promoList;
+	}
+	
+	public void setPromoList(ArrayList<PromoSetMeal> promoItemList) {
+		//effectively replaces the old ArrayList with the newly input one
+		promoList.clear(); //clear all items
+		promoList.addAll(promoItemList); //add all items from the given list
 	}
 	
 	public void createPromoSetMeal(String name, float price) {
@@ -32,39 +41,26 @@ public class PromoManager extends Manager{
 		}
 	}
 	
-	public boolean checkPromoExists(String promoName) {
+	public void removePromo(String promoName){
+    	boolean found = false;
+    	PromoSetMeal foundPromo = null;
     	
     	for(int i=0; i < promoList.size(); i++) {
-    		if(promoList.get(i).getName().equals(promoName)) {
-    			return true; //exists
-    		}
-    	}
-
-    	return false; //does not exist
+			if(promoList.get(i).getName().equals(promoName)) {
+				found = true; //found promo name
+				foundPromo = promoList.get(i);
+				promoList.remove(i); //remove from promoList
+				break; //exit for loop
+			}
+		}
     	
+    	if(found) System.out.println(promoName + " removed.");
+    	else System.out.println(promoName + " not found.");
+    	
+    	foundPromo = null; //removing the pointer, the promo will be deleted by garbage collector
+    	
+    	System.out.println();
     }
-	
-	public PromoSetMeal returnPromo(String promoName) {
-    	
-    	for(int i=0; i < promoList.size(); i++) {
-    		if(promoList.get(i).getName().equals(promoName)) {
-    			return promoList.get(i); //exists
-    		}
-    	}
-
-    	return null; //does not exist
-    	
-    }
-	
-	public ArrayList<PromoSetMeal> getPromoList(){
-		return promoList;
-	}
-	
-	public void PromoList(ArrayList<PromoSetMeal> promoItemList) {
-		//effectively replaces the old ArrayList with the newly input one
-		promoList.clear(); //clear all items
-		promoList.addAll(promoItemList); //add all items from the given list
-	}
 	
 	public void viewAllPromo() {
     	//Printing names based on creation time
@@ -79,25 +75,6 @@ public class PromoManager extends Manager{
 		}
     	
     	System.out.println();
-    }
-	
-	public void removePromo(String promoName){
-    	boolean found = false;
-    	PromoSetMeal foundPromo = null;
-    	
-    	for(int i=0; i < promoList.size(); i++) {
-			if(promoList.get(i).getName() == promoName) {
-				found = true; //found promo name
-				foundPromo = promoList.get(i);
-				promoList.remove(i); //remove from promoList
-				break; //exit for loop
-			}
-		}
-    	
-    	if(found) System.out.println(promoName + " removed.");
-    	else System.out.println(promoName + " not found.");
-    	
-    	foundPromo = null; //removing the pointer, the promo will be deleted by garbage collector
     }
 	
 	public void viewIndividualPromo(String promoName){
@@ -119,6 +96,30 @@ public class PromoManager extends Manager{
 		System.out.println("--------------------");
 		
 		System.out.println();
+    	
+    }
+	
+	public PromoSetMeal returnPromo(String promoName) {
+    	
+    	for(int i=0; i < promoList.size(); i++) {
+    		if(promoList.get(i).getName().equals(promoName)) {
+    			return promoList.get(i); //exists
+    		}
+    	}
+
+    	return null; //does not exist
+    	
+    }
+	
+	public boolean checkPromoExists(String promoName) {
+    	
+    	for(int i=0; i < promoList.size(); i++) {
+    		if(promoList.get(i).getName().equals(promoName)) {
+    			return true; //exists
+    		}
+    	}
+
+    	return false; //does not exist
     	
     }
 	
