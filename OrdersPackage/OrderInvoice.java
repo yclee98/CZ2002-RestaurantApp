@@ -1,10 +1,12 @@
+package OrdersPackage;
+
 import FlatFile.CSVFormat;
 public class OrderInvoice implements CSVFormat{
 
-    private long orderID;
+    private long invoiceID;
     private long staffID;
     private int tableNumber;
-    //*************private String orderDateTime; change to long
+    //************* private String orderDateTime; change to long
     private long orderDateTime;
     private long customerID;
     private double totalPrice;
@@ -17,7 +19,7 @@ public class OrderInvoice implements CSVFormat{
     //*************change to datetime to long in constructor
     public OrderInvoice(long orderID, long staffID, long customerID, int tableNumber, long orderDateTime, 
                         String orderitems, double totalPrice, double gST, double serviceCharge, double discount, double finalPaymentPrice){
-        this.orderID = orderID;
+        this.invoiceID = orderID;
         this.staffID = staffID;
         this.tableNumber = tableNumber;
         this.orderDateTime = orderDateTime;
@@ -30,8 +32,8 @@ public class OrderInvoice implements CSVFormat{
         this.serviceCharge = serviceCharge;
     }
 
-    public long getOrderID() {
-        return orderID;
+    public long getInvoiceID() {
+        return invoiceID;
     }
 
     public long getStaffID() {
@@ -75,7 +77,7 @@ public class OrderInvoice implements CSVFormat{
     }
 
     public String toCSVFormat() {
-        return orderID + "," + staffID + "," + customerID + "," + tableNumber + "," + orderDateTime
+        return invoiceID + "," + staffID + "," + customerID + "," + tableNumber + "," + orderDateTime
                 + "," + orderitems + "," + totalPrice + "," + gST + "," + serviceCharge + "," + discount + "," +
                 finalPaymentPrice;
     }

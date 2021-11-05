@@ -1,6 +1,9 @@
+package OrdersPackage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import Utility.*;
 
 enum Period{
     Day,
@@ -60,7 +63,7 @@ public class SalesReportGenerator {
             orderDateTime = orderInvoice.getOrderDateTime(); 
 
             if(orderDateTime>=startDate && orderDateTime<=endDate){ //if invoice date between startdate and enddate
-                System.out.println("Adding invoice " + orderInvoice.getOrderID() + " @ " +DateTime.epochToDate(orderDateTime, true));//remove
+                System.out.println("Adding invoice " + orderInvoice.getInvoiceID() + " @ " + DateTime.epochToDate(orderDateTime, true));//remove
 
                 dataArray[0]+=orderInvoice.getTotalPrice();
                 dataArray[1]+=orderInvoice.getGST();
@@ -86,7 +89,7 @@ public class SalesReportGenerator {
         
     }
     
-    public void printReport(ArrayList<SaleReportItem> saleReportItems,double[] dataArray){
+    public void printReport(ArrayList<SaleReportItem> saleReportItems, double[] dataArray){
         Collections.sort(saleReportItems);
         System.out.println("------------------------------------------------");
         System.out.printf("%-20s%-20s\n", "Name", "Quantity Sold");

@@ -1,3 +1,6 @@
+package OrdersPackage;
+import MenuItemPackage.MenuItem;
+
 public class OrderItems {
 
     private MenuItem item;

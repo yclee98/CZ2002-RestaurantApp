@@ -1,14 +1,28 @@
-package RestaurantProject;
-
+import CustomerPackage.CustomerManager;
+import OrdersPackage.InvoiceManager;
+import OrdersPackage.OrderManager;
+import OrdersPackage.OrderUI;
+import StaffPackage.StaffManager;
+import TablePackage.TableManager;
+import java.util.ArrayList;
 import java.util.Scanner;
+import MenuCatePackage.*;
+import MenuItemPackage.*;
+import PromoPackage.*;
 
 public class RestaurantUI {
-    private static Scanner userInput = new Scanner(System.in);
-    
+    protected static Scanner userInput = new Scanner(System.in);
+    protected static OrderManager order_Mngr = new OrderManager();
+    protected static InvoiceManager invoice_Mngr = new InvoiceManager();
+    protected static PromoManager promo_Mngr = new PromoManager();
+    protected static ItemManager item_Mngr = new ItemManager();
+    protected static TableManager table_Mngr = new TableManager();
+    protected static StaffManager staff_Mngr = new StaffManager();
+    public static CustomerManager cust_Mngr = new CustomerManager();
 	public static MenuManager menu = new MenuManager();
+	public static ArrayList<MenuCate> cateList = new ArrayList<MenuCate>();
 
     public static void main(String[] args){
-    	
         mainMenuPage();        
     }
 
@@ -18,12 +32,12 @@ public class RestaurantUI {
             System.out.println("*****Main Menu*****");
             System.out.println("Select an option");
             System.out.println("1. Menu Items/Promotion");
-            System.out.println("2. Order");
+            System.out.println("2. OrdersPackage.Order");
             System.out.println("3. Reservation");
             System.out.println("4. Check Table Availability");
             System.out.println("5. Print Sale Revenue Report");
-            System.out.println("6. Staff");
-            System.out.println("7. Customer");
+            System.out.println("6. StaffPackage.Staff");
+            System.out.println("7. CustomerPackage.Customer");
             System.out.println("8. Exit");
             option = userInput.nextInt();
             System.out.println();
@@ -58,14 +72,12 @@ public class RestaurantUI {
     private static void menuPage(){
         int option;
         do{
-            System.out.println("*****Menu Items/Promotion*****");
+            System.out.println("***** Menu Items/Promotion *****");
             System.out.println("Select an option");
-            System.out.println("1. Menu Item Options");
-            System.out.println("2. Promotion Set Options");
+            System.out.println("1. Menu Options");
+            System.out.println("2. Promotion Options");
             System.out.println("3. Category Options");
-            System.out.println("4. Save Menu");
-            System.out.println("5. Load Menu");
-            System.out.println("6. Back");
+            System.out.println("4. Back");
             option = userInput.nextInt();
             userInput.nextLine(); //clear \n buffer
             System.out.println();
@@ -87,75 +99,77 @@ public class RestaurantUI {
                 	menu.categoryOptions();
             		
             		break;
-                case 4: //Save All
-                	menu.cate.saveData(); //save categories
-                	menu.saveData(); //save menu items
-                	menu.promo.saveData(); //save promotions
-                	
-                	System.out.println("Menu Saved.");
-            		System.out.println();
-            		break;
-                case 5:
-                	
-                	//load categories
-                	menu.cate.getCateList().clear();
-                	menu.cate.retrieveData(); 
-                	
-                	//load menu items
-                	menu.item.getItemList().clear();
-                	menu.retrieveData(); 
-                	
-                	//load promotions
-                	menu.promo.getPromoList().clear();
-                	menu.promo.retrieveData();
-                	menu.populateAllPromos();
-                	
-                	System.out.println("Menu Loaded.");
-            		System.out.println();
-            		break;
+                
         		default:
         			break;
             }
 
-        }while(option>0 && option<6);
+        }while(option>0 && option<4);
     }
-    
     
     private static void orderPage(){
         int option;
+        long orderID;
+        MenuItem cusItem;
+        PromoSetMeal cusMeal;
         do{
-            System.out.println("*****Order*****");
+            System.out.println("***** OrdersPackage.Order *****");
             System.out.println("Select an option");
             System.out.println("1. View All Orders");
             System.out.println("2. Create Order");
             System.out.println("3. View Individual Order");
-            System.out.println("4. Add Items to Order"); 
+            System.out.println("4. Add Items to Order");
             System.out.println("5. Remove items from Order");
-            System.out.println("6. Print Order Invoice");
-            System.out.println("7. Back");
+            System.out.println("6. Pay for items from Order");
+            System.out.println("7. Print Order Invoice");
+            System.out.println("8. Print All Invoice");
+            System.out.println("9. Back");
             option = userInput.nextInt();
             System.out.println();
 
             switch(option){
-                case 1:
+
+                case 1: // view all orders
+                    OrderUI.viewAllOrders(order_Mngr);
                     break;
-                case 2:
+
+                case 2: // Create orders
+                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr);
                     break;
-                case 3:
+
+                case 3: //View Individual OrdersPackage.Order
+                    OrderUI.viewIndividualOrders(order_Mngr);
                     break;
-                case 4:
+
+                case 4: // add items to order
+                    // print all the customer names and the associated orderIDs
+                    OrderUI.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
                     break;
-                case 5:
+
+                case 5: // Remove items from OrdersPackage.Order
+                    OrderUI.removeItemsFromOrder(order_Mngr);
+                    break;
+
+                case 6:
+                    OrderUI.settlePayment(order_Mngr, invoice_Mngr);
+                    break;
+
+                case 7: // print order invoice
+                    OrderUI.printOrderInvoice(invoice_Mngr);
+                    break;
+
+                case 8: // print all invoice
+                    OrderUI.printAllInvoices(invoice_Mngr);
                     break;
                 default:
             }
-        }while(option>0 && option<7);
+        }while(option>0 && option<9);
     }
 
     private static void reservationPage(){
         int option;
         do{
-            System.out.println("*****Reservation*****");
+            System.out.println("***** Reservation *****");
             System.out.println("Select an option");
             System.out.println("1. View All Reservations");
             System.out.println("2. Create Reservation Booking");
@@ -178,7 +192,7 @@ public class RestaurantUI {
     private static void staffPage(){
         int option;
         do{
-            System.out.println("*****Staff*****");
+            System.out.println("***** Staff *****");
             System.out.println("Select an option");
             System.out.println("1. View All Staff");
             System.out.println("2. Create Staff");
@@ -201,7 +215,7 @@ public class RestaurantUI {
     private static void customerPage(){
         int option;
         do{
-            System.out.println("*****Customer*****");
+            System.out.println("***** Customer *****");
             System.out.println("Select an option");
             System.out.println("1. View All Customer");
             System.out.println("2. Create Customer");
@@ -213,6 +227,7 @@ public class RestaurantUI {
 
             switch(option){
                 case 1:
+
                     break;
                 case 2:
                     break;

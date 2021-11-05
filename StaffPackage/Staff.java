@@ -1,3 +1,5 @@
+package StaffPackage;
+
 import FlatFile.CSVFormat;
 
 public class Staff implements CSVFormat{
@@ -52,5 +54,4 @@ public class Staff implements CSVFormat{
             gender + "," +
             jobTitle; 
     }
-    
 }

@@ -1,3 +1,5 @@
+package OrdersPackage;
+
 public class SaleReportItem implements Comparable<SaleReportItem>{
     private String name;
     private int quantity;
