@@ -101,28 +101,27 @@ public class TableManager extends Manager {
 	//Return an Empty table that fits the capactiy size
 	public int assignTable(int capacity, ArrayList<Integer> num){
 		//Flag =  true when table is taken
-		boolean flag = false;
+		boolean flag;
 		//sort based off capacity
 		tableList.sort(Comparator.nullsLast(Comparator.comparingInt(Table::getCapacity)));		
 		for(int i=0; i<tableList.size(); i++){
+			//reset flag
+			flag = false;
 			//Iterating throught the entire list to find if there is an avil table
 			if(tableList.get(i).getCapacity() >= capacity){
 				//iterating through the list of taken tables
 				for(int j=0; j<num.size(); j++){
 					//The table already taken
-					if(tableList.get(j).getTableNum() == num.get(j)) {
+					if(tableList.get(i).getTableNum() == num.get(j)) {
 						flag = true;
+						break;
 					}
 				}
+				//If the table is not taken
+				if(flag == false){
+					return tableList.get(i).getTableNum();
+				}
 			}
-			//If the table is not taken
-			if(flag == false){
-				return tableList.get(i).getTableNum();
-			}
-
-			//current table is already taken 
-			//reset flag
-			flag = false;
 		}
 		return -1;
 	}
