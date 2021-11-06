@@ -20,7 +20,7 @@ public class InvoiceManager extends Manager{
      * recreate the invoice objects to store within the invoiceList.
      */
     public InvoiceManager(){
-        initializeInvoiceList();
+        retrieveData();
     }
 
     /**
@@ -77,25 +77,25 @@ public class InvoiceManager extends Manager{
      * @param orderID orderID/invoiceID of the invoice to print.
      */
     public void printInvoice(long orderID) {
-        for (int i = 0; i < this.invoiceList.size(); i++) {
-            if (this.invoiceList.get(i).getInvoiceID() == orderID) {
+        for (int i = 0; i < invoiceList.size(); i++) {
+            if (invoiceList.get(i).getInvoiceID() == orderID) {
                 System.out.println("Order Invoice: " + orderID);
-                System.out.println("Customer ID: " + this.invoiceList.get(i).getCustomerID());
-                System.out.println("Staff ID: " + this.invoiceList.get(i).getStaffID());
-                System.out.println("Table Number: " + this.invoiceList.get(i).getTableNumber());
+                System.out.println("Customer ID: " + invoiceList.get(i).getCustomerID());
+                System.out.println("Staff ID: " + invoiceList.get(i).getStaffID());
+                System.out.println("Table Number: " + invoiceList.get(i).getTableNumber());
                 //*************change to display date time in string format from long
-                System.out.println("Date & Time: " + DateTime.epochToDate(this.invoiceList.get(i).getOrderDateTime(), true));
+                System.out.println("Date & Time: " + DateTime.epochToDate(invoiceList.get(i).getOrderDateTime(), true));
                 System.out.println("==============================================");
-                ArrayList<String> orderItems = unpackOrderItemStr(this.invoiceList.get(i).getOrderItems());
+                ArrayList<String> orderItems = unpackOrderItemStr(invoiceList.get(i).getOrderItems());
                 for (int j = 0; j < orderItems.size(); j++) {
                     System.out.println(orderItems.get(j));
                 }
                 System.out.println("----------------------------------------------");
-                System.out.printf("Sub Total:          $%.2f\n", this.invoiceList.get(i).getTotalPrice());
-                System.out.printf("GST:               +$%.2f\n", this.invoiceList.get(i).getGST());
-                System.out.printf("Service Charge:    +$%.2f\n", this.invoiceList.get(i).getServiceCharge());
-                System.out.printf("Member Discount:   -$%.2f\n", this.invoiceList.get(i).getDiscount());
-                System.out.printf("Total Price:        $%.2f\n", this.invoiceList.get(i).getFinalPaymentPrice());
+                System.out.printf("Sub Total:          $%.2f\n", invoiceList.get(i).getTotalPrice());
+                System.out.printf("GST:               +$%.2f\n", invoiceList.get(i).getGST());
+                System.out.printf("Service Charge:    +$%.2f\n", invoiceList.get(i).getServiceCharge());
+                System.out.printf("Member Discount:   -$%.2f\n", invoiceList.get(i).getDiscount());
+                System.out.printf("Total Price:        $%.2f\n", invoiceList.get(i).getFinalPaymentPrice());
                 System.out.println("==============================================");
                 return;
             }
@@ -126,15 +126,8 @@ public class InvoiceManager extends Manager{
      */
     public void saveOrder(Order paidOrder) {
         OrderInvoice newInvoice = convertOrderToInvoice(paidOrder);
-        this.retrieveData();
-        this.saveData();
-    }
-
-    /**
-     * Retrieves all stored invoices from Orders.csv to repopulate invoiceList
-     */
-    private void initializeInvoiceList(){
-        this.retrieveData();
+        invoiceList.add(newInvoice);
+        saveData();
     }
 
     /**
