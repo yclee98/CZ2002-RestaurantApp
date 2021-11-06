@@ -1,21 +1,23 @@
 package OrdersPackage;
 import java.util.ArrayList;
+
+import FlatFile.FlatFileAdapter;
 import Utility.*;
 
 /**
  * This a control class is used to interact with and manage invoice entities
  */
-public class InvoiceManager {
+public class InvoiceManager extends Manager{
 
     /**
      * The object used to save the invoices inside the invoiceList to the flat files
      */
-    protected OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
+//    protected OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
 
     /**
      * The list of all invoices in the system
      */
-    protected ArrayList<OrderInvoice> invoiceList;
+    protected ArrayList<OrderInvoice> invoiceList = new ArrayList<>();
 
     /**
      * Creates a new Invoice manager.
@@ -131,18 +133,15 @@ public class InvoiceManager {
      */
     public void saveOrder(Order paidOrder) {
         OrderInvoice newInvoice = convertOrderToInvoice(paidOrder);
-        orderHelper.retrieveData();
-        orderHelper.addToArray(newInvoice);
-        orderHelper.saveData();
+        this.retrieveData();
+        this.saveData();
     }
 
     /**
-     * Retrieves all stored invoices from Orders.csv to repopulate and assigns invoiceList as reference
+     * Retrieves all stored invoices from Orders.csv to repopulate invoiceList
      */
     private void initializeInvoiceList(){
-//        OrdersPackage.OrderFlatFileHelper orderHelper = new OrdersPackage.OrderFlatFileHelper();
-        orderHelper.retrieveData();
-        invoiceList = orderHelper.orderInvoices;
+        this.retrieveData();
     }
 
     /**
@@ -163,5 +162,56 @@ public class InvoiceManager {
     public void viewSaleReport(){
         SalesReportGenerator salesReportGenerator = new SalesReportGenerator();
         salesReportGenerator.viewSaleReport(invoiceList);
+    }
+
+    public void createFlatFileAdapter(){
+        super.addFlatFileAdapter(new FlatFileAdapter(){
+
+            /**
+             * get the name of the csv file to store the invoices into
+             * @return The file name
+             */
+            @Override
+            public String getFileName() {
+                return "Orders.csv";
+            }
+
+            /**
+             * Gets all the column names inside of the csv file
+             * @return String of the column names
+             */
+            @Override
+            public String getColumnsName() {
+                return "OrderID, StaffID, CustomerID, Table Number, date, " +
+                        "orderItems, totalPrice, GST, Service, Member_Discount, paymentPrice";
+            }
+
+            /**
+             * Inserts an invoice into a row in the csv file
+             * @param index invoice to store into the csv file based on the index in the invoiceList
+             * ArrayList
+             * @return the invoice in csv format if successful, null if not.
+             */
+            @Override
+            public String insertRow(int index) {
+                try{
+                    return invoiceList.get(index).toCSVFormat();
+                }catch (Exception e){
+                    return null;
+                }
+            }
+
+            /**
+             * Extracts as single row from the csv file and remakes it into a invoice object
+             * @param row Row string read from the csv file
+             */
+            @Override
+            public void extractRow(String[] row) {
+                invoiceList.add(new OrderInvoice(Long.parseLong(row[0]), Long.parseLong(row[1]),
+                        Long.parseLong(row[2]), Integer.parseInt(row[3]), Long.parseLong(row[4]), row[5],
+                        Double.parseDouble(row[6]), Double.parseDouble(row[7]), Double.parseDouble(row[8]),
+                        Double.parseDouble(row[9]), Double.parseDouble(row[10])));
+            }
+        });
     }
 }
