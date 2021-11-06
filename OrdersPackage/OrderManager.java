@@ -53,7 +53,6 @@ public class OrderManager {
      * @param customer Customer object that the order belongs to.
      * @param inOut Indicates whether the customer is eating in or taking out.
      * @param table_Mngr Used to check and assign the table to the customer.
-     * @return
      */
     public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr){
         boolean existOrder = checkOrderExists(customer);
