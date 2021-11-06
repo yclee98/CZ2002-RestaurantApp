@@ -83,13 +83,16 @@ public class SalesReportGenerator {
                     }
                 } 
             }
-            
         }
         printReport(saleReportItems, dataArray);
         
     }
     
     public void printReport(ArrayList<SaleReportItem> saleReportItems, double[] dataArray){
+        if(saleReportItems.size()==0){
+            System.out.println("No Sales during this period");
+            return;
+        }
         Collections.sort(saleReportItems);
         System.out.println("------------------------------------------------");
         System.out.printf("%-20s%-20s\n", "Name", "Quantity Sold");
@@ -130,24 +133,24 @@ public class SalesReportGenerator {
 
 
     public static void main(String[] args) {
-        ArrayList<OrderInvoice> oi = new ArrayList<OrderInvoice>();
-        oi.add(new OrderInvoice(1, 15, 9, 2021, 1631635200000L, "burger weqwe/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(2, 18, 9, 2021, 1631894400000L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(3, 24, 9, 2021, 1632412800000L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(4, 30, 9, 2021, 1632998467787L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(5, 23 ,10, 2021, 1634996839529L, "burger weqwe/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(6, 24, 10, 2021, 1635011585756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(7, 25, 10, 2021, 1635097985756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(8, 26, 10, 2021, 1635184385756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(9, 27, 10, 2021, 1635270785756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(10, 30, 10, 2021, 1635270785756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(11, 30, 10, 2021, 1635601682783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(12, 13, 11, 2021, 1636811282783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
-        oi.add(new OrderInvoice(13, 4, 12, 2021, 1638625682783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // ArrayList<OrderInvoice> oi = new ArrayList<OrderInvoice>();
+        // oi.add(new OrderInvoice(1, 15, 9, 2021, 1631635200000L, "burger weqwe/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(2, 18, 9, 2021, 1631894400000L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(3, 24, 9, 2021, 1632412800000L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(4, 30, 9, 2021, 1632998467787L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(5, 23 ,10, 2021, 1634996839529L, "burger weqwe/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(6, 24, 10, 2021, 1635011585756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(7, 25, 10, 2021, 1635097985756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(8, 26, 10, 2021, 1635184385756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(9, 27, 10, 2021, 1635270785756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(10, 30, 10, 2021, 1635270785756L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(11, 30, 10, 2021, 1635601682783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(12, 13, 11, 2021, 1636811282783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
+        // oi.add(new OrderInvoice(13, 4, 12, 2021, 1638625682783L, "burger/1|thai/2|er/3|wer/4",1,2,3,4,5));
 
 
-        SalesReportGenerator sg = new SalesReportGenerator();
-        sg.viewSaleReport(oi);
+        // SalesReportGenerator sg = new SalesReportGenerator();
+        // sg.viewSaleReport(oi);
                 
     }
 
