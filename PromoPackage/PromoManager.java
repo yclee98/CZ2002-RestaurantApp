@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Utility.Manager;
-import RestaurantProject.FlatFile.FlatFileAdapter;
+import FlatFile.FlatFileAdapter;
 
 public class PromoManager extends Manager{
 	
@@ -111,6 +111,10 @@ public class PromoManager extends Manager{
     	return null; //does not exist
     	
     }
+
+    public PromoSetMeal returnPromo(int index){
+		return promoList.get(index-1);
+	}
 	
 	public boolean checkPromoExists(String promoName) {
     	
