@@ -10,11 +10,6 @@ import Utility.*;
 public class InvoiceManager extends Manager{
 
     /**
-     * The object used to save the invoices inside the invoiceList to the flat files
-     */
-//    protected OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
-
-    /**
      * The list of all invoices in the system
      */
     protected ArrayList<OrderInvoice> invoiceList = new ArrayList<>();
@@ -82,27 +77,25 @@ public class InvoiceManager extends Manager{
      * @param orderID orderID/invoiceID of the invoice to print.
      */
     public void printInvoice(long orderID) {
-        OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
-        orderHelper.retrieveData();
-        for (int i = 0; i < orderHelper.orderInvoices.size(); i++) {
-            if (orderHelper.orderInvoices.get(i).getInvoiceID() == orderID) {
+        for (int i = 0; i < this.invoiceList.size(); i++) {
+            if (this.invoiceList.get(i).getInvoiceID() == orderID) {
                 System.out.println("Order Invoice: " + orderID);
-                System.out.println("Customer ID: " + orderHelper.orderInvoices.get(i).getCustomerID());
-                System.out.println("Staff ID: " + orderHelper.orderInvoices.get(i).getStaffID());
-                System.out.println("Table Number: " + orderHelper.orderInvoices.get(i).getTableNumber());
+                System.out.println("Customer ID: " + this.invoiceList.get(i).getCustomerID());
+                System.out.println("Staff ID: " + this.invoiceList.get(i).getStaffID());
+                System.out.println("Table Number: " + this.invoiceList.get(i).getTableNumber());
                 //*************change to display date time in string format from long
-                System.out.println("Date & Time: " + DateTime.epochToDate(orderHelper.orderInvoices.get(i).getOrderDateTime(), true));
+                System.out.println("Date & Time: " + DateTime.epochToDate(this.invoiceList.get(i).getOrderDateTime(), true));
                 System.out.println("==============================================");
-                ArrayList<String> orderItems = unpackOrderItemStr(orderHelper.orderInvoices.get(i).getOrderItems());
+                ArrayList<String> orderItems = unpackOrderItemStr(this.invoiceList.get(i).getOrderItems());
                 for (int j = 0; j < orderItems.size(); j++) {
                     System.out.println(orderItems.get(j));
                 }
                 System.out.println("----------------------------------------------");
-                System.out.printf("Sub Total:          $%.2f\n", orderHelper.orderInvoices.get(i).getTotalPrice());
-                System.out.printf("GST:               +$%.2f\n", orderHelper.orderInvoices.get(i).getGST());
-                System.out.printf("Service Charge:    +$%.2f\n", orderHelper.orderInvoices.get(i).getServiceCharge());
-                System.out.printf("Member Discount:   -$%.2f\n", orderHelper.orderInvoices.get(i).getDiscount());
-                System.out.printf("Total Price:        $%.2f\n", orderHelper.orderInvoices.get(i).getFinalPaymentPrice());
+                System.out.printf("Sub Total:          $%.2f\n", this.invoiceList.get(i).getTotalPrice());
+                System.out.printf("GST:               +$%.2f\n", this.invoiceList.get(i).getGST());
+                System.out.printf("Service Charge:    +$%.2f\n", this.invoiceList.get(i).getServiceCharge());
+                System.out.printf("Member Discount:   -$%.2f\n", this.invoiceList.get(i).getDiscount());
+                System.out.printf("Total Price:        $%.2f\n", this.invoiceList.get(i).getFinalPaymentPrice());
                 System.out.println("==============================================");
                 return;
             }
