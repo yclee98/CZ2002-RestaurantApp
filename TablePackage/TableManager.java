@@ -126,6 +126,15 @@ public class TableManager extends Manager {
 		return -1;
 	}
 
+	public int findAvailableTable(){
+		for(int i = 0; i < tableList.size(); i++){
+			if(!tableList.get(i).getAssigned()){
+				return tableList.get(i).getTableNum();
+			}
+		}
+		return -1;
+	}
+
 	
 	
 	//save function

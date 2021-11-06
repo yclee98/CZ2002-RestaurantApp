@@ -4,23 +4,47 @@ import Utility.Manager;
 import FlatFile.FlatFileAdapter;
 import java.util.ArrayList;
 
+/**
+ * The orderFlatFileHelper is used to read and write the attributes of the invoice into the Orders.csv file
+ */
 public class OrderFlatFileHelper extends Manager {
 
+    /**
+     * contains all the invoice that is read from the Orders.csv file
+     */
     protected ArrayList<OrderInvoice> orderInvoices = new ArrayList<OrderInvoice>();
 
+    /**
+     * used to format the objects to store the attributes such that it is compatible with the csv file format
+     */
     public void createFlatFileAdapter(){
         super.addFlatFileAdapter(new FlatFileAdapter(){
+
+            /**
+             * get the name of the csv file to store the invoices into
+             * @return The file name
+             */
             @Override
             public String getFileName() {
                 return "Orders.csv";
             }
 
+            /**
+             * Gets all the column names inside of the csv file
+             * @return String of the column names
+             */
             @Override
             public String getColumnsName() {
                 return "OrderID, StaffID, CustomerID, Table Number, date, " +
                         "orderItems, totalPrice, GST, Service, Member_Discount, paymentPrice";
             }
 
+            /**
+             * Inserts an invoice into a row in the csv file
+             * @param index invoice to store into the csv file based on the index in the orderInvoices
+             * ArrayList
+             * @return the invoice in csv format if successful, null if not.
+             */
             @Override
             public String insertRow(int index) {
                 try{
@@ -30,6 +54,10 @@ public class OrderFlatFileHelper extends Manager {
                 }
             }
 
+            /**
+             * Extracts as single row from the csv file and remakes it into a invoice object
+             * @param row Row string read from the csv file
+             */
             @Override
             public void extractRow(String[] row) {
                 orderInvoices.add(new OrderInvoice(Long.parseLong(row[0]), Long.parseLong(row[1]),
@@ -40,6 +68,10 @@ public class OrderFlatFileHelper extends Manager {
         });
     }
 
+    /**
+     * Adds an invoice to the orderInvoices array to be saved.
+     * @param invoice Invoice to be saved
+     */
     public void addToArray(OrderInvoice invoice){
         orderInvoices.add(invoice);
     }

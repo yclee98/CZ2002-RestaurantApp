@@ -7,16 +7,36 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * This is the Control class that manages the all the orders that customers create.
+ */
 public class OrderManager {
+    /**
+     * contains all the active(unpaid) orders.
+     */
     private ArrayList<Order> orderList = new ArrayList<>();
-//    private OrdersPackage.InvoiceManager iManager = new OrdersPackage.InvoiceManager();
+
+    /**
+     * The discount percentage applicable only to members.
+     */
     private double discount = 0.1;
+
+    /**
+     * The GST applicable to all orders.
+     */
     private double taxes = 0.07;
+
+    /**
+     * The service charge applicable to all orders.
+     */
     private double service = 0.05;
     private Scanner userInput = new Scanner(System.in);
 
     public OrderManager(){}
 
+    /**
+     * Prints all the customers currently still active and the orderIDs that belongs to them.
+     */
     public void printCustomerAndOrders(){
         System.out.printf("%-20s %20s", "Customers", "OrderID\n");
         System.out.println("----------------------------------------");
@@ -27,10 +47,17 @@ public class OrderManager {
         System.out.println("----------------------------------------");
     }
 
-    public long createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr){
+    /**
+     * Creates a new order.
+     * @param staffID ID of the staff that took the order.
+     * @param customer Customer object that the order belongs to.
+     * @param inOut Indicates whether the customer is eating in or taking out.
+     * @param table_Mngr Used to check and assign the table to the customer.
+     * @return
+     */
+    public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr){
         boolean existOrder = checkOrderExists(customer);
         int tableNo = -1;
-
         if(!existOrder) {
             if (inOut == 1) {
                 tableNo = table_Mngr.findAvailableTable();
@@ -44,12 +71,17 @@ public class OrderManager {
             Order newOrder = new Order(staffID, customer, tableNo);
             orderList.add(newOrder);
             System.out.println("SUCCESS! Order created!");
-            return newOrder.getOrderID();
         }
         else{System.out.println("ERROR! Order already exists!");}
-        return -1;
+        return;
     }
 
+    /**
+     * Adds a MenuItem (ala carte) to the order.
+     * @param orderID ID of the order that the MenuItem is to be added into.
+     * @param newItem MenuItem to be added to the order.
+     * @param quantity Number of the MenuItem the customer wants to add.
+     */
     public void addItemToOrder(long orderID, MenuItem newItem, int quantity){
         if(quantity <= 0){
             System.out.println("Please enter a number > 0");
@@ -63,6 +95,12 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Adds a PromoSetMeal to the order.
+     * @param orderID ID of the order that the PromoSetMeal is to be added into.
+     * @param newItem PromoSetMeal to be added to the order.
+     * @param quantity Number of the PromoSetMeal the customer wants to add.
+     */
     public void addItemToOrder(long orderID, PromoSetMeal newItem, int quantity){
         if(quantity <= 0){
             System.out.println("Please enter a number > 0");
@@ -76,6 +114,10 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Removes an existing item (MenuItem/PromoMenuItem) from the order
+     * @param orderID The orderID that the item is to be removed from
+     */
     public void removeItemFromOrder(long orderID){
         int removeItemIndex, quantity;
         boolean found = false;
@@ -110,6 +152,9 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Prints all existing orders and their order details
+     */
     public void viewAllOrders(){
         System.out.println("---------------- Orders ----------------");
         for(int i = 0; i < orderList.size(); i++){
@@ -117,6 +162,10 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Prints the all the order details pertaining to the specified orderID
+     * @param orderID ID of the order to print details for.
+     */
     public void viewOrder(long orderID){
         boolean found = false;
         for(int i = 0; i < orderList.size(); i++){
@@ -145,7 +194,14 @@ public class OrderManager {
         }
     }
 
-    public void settlePayment(long orderID, InvoiceManager invoice_Mngr){
+    /**
+     * This method finalizes the order and prepares it for payment, final price is calculated and order is
+     * converted to invoice if customer agrees to pay. Assigned table will be unassigned.
+     * @param orderID orderID of the order to be paid.
+     * @param invoice_Mngr object in charge of converting order to invoice.
+     * @param table_Mngr used to unassign the table.
+     */
+    public void settlePayment(long orderID, InvoiceManager invoice_Mngr, TableManager table_Mngr){
         String userReply;
         Order payOrder = null;
         double paymentPrice;
@@ -168,11 +224,22 @@ public class OrderManager {
         System.out.println("\nConfirm and proceed to payment? (Y/N): ");
         userReply = userInput.next();
         if(Objects.equals(userReply, "Y")){
+            // if customer had been assign a table number, unassign it
+            if(payOrder.getTableNumber() != -1){
+                table_Mngr.setAssign(payOrder.getTableNumber(), false);
+            }
             payOrder.setFinalPaymentPrice(paymentPrice);
             invoice_Mngr.saveOrder(payOrder);
+            invoice_Mngr.printInvoice(payOrder.getOrderID());
         }
     }
 
+    /**
+     * This method calculates the price the customer has to pay. It applies taxes, charges and discounts if
+     * applicable
+     * @param orderID ID of the order to be paid
+     * @return the payment price the customer has to pay
+     */
     public double calculateFinalPrice(long orderID){
         Order payOrder;
         double finalPrice = 0;
@@ -204,6 +271,12 @@ public class OrderManager {
         return finalPrice;
     }
 
+    /**
+     * Checks if the customer has an existing active order. Prevents recreation of order with same
+     * customer.
+     * @param newCust the subject customer to check existing orders for.
+     * @return true if existing order is found, false if not.
+     */
     private boolean checkOrderExists(Customer newCust){
         long custID = newCust.getCustomerID();
         for(int i  = 0; i < orderList.size(); i++){
@@ -214,6 +287,11 @@ public class OrderManager {
         return false;
     }
 
+    /**
+     * Checks if there is an order with the specified orderID
+     * @param OrderID the subject orderID to find the order
+     * @return true if existing order is found, false if not.
+     */
     public boolean checkOrderExists(long OrderID){
         for(int i  = 0; i < orderList.size(); i++){
             if(orderList.get(i).getOrderID() == OrderID){

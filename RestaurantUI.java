@@ -151,7 +151,7 @@ public class RestaurantUI {
                     break;
 
                 case 6:
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr);
+                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
                     break;
 
                 case 7: // print order invoice

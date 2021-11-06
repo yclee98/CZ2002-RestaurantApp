@@ -149,12 +149,12 @@ public class OrderUI {
         order_Mngr.removeItemFromOrder(orderID);
     }
 
-    public static void settlePayment(OrderManager order_Mngr, InvoiceManager invoice_Mngr){
+    public static void settlePayment(OrderManager order_Mngr, InvoiceManager invoice_Mngr, TableManager table_Mngr){
         Scanner userInput = new Scanner(System.in);
         order_Mngr.printCustomerAndOrders();
         System.out.println("Please enter the orderID to pay");
         long orderID = userInput.nextLong();
-        order_Mngr.settlePayment(orderID, invoice_Mngr);
+        order_Mngr.settlePayment(orderID, invoice_Mngr, table_Mngr);
     }
 
     public static void printOrderInvoice(InvoiceManager invoice_Mngr){
@@ -219,7 +219,7 @@ public class OrderUI {
                     break;
 
                 case 6: //
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr);
+                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
                     break;
 
                 case 7: // print order invoice
