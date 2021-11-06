@@ -9,14 +9,6 @@ import StaffPackage.*;
 
 
 public class OrderUI {
-//    protected static Scanner userInput = new Scanner(System.in);
-//    protected static OrdersPackage.OrderManager order_Mngr = new OrdersPackage.OrderManager();
-//    protected static OrdersPackage.InvoiceManager invoice_Mngr = new OrdersPackage.InvoiceManager();
-//    protected static PromoManager promo_Mngr = new PromoManager();
-//    protected static ItemManager item_Mngr = new ItemManager();
-//    protected static TableManager table_Mngr = new TableManager();
-//    protected static StaffPackage.StaffManager staff_Mngr = new StaffPackage.StaffManager();
-//    public static CustomerPackage.CustomerManager cust_Mngr = new CustomerPackage.CustomerManager();
 
     public OrderUI(){}
 
@@ -113,13 +105,13 @@ public class OrderUI {
                 System.out.println("--- Ala Carte ---");
                 item_Mngr.viewAllMenuItems();
                 do {
-                    System.out.println("\n Specify item index to add (Enter -1 to finish)");
+                    System.out.println("Specify item index to add (Enter -1 to finish)");
                     int item_idx = userInput.nextInt();
                     if (item_idx == -1) {
                         break;
                     }
                     cusItem = item_Mngr.returnIndividualMenuItem(item_idx);
-                    System.out.println("\n Specify quantity to add ");
+                    System.out.println("Specify quantity to add ");
                     int qty = userInput.nextInt();
                     order_Mngr.addItemToOrder(orderID, cusItem, qty);
                 }while(true);
@@ -129,13 +121,13 @@ public class OrderUI {
                 System.out.println("--- Promotional Meals ---");
                 promo_Mngr.viewAllPromo();
                 do {
-                    System.out.println("\n Specify meal index to add (Enter -1 to finish)");
+                    System.out.println("Specify meal index to add (Enter -1 to finish)");
                     int item_idx = userInput.nextInt();
                     if (item_idx == -1) {
                         break;
                     }
                     cusMeal = promo_Mngr.returnPromo(item_idx);
-                    System.out.println("\n Specify quantity to add (Enter -1 to finish)");
+                    System.out.println("Specify quantity to add (Enter -1 to finish)");
                     int qty = userInput.nextInt();
                     order_Mngr.addItemToOrder(orderID, cusMeal, qty);
                 }while(true);
