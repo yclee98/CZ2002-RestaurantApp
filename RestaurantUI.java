@@ -32,12 +32,12 @@ public class RestaurantUI {
             System.out.println("*****Main Menu*****");
             System.out.println("Select an option");
             System.out.println("1. Menu Items/Promotion");
-            System.out.println("2. OrdersPackage.Order");
+            System.out.println("2. Order");
             System.out.println("3. Reservation");
             System.out.println("4. Check Table Availability");
             System.out.println("5. Print Sale Revenue Report");
-            System.out.println("6. StaffPackage.Staff");
-            System.out.println("7. CustomerPackage.Customer");
+            System.out.println("6. Staff");
+            System.out.println("7. Customer");
             System.out.println("8. Exit");
             option = userInput.nextInt();
             System.out.println();
@@ -56,7 +56,7 @@ public class RestaurantUI {
                     //go to check table availability
                     break;
                 case 5:
-                    //go to print sales revenue report
+                    invoice_Mngr.viewSaleReport();
                     break;
                 case 6:
                     staffPage();
@@ -66,6 +66,7 @@ public class RestaurantUI {
                     break;
                 default:
             }
+            System.out.println();
         }while(option>0 && option<8);
     }
 
@@ -204,11 +205,21 @@ public class RestaurantUI {
 
             switch(option){
                 case 1:
+                    staff_Mngr.printAllStaff();
                     break;
                 case 2:
+                    staff_Mngr.createStaff();
+                    break;
+                case 3:
+                    staff_Mngr.viewStaffByID();
+                    break;
+                case 4:
+                    staff_Mngr.removeStaffById();
                     break;
                 default:
+                    staff_Mngr.saveData();
             }
+            System.out.println();
         }while(option>0 && option<5);
     }
 

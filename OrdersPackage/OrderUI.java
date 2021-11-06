@@ -46,14 +46,18 @@ public class OrderUI {
         staff_Mngr.printAllStaff();
         do{
             System.out.println("Please enter the StaffID ");
-            try{sID = userInput.nextLong();
+            try{
+                sID = userInput.nextLong();
+                if(staff_Mngr.findStaffById(sID)!=-1){
+                    break;
+                }
             }
             catch(InputMismatchException m){
                 System.out.println("ERROR! Please enter the ID of the StaffPackage.Staff!");
                 userInput.nextLine();
                 continue;
             }
-            break;
+            // break;
         }while(true);
 
         System.out.println("Please specify eating in or take away");
