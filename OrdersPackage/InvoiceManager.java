@@ -2,14 +2,33 @@ package OrdersPackage;
 import java.util.ArrayList;
 import Utility.*;
 
+/**
+ * This a control class is used to interact with and manage invoice entities
+ */
 public class InvoiceManager {
+
+    /**
+     * The object used to save the invoices inside the invoiceList to the flat files
+     */
     protected OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
+
+    /**
+     * The list of all invoices in the system
+     */
     protected ArrayList<OrderInvoice> invoiceList;
 
+    /**
+     * Creates a new Invoice manager.
+     * During creation, application will read all existing invoices stored inside the Orders.csv and
+     * recreate the invoice objects to store within the invoiceList.
+     */
     public InvoiceManager(){
         initializeInvoiceList();
     }
-    // DateTime.epochToDate(
+
+    /**
+     * Prints the Invoice and the date in which they are created
+     */
     public void printInvoiceIDAndDate(){
         long invoiceID;
         System.out.println("InvoiceID               Date");
@@ -21,6 +40,14 @@ public class InvoiceManager {
         System.out.println("----------------------------");
     }
 
+    /**
+     * This function is invoked after the customer has paid for the order.
+     * Converts the order object into an invoice object.
+     * orderItemList and orderPromoList arrayList in Order object is converted to a string in "item/quantity/price|"
+     * format for invoice storage.
+     * @param orderToStore Order object to convert into invoice
+     * @return Invoice object converted from orderToStore.
+     */
     public OrderInvoice convertOrderToInvoice(Order orderToStore) {
         // convert all Orderitems to itemName and qty in string
         String orderItemStr = "";
@@ -48,6 +75,10 @@ public class InvoiceManager {
                 orderToStore.getFinalPaymentPrice());
     }
 
+    /**
+     * Searches and prints the Invoice details based on user entered invoiceID/orderID
+     * @param orderID orderID/invoiceID of the invoice to print.
+     */
     public void printInvoice(long orderID) {
         OrderFlatFileHelper orderHelper = new OrderFlatFileHelper();
         orderHelper.retrieveData();
@@ -76,6 +107,12 @@ public class InvoiceManager {
         }
     }
 
+    /**
+     * Invoice stores orderItems as a one long string. Splitting is required to seperate the items, quantity
+     * and price to be able to print properly.
+     * @param orderItemStr  The concatenated string that contains orderItems in "item/quantity/price|" format
+     * @return The result of the unpacking of the long orderItemStr stored in String arrayList
+     */
     public ArrayList<String> unpackOrderItemStr(String orderItemStr) {
         ArrayList<String> rebuiltOrderItem = new ArrayList<String>();
         String[] parts = orderItemStr.split("\\|");
@@ -88,6 +125,10 @@ public class InvoiceManager {
         return rebuiltOrderItem;
     }
 
+    /**
+     * Converts order to invoice and saves into Orders.csv
+     * @param paidOrder Order to be saved
+     */
     public void saveOrder(Order paidOrder) {
         OrderInvoice newInvoice = convertOrderToInvoice(paidOrder);
         orderHelper.retrieveData();
@@ -95,12 +136,18 @@ public class InvoiceManager {
         orderHelper.saveData();
     }
 
+    /**
+     * Retrieves all stored invoices from Orders.csv to repopulate and assigns invoiceList as reference
+     */
     private void initializeInvoiceList(){
 //        OrdersPackage.OrderFlatFileHelper orderHelper = new OrdersPackage.OrderFlatFileHelper();
         orderHelper.retrieveData();
         invoiceList = orderHelper.orderInvoices;
     }
 
+    /**
+     * Prints all invoices inside the invoice arrayList referenced by invoiceList
+     */
     public void printAllInvoices(){
         long invoiceIDs;
         System.out.println("************* Invoices **************");
@@ -110,6 +157,9 @@ public class InvoiceManager {
         }
     }
 
+    /**
+     * Prints sales report using invoices referenced by invoiceList
+     */
     public void viewSaleReport(){
         SalesReportGenerator salesReportGenerator = new SalesReportGenerator();
         salesReportGenerator.viewSaleReport(invoiceList);

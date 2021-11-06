@@ -3,7 +3,7 @@ package OrdersPackage;
 import PromoPackage.*;
 
 /**
- * This is an entity class that combines the PromoSetMeal object and the quantity specified by the customer.
+ * This is an entity class that combines the PromoSetMeal object and the quantity specified by the customer
  */
 public class OrderPromoItems {
 

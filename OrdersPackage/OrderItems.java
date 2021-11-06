@@ -2,7 +2,7 @@ package OrdersPackage;
 import MenuItemPackage.*;
 
 /**
- * This is an entity class that combines the MenuItem object and the quantity specified by the customer.
+ * This is an entity class that combines the MenuItem object and the quantity specified by the customer
  */
 public class OrderItems {
 

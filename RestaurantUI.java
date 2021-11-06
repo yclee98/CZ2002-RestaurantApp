@@ -2,13 +2,13 @@ import CustomerPackage.CustomerManager;
 import OrdersPackage.InvoiceManager;
 import OrdersPackage.OrderManager;
 import OrdersPackage.OrderUI;
-import StaffPackage.StaffManager;
 import TablePackage.TableManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 import MenuCatePackage.*;
 import MenuItemPackage.*;
 import PromoPackage.*;
+import StaffPackage.*;
 
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * This is the Control class that manages the all the orders that customers create.
+ * This is the Control class that manages the all the orders that customers create
  */
 public class OrderManager {
     /**
