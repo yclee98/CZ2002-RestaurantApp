@@ -11,7 +11,8 @@ public class PromoManager extends Manager{
 	
 	private ArrayList<PromoSetMeal> promoList = new ArrayList<PromoSetMeal>();
 
-	public PromoManager() {	
+	public PromoManager() {
+
 	}
 	
 	public ArrayList<PromoSetMeal> getPromoList(){
@@ -112,6 +113,7 @@ public class PromoManager extends Manager{
     	
     }
 
+	// ************** Added this to return Item by index ******************
     public PromoSetMeal returnPromo(int index){
 		return promoList.get(index-1);
 	}

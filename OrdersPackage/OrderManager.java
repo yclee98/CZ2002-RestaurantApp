@@ -43,10 +43,10 @@ public class OrderManager {
             }
             Order newOrder = new Order(staffID, customer, tableNo);
             orderList.add(newOrder);
-            System.out.println("SUCCESS! OrdersPackage.Order created!");
+            System.out.println("SUCCESS! Order created!");
             return newOrder.getOrderID();
         }
-        else{System.out.println("ERROR! OrdersPackage.Order already exists!");}
+        else{System.out.println("ERROR! Order already exists!");}
         return -1;
     }
 
@@ -106,7 +106,7 @@ public class OrderManager {
             }
         }
         if(!found){
-            System.out.println("ERROR: OrdersPackage.Order not found!");
+            System.out.println("ERROR: Order not found!");
         }
     }
 
@@ -126,14 +126,14 @@ public class OrderManager {
                 ArrayList<OrderItems> itemsInOrder = orderList.get(i).getOrderItemList();
                 ArrayList<OrderPromoItems> promoInOrder = orderList.get(i).getPromoItemList();
                 System.out.println("==============================================");
-                System.out.println("OrdersPackage.Order: " + orderID);
+                System.out.println("Order: " + orderID);
                 for(j = 0; j < itemsInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+1), itemsInOrder.get(j).getQuantity(), itemsInOrder.get(j).getItem().getName(),
-                            itemsInOrder.get(i).getItem().getPrice());
+                            (itemsInOrder.get(i).getItem().getPrice()*itemsInOrder.get(j).getQuantity()));
                 }
                 for(j = j - itemsInOrder.size(); j < promoInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+itemsInOrder.size()+1), promoInOrder.get(j).getQuantity(), promoInOrder.get(j).getPromoItem().getName(),
-                            promoInOrder.get(i).getPromoItem().getPrice());
+                            (promoInOrder.get(i).getPromoItem().getPrice()*promoInOrder.get(j).getQuantity()));
                 }
                 System.out.println("----------------------------------------------");
                 System.out.printf("Sub-Total = $%.2f\n", orderList.get(i).getTotalPrice());
@@ -141,7 +141,7 @@ public class OrderManager {
             }
         }
         if(!found){
-            System.out.println("ERROR: OrdersPackage.Order " + orderID + " is not found!");
+            System.out.println("ERROR: Order " + orderID + " is not found!");
         }
     }
 

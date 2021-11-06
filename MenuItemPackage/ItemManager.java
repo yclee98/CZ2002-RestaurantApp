@@ -9,6 +9,7 @@ public class ItemManager {
 	private ArrayList<MenuItem> itemList = new ArrayList<MenuItem>();
 
 	public ItemManager() {
+
 	}
 	
 	public ArrayList<MenuItem> getItemList(){
@@ -101,6 +102,10 @@ public class ItemManager {
     	
     	return null; //returns null if not found
     }
+	// ************** Added this to return Item by index ******************
+	public MenuItem returnIndividualMenuItem(int index){
+		return itemList.get(index-1);
+	}
     
     public boolean checkItemExists(String itemName) {
     	
@@ -113,7 +118,6 @@ public class ItemManager {
     	return false; //does not exist
     	
     }
-    
     public boolean checkItemExists(long itemID) {
     	
     	for(int i=0; i < itemList.size(); i++) {

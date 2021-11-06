@@ -1,5 +1,5 @@
 package OrdersPackage;
-import MenuItemPackage.MenuItem;
+import MenuItemPackage.*;
 
 public class OrderItems {
 

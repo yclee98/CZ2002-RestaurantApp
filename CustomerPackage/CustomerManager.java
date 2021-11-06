@@ -8,7 +8,8 @@ public class CustomerManager
 	
 	public CustomerManager()
 	{
-		this.customerList= new ArrayList<Customer>(); 
+		this.customerList= new ArrayList<Customer>();
+
 	}
 	
 	public void createcustomer(long custId, String custName, boolean mem)
@@ -51,9 +52,9 @@ public class CustomerManager
 
 	public void printCustomers(){
 		System.out.println("*********** Customers ***********");
-		System.out.println(" Customer					ID");
+		System.out.printf("%-20s\t\t%-20s\n","Customer", "ID");
 		for(int i = 0; i < customerList.size(); i++){
-			System.out.println(customerList.get(i).getCustomerName() + "					" + customerList.get(i).getCustomerID());
+			System.out.printf("%-20s\t\t%-20s\n", customerList.get(i).getCustomerName(), Long.toString(customerList.get(i).getCustomerID()));
 		}
 	}
 }
