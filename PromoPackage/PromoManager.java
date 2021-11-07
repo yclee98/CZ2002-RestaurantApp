@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Utility.Manager;
-import FlatFile.FlatFileAdapter;
+import RestaurantProject.FlatFile.FlatFileAdapter;
 
 public class PromoManager extends Manager{
 	
@@ -113,7 +113,6 @@ public class PromoManager extends Manager{
     	
     }
 
-	// ************** Added this to return Item by index ******************
     public PromoSetMeal returnPromo(int index){
 		if(index > promoList.size() || index <= 0){
 			return null;
