@@ -55,14 +55,16 @@ public class InvoiceManager extends Manager{
             // extract the name of the orderitem MenuItem
             itemNameStr = orderToStore.getOrderItemList().get(i).getItem().getName();
             itemQtyStr = Long.toString(orderToStore.getOrderItemList().get(i).getQuantity());
-            itemPriceStr = Double.toString(orderToStore.getOrderItemList().get(i).getItem().getPrice());
+            itemPriceStr = Double.toString(orderToStore.getOrderItemList().get(i).getItem().getPrice()*
+                    orderToStore.getOrderItemList().get(i).getQuantity());
             orderItemStr = orderItemStr.concat(itemNameStr + "/" + itemQtyStr + "/" + itemPriceStr + "|");
         }
         for (int i = 0; i < orderToStore.getPromoItemList().size(); i++) {
             // extract the name of the Promo meal item
             itemNameStr = orderToStore.getPromoItemList().get(i).getPromoItem().getName();
             itemQtyStr = Long.toString(orderToStore.getPromoItemList().get(i).getQuantity());
-            itemPriceStr = Double.toString(orderToStore.getPromoItemList().get(i).getPromoItem().getPrice());
+            itemPriceStr = Double.toString(orderToStore.getPromoItemList().get(i).getPromoItem().getPrice()*
+                    orderToStore.getPromoItemList().get(i).getQuantity());
             orderItemStr = orderItemStr.concat(itemNameStr + "/" + itemQtyStr + "/" + itemPriceStr + "|");
         }
         return new OrderInvoice(orderToStore.getOrderID(), orderToStore.getStaffID(),
