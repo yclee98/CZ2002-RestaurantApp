@@ -180,7 +180,7 @@ public class OrderManager {
                 System.out.println("Table No: "+ orderList.get(i).getTableNumber());
                 for(j = 0; j < itemsInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+1), itemsInOrder.get(j).getQuantity(), itemsInOrder.get(j).getItem().getName(),
-                            (itemsInOrder.get(i).getItem().getPrice()*itemsInOrder.get(j).getQuantity()));
+                            (itemsInOrder.get(j).getItem().getPrice()*itemsInOrder.get(j).getQuantity()));
                 }
                 for(j = j - itemsInOrder.size(); j < promoInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+itemsInOrder.size()+1), promoInOrder.get(j).getQuantity(), promoInOrder.get(j).getPromoItem().getName(),
