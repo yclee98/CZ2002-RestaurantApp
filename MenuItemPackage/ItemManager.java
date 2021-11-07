@@ -92,7 +92,7 @@ public class ItemManager {
     	return null; //returns null if not found
     }
     
-    public MenuItem returnIndividualMenuItem(String itemName){
+	public MenuItem returnIndividualMenuItem(String itemName){
     	
     	for(int i=0; i < itemList.size(); i++) {
 			if(itemList.get(i).getName().equals(itemName)) {
