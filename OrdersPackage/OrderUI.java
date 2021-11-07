@@ -50,7 +50,7 @@ public class OrderUI {
             break;
         }while(true);
 
-        Customer newCust = cust_Mngr.findCustomer(cID);
+        Customer newCust = cust_Mngr.returnCustomer(cID);
         if(newCust == null){
             System.out.println("No customer with that ID is found! ");
             return;
