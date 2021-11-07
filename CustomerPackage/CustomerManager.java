@@ -12,13 +12,13 @@ public class CustomerManager
 
 	}
 	
-	public void createcustomer(long custId, String custName, boolean mem)
+	public void createCustomer(long custId, String custName, boolean mem)
 	{
-		Customer newcustomer = new Customer(custId,custName, mem);
-		this.customerList.add(newcustomer);
+		Customer newCustomer = new Customer(custId,custName, mem);
+		this.customerList.add(newCustomer);
 	}
 	
-	public boolean findcustomer(long custId)
+	public boolean findCustomerExists(long custId)
 	{
 		for(Customer cust: this.customerList)
 		{
@@ -30,7 +30,7 @@ public class CustomerManager
 		return false;
 	}
 	
-	public void removecustomer(long custId)
+	public void removeCustomer(long custId)
 	{
 		for(int i=0; i<this.customerList.size(); i++)
 		{
@@ -41,7 +41,7 @@ public class CustomerManager
 		}
 	}
 
-	public Customer findCustomer(long custId){
+	public Customer returnCustomer(long custId){
 		for(int i = 0; i < customerList.size(); i++){
 			if(customerList.get(i).getCustomerID() == custId){
 				return customerList.get(i);
