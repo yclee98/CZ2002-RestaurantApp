@@ -3,7 +3,7 @@ package PromoPackage;
 import java.util.ArrayList;
 
 import MenuItemPackage.MenuItem;
-import RestaurantProject.FlatFile.CSVFormat;
+import FlatFile.CSVFormat;
 
 
 public class PromoSetMeal implements CSVFormat{
