@@ -3,7 +3,7 @@ package MenuCatePackage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import RestaurantProject.FlatFile.FlatFileAdapter;
+import FlatFile.FlatFileAdapter;
 import Utility.Manager;
 
 public class CateManager extends Manager{
