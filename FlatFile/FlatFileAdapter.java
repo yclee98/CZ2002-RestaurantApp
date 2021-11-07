@@ -1,34 +1,38 @@
 package FlatFile;
-
+/**
+ * This interface is an adapter which is use by the FlatFileHandler
+ * It allow the different classes that require saving and retrieving to/from flatfile to change the body according to their needs
+ */
 public interface FlatFileAdapter {
+    /**
+     * @return filename in .csv where data should be stored
+     * e.g. return "test.csv";
+     */
     public String getFileName();
-        //return the filename
 
-    public String getColumnsName();
-        //return the columns/variables name for the entity to store 
-        //basically the first row in the table
-        //e.g
-        //return "Staff ID, Staff Name, Gender, Job Title";  
+    /**
+     * Get the columns/variables names which will be store in the first row of the csv file 
+     * @return a string of columns/variables names that will be displayed as the columns for the csv file
+     * e.g. return "col1, col2, col3";
+     */
+    public String getColumnsName(); 
 
+    /**
+     * To insert a row into the csv file
+     * When storing infomation of an entity, it will be easier to implement CSVFormat on the entity and call toCSVFormat to 
+     * get the entity information in csv format and store as a row
+     * e.g. return allstaff.get(index).toCSVFormat();
+     * @param index is use to indicate the index position of the csv file, starting from index 0
+     * @return a row in string to be inserted or return null if it is end of the insert
+     */
     public String insertRow(int index);
-        //to insert a row entry for the csv which contain the information of a single entity of the array
-        //can implement CSVFormat in the entity and override the method so that we can easily get the row information from that entity
-        //should return null if out of range of the array else return string which contain information of the entity
-        //can do a if else to check or do try catch which does not need to do any comparison
-        //basically how u going to insert one entry to the csv 
-        //e.g
-        // try{
-        //     return allstaff.get(index).toCSVFormat();
-        // }catch(Exception e){
-        //     return null;
-        // }
         
-
+    /**
+     * To specify, after extracting a row of the csv what are the action to perform 
+     * e.g. storing the extracted row into an array of entity
+     * e.g. allStaff.add(new Staff(Long.parseLong(row[0]), row[1], row[2].charAt(0), row[3]));
+     * @param row is a row of the csv file in a string array
+     */
     public void extractRow(String[] row);
-        //extract a single row from the csv and then
-        //create an object from the string array row and store inside your array
-        //basically what u need to do after getting a single row from the csv
-        //e.g.
-        // allStaff.add(new Staff(Long.parseLong(row[0]), row[1], row[2].charAt(0), row[3]));
         
 }
