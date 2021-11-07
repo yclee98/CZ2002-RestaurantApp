@@ -93,7 +93,7 @@ public class StaffManager extends Manager{
      * Print all the staff id and name
      */
     public void printAllStaff(){
-        System.out.println("Listing all the Staffs");
+        System.out.println("Lists of stuff");
         for(int i=0; i<staffList.size(); i++){
             System.out.println(staffList.get(i).getStaffID()+ " " + staffList.get(i).getStaffName());
         }
