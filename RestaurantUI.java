@@ -163,7 +163,7 @@ public class RestaurantUI {
 
                 case 4: // add items to order
                     // print all the customer names and the associated orderIDs
-                    OrderUI.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
+                    OrderUI.AddItemsToOrder(order_Mngr, menu_Mngr.item_Mngr, menu_Mngr.promo_Mngr);
                     break;
 
                 case 5: // Remove items from OrdersPackage.Order
