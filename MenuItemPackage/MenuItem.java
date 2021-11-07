@@ -1,6 +1,6 @@
 package MenuItemPackage;
 
-import RestaurantProject.FlatFile.CSVFormat;
+import FlatFile.CSVFormat;
 
 import MenuCatePackage.*;
 
