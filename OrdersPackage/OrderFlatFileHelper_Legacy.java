@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  *  The OrderFlatFileHelper is used to read and write the attributes of the invoice into the Orders.csv file
  */
-public class OrderFlatFileHelper extends Manager {
+public class OrderFlatFileHelper_Legacy extends Manager {
 
     /**
      * contains all the invoice that is read from the Orders.csv file
