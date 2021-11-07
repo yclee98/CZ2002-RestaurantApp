@@ -102,7 +102,7 @@ public class ItemManager {
     	
     	return null; //returns null if not found
     }
-	// ************** Added this to return Item by index ******************
+
 	public MenuItem returnIndividualMenuItem(int index){
 		if(index > itemList.size() || index <= 0){
 			return null;
