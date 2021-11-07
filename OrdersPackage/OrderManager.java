@@ -259,7 +259,6 @@ public class OrderManager {
                 if(payOrder.getCustomer().isMember()){
                     double discountValue = payOrder.getTotalPrice() * discount;
                     finalPrice = (payOrder.getTotalPrice() * (1+taxes+service)) - discountValue;
-                    System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
                     System.out.printf("    Service Charge      5%%:     +$%.2f\n", serviceValue);
                     System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
@@ -267,13 +266,13 @@ public class OrderManager {
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes+service);
-                    System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
                 }
                 break;
             }
         }
-        System.out.printf("Final payment Price = $%.2f", finalPrice);
+        System.out.printf("Final payment Price = $%.2f\n", finalPrice);
+        System.out.println("=============================================");
         return finalPrice;
     }
 
