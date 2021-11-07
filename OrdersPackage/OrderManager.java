@@ -129,7 +129,7 @@ public class OrderManager {
                     System.out.print("Please select the index number of the order you want to remove: ");
                     removeItemIndex = userInput.nextInt();
                     if(removeItemIndex > orderList.get(i).getOrderItemList().size() +
-                            orderList.get(i).getPromoItemList().size()) {
+                            orderList.get(i).getPromoItemList().size() || removeItemIndex < 1) {
                         System.out.println("ERROR: Index out of bounds");
                         continue;
                     }
