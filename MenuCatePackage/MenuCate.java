@@ -1,6 +1,6 @@
 package MenuCatePackage;
 
-import RestaurantProject.FlatFile.CSVFormat;
+import FlatFile.CSVFormat;
 
 public class MenuCate implements CSVFormat{
 
