@@ -14,9 +14,9 @@ public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
-    protected static TableManager table_Mngr = new TableManager();
+    protected static TableReservationManager tableres_Mngr = new TableReservationManager();
     protected static StaffManager staff_Mngr = new StaffManager();
-    public static CustomerManager cust_Mngr = new CustomerManager();
+    protected static CustomerManager cust_Mngr = new CustomerManager();
     protected static MenuManager menu_Mngr = new MenuManager();
 
 
