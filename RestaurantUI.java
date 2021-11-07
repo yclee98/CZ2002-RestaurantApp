@@ -14,15 +14,26 @@ public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
-    protected static PromoManager promo_Mngr = new PromoManager();
-    protected static ItemManager item_Mngr = new ItemManager();
     protected static TableManager table_Mngr = new TableManager();
     protected static StaffManager staff_Mngr = new StaffManager();
     public static CustomerManager cust_Mngr = new CustomerManager();
-	public static MenuManager menu = new MenuManager();
-	public static ArrayList<MenuCate> cateList = new ArrayList<MenuCate>();
+    protected static MenuManager menu_Mngr = new MenuManager();
+
 
     public static void main(String[] args){
+	//Autoload Menu
+    	//load categories
+    	menu_Mngr.cate_Mngr.getCateList().clear();
+    	menu_Mngr.cate_Mngr.retrieveData(); 
+    	
+    	//load menu items
+    	menu_Mngr.item_Mngr.getItemList().clear();
+    	menu_Mngr.retrieveData(); 
+    	
+    	//load promotions
+    	menu_Mngr.promo_Mngr.getPromoList().clear();
+    	menu_Mngr.promo_Mngr.retrieveData();
+    	menu_Mngr.populateAllPromos();
         mainMenuPage();        
     }
 
@@ -73,12 +84,13 @@ public class RestaurantUI {
     private static void menuPage(){
         int option;
         do{
-            System.out.println("***** Menu Items/Promotion *****");
+            System.out.println("*****Menu Items/Promotion*****");
             System.out.println("Select an option");
-            System.out.println("1. Menu Options");
-            System.out.println("2. Promotion Options");
+            System.out.println("1. Menu Item Options");
+            System.out.println("2. Promotion Set Options");
             System.out.println("3. Category Options");
-            System.out.println("4. Back");
+            System.out.println("4. Save Menu");
+            System.out.println("5. Back");
             option = userInput.nextInt();
             userInput.nextLine(); //clear \n buffer
             System.out.println();
@@ -86,26 +98,33 @@ public class RestaurantUI {
             switch(option){
             	case 1: //Menu Options
             		
-            		menu.menuOptions();
+            		menu_Mngr.menuOptions();
             		
             		break;
                 case 2: //Promotion Options
                 	
-            		menu.promotionOptions();
+            		menu_Mngr.promotionOptions();
             		
             		break;
 
                 case 3: //Category Options
                 	
-                	menu.categoryOptions();
+                	menu_Mngr.categoryOptions();
             		
             		break;
-                
+                case 4: //Save All
+                	menu_Mngr.cate_Mngr.saveData(); //save categories
+                	menu_Mngr.saveData(); //save menu items
+                	menu_Mngr.promo_Mngr.saveData(); //save promotions
+                	
+                	System.out.println("Menu Saved.");
+            		System.out.println();
+            		break;
         		default:
         			break;
             }
 
-        }while(option>0 && option<4);
+        }while(option>0 && option<5);
     }
     
     private static void orderPage(){
