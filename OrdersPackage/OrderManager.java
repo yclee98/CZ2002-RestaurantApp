@@ -264,11 +264,13 @@ public class OrderManager {
                     System.out.printf("    Service Charge      5%%:     +$%.2f\n", serviceValue);
                     System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
                     payOrder.setDiscountValue(discountValue);
+                    break;
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes+service);
                     System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
+                    break;
                 }
             }
         }
