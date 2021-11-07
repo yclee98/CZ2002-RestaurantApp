@@ -1,5 +1,3 @@
-package RestaurantProject;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +5,7 @@ import Utility.Manager;
 import MenuItemPackage.*;
 import PromoPackage.*;
 import MenuCatePackage.*;
-import RestaurantProject.FlatFile.FlatFileAdapter;
+import FlatFile.FlatFileAdapter;
 
 public class MenuManager extends Manager {
 	
