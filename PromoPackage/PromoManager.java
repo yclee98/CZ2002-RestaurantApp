@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Utility.Manager;
-import RestaurantProject.FlatFile.FlatFileAdapter;
+import FlatFile.FlatFileAdapter;
 
 public class PromoManager extends Manager{
 	
