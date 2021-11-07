@@ -6,6 +6,10 @@ import java.util.Scanner;
 import FlatFile.FlatFileAdapter;
 import Utility.Manager;
 
+/**
+ * This control class manages all the staff member entities
+ * It store all the staff entities inside an array list
+ */
 public class StaffManager extends Manager{
     private ArrayList<Staff> staffList = new ArrayList<>();
     private Scanner userInput = new Scanner(System.in);
@@ -13,7 +17,9 @@ public class StaffManager extends Manager{
     public StaffManager(){
         this.retrieveData();
     }
-
+    /**
+     * Override the parent abstract method to create FlatFileAdapter use for saving/retrieving of data from the csv file
+     */
     @Override
     public void createFlatFileAdapter() {
         super.addFlatFileAdapter(new FlatFileAdapter() {
@@ -43,7 +49,11 @@ public class StaffManager extends Manager{
             
         });
     }
-
+    
+    /**
+     * Create new staff memeber
+     * It does user input prompting for information before creating the staff 
+     */
     public void createStaff(){
         String staffName, jobTitle;
         char gender;
@@ -65,6 +75,9 @@ public class StaffManager extends Manager{
         staffList.add(new Staff(id, staffName, gender, jobTitle));
     }
 
+    /**
+     * Remove the staff by the id the user input 
+     */
     public void removeStaffById(){
         long id;
         int index;
@@ -76,6 +89,9 @@ public class StaffManager extends Manager{
         }
     }
 
+    /**
+     * Print all the staff id and name
+     */
     public void printAllStaff(){
         System.out.println("Listing all the Staffs");
         for(int i=0; i<staffList.size(); i++){
@@ -83,6 +99,9 @@ public class StaffManager extends Manager{
         }
     }
     
+    /**
+     * Print individual staff information which includes the name, gender and title 
+     */
     public void viewStaffByID(){
         System.out.println("Enter the staff id to view");
         long id = userInput.nextLong();
@@ -95,6 +114,11 @@ public class StaffManager extends Manager{
         }
     }
 
+    /**
+     * Find the staff by the given id
+     * @param id of the staff to find
+     * @return the index position where the staff with the id is located at 
+     */
     public int findStaffById(long id){
         for(int i=0; i<staffList.size(); i++){
             if(staffList.get(i).getStaffID() == id){
@@ -105,9 +129,5 @@ public class StaffManager extends Manager{
         return -1;
     }
 
-    public void getting(){
-        System.out.println(staffList.get(0).getStaffName());
-        System.out.println(staffList.get(4).getStaffName());
-    }
     
 }

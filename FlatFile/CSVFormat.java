@@ -1,11 +1,11 @@
 package FlatFile;
-
+/**
+ * This interface is used to conveniently return the entity information to a csv format 
+ */
 public interface CSVFormat{
+    /**
+     * @return all the class variabe in this format
+     * e.g. staffID + "," + staffName + "," + gender + "," + jobTitle;
+     */
     public String toCSVFormat();
-    //return a string that is of a csv format
-    // return staffID + "," +
-    //         staffName + "," +
-    //         gender + "," +
-    //         jobTitle; 
-    //dont put any spaces between the comma
 }
