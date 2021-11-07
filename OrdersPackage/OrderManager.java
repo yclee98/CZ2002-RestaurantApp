@@ -175,13 +175,16 @@ public class OrderManager {
                 ArrayList<OrderPromoItems> promoInOrder = orderList.get(i).getPromoItemList();
                 System.out.println("==============================================");
                 System.out.println("Order: " + orderID);
+                System.out.println("Customer ID: " + orderList.get(i).getCustomer().getCustomerID());
+                System.out.println("Customer: " + orderList.get(i).getCustomer().getCustomerName());
+                System.out.println("Table No: "+ orderList.get(i).getTableNumber());
                 for(j = 0; j < itemsInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+1), itemsInOrder.get(j).getQuantity(), itemsInOrder.get(j).getItem().getName(),
                             (itemsInOrder.get(i).getItem().getPrice()*itemsInOrder.get(j).getQuantity()));
                 }
                 for(j = j - itemsInOrder.size(); j < promoInOrder.size(); j++){
                     System.out.printf("%2d. %2d %-20s \t\t $%-10.2f\n", (j+itemsInOrder.size()+1), promoInOrder.get(j).getQuantity(), promoInOrder.get(j).getPromoItem().getName(),
-                            (promoInOrder.get(i).getPromoItem().getPrice()*promoInOrder.get(j).getQuantity()));
+                            (promoInOrder.get(j).getPromoItem().getPrice()*promoInOrder.get(j).getQuantity()));
                 }
                 System.out.println("----------------------------------------------");
                 System.out.printf("Sub-Total = $%.2f\n", orderList.get(i).getTotalPrice());
@@ -205,7 +208,8 @@ public class OrderManager {
         Order payOrder = null;
         double paymentPrice;
         boolean found = false;
-        for(int i = 0; i < orderList.size(); i++) {
+        int i;
+        for(i = 0; i < orderList.size(); i++) {
             if (orderList.get(i).getOrderID() == orderID) {
                 found = true;
                 payOrder = orderList.get(i);
@@ -230,6 +234,7 @@ public class OrderManager {
             payOrder.setFinalPaymentPrice(paymentPrice);
             invoice_Mngr.saveOrder(payOrder);
             invoice_Mngr.printInvoice(payOrder.getOrderID());
+            orderList.remove(i);
         }
     }
 
@@ -252,15 +257,16 @@ public class OrderManager {
                 payOrder.setServiceCharge(serviceValue);
                 payOrder.setGstValue(taxes);
                 if(payOrder.getCustomer().isMember()){
-                    finalPrice = payOrder.getTotalPrice() * (1+taxes+service) * (1-discount);
-                    System.out.println("-------------------------------------");
                     double discountValue = payOrder.getTotalPrice() * discount;
+                    finalPrice = (payOrder.getTotalPrice() * (1+taxes+service)) - discountValue;
+                    System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
+                    System.out.printf("    Service Charge      5%%:     +$%.2f\n", serviceValue);
                     System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
                     payOrder.setDiscountValue(discountValue);
                 }
                 else{
-                    finalPrice = payOrder.getTotalPrice() * (1+taxes);
+                    finalPrice = payOrder.getTotalPrice() * (1+taxes+service);
                     System.out.println("-------------------------------------");
                     System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
                 }

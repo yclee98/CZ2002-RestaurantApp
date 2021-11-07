@@ -242,7 +242,7 @@ public class Order {
      */
     public void removeOrderItem(int orderItemIndex, long quantity) {
         // if user specified more quantity than recorded, Assume user wants to remove all of the item order
-        if(orderItemIndex < orderItemList.size()) {
+        if(orderItemIndex < orderItemList.size() && orderItemIndex >= 0) {
             if (quantity >= orderItemList.get(orderItemIndex).getQuantity()) {
                 totalPrice = totalPrice - orderItemList.get(orderItemIndex).getItem().getPrice() * orderItemList.get(orderItemIndex).getQuantity();
                 orderItemList.remove(orderItemIndex);
@@ -251,7 +251,7 @@ public class Order {
                 orderItemList.get(orderItemIndex).setQuantity(orderItemList.get(orderItemIndex).getQuantity() - quantity);
             }
         }
-        else {
+        else if(orderItemIndex < orderItemList.size()+orderPromoList.size() && orderItemIndex >= 0){
             orderItemIndex -= orderItemList.size();
             if (quantity >= orderPromoList.get(orderItemIndex).getQuantity()) {
                 totalPrice = totalPrice - orderPromoList.get(orderItemIndex).getPromoItem().getPrice() * orderPromoList.get(orderItemIndex).getQuantity();
@@ -260,6 +260,9 @@ public class Order {
                 totalPrice = totalPrice - orderPromoList.get(orderItemIndex).getPromoItem().getPrice() * quantity;
                 orderPromoList.get(orderItemIndex).setQuantity(orderPromoList.get(orderItemIndex).getQuantity() - quantity);
             }
+        }
+        else{
+            System.out.println("No item with index" + orderItemIndex);
         }
     }
 

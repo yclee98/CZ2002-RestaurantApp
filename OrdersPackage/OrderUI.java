@@ -138,6 +138,10 @@ public class OrderUI {
                         break;
                     }
                     cusItem = item_Mngr.returnIndividualMenuItem(item_idx);
+                    if(cusItem == null){
+                        System.out.println("No item with index " + item_idx);
+                        continue;
+                    }
                     System.out.println("Specify quantity to add ");
                     int qty = userInput.nextInt();
                     order_Mngr.addItemToOrder(orderID, cusItem, qty);
@@ -154,6 +158,10 @@ public class OrderUI {
                         break;
                     }
                     cusMeal = promo_Mngr.returnPromo(item_idx);
+                    if(cusMeal == null){
+                        System.out.println("No item with index " + item_idx);
+                        continue;
+                    }
                     System.out.println("Specify quantity to add (Enter -1 to finish)");
                     int qty = userInput.nextInt();
                     order_Mngr.addItemToOrder(orderID, cusMeal, qty);
