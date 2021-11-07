@@ -12,9 +12,7 @@ public class PromoManager extends Manager{
 	private ArrayList<PromoSetMeal> promoList = new ArrayList<PromoSetMeal>();
 
 	public PromoManager() {
-		// TODO: remove the lines below! only for testing
-		promoList.add(new PromoSetMeal("happy meal", 6.00f));
-		promoList.add(new PromoSetMeal("sad meal", 6.00f));
+
 	}
 	
 	public ArrayList<PromoSetMeal> getPromoList(){

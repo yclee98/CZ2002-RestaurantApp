@@ -9,10 +9,7 @@ public class ItemManager {
 	private ArrayList<MenuItem> itemList = new ArrayList<MenuItem>();
 
 	public ItemManager() {
-		// TODO: remove the lines below! only for testing
-		itemList.add(new MenuItem("Hamburger", "A hamburger", 5, 1200, new MenuCate(1432, "Fastfood")));
-		itemList.add(new MenuItem("Wrap", "A Wrap", 4, 1201, new MenuCate(1432, "Fastfood")));
-		itemList.add(new MenuItem("Coke", "A Coke", 5, 1200, new MenuCate(1431, "Drinks")));
+
 	}
 	
 	public ArrayList<MenuItem> getItemList(){
