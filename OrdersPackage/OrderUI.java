@@ -68,7 +68,6 @@ public class OrderUI {
             catch(InputMismatchException m){
                 System.out.println("ERROR! Please enter the ID of the Staff!");
                 userInput.nextLine();
-                continue;
             }
             // break;
         }while(true);
@@ -79,9 +78,14 @@ public class OrderUI {
         do {
             try {
                 inOut = userInput.nextInt();
-            } catch (InputMismatchException m) {
+            }
+            catch (InputMismatchException m) {
                 System.out.println("ERROR! Enter 1 or 2");
                 userInput.nextLine();
+                continue;
+            }
+            if(inOut > 2 || inOut < 1){
+                System.out.println("ERROR! Enter 1 or 2");
                 continue;
             }
             break;

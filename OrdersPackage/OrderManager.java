@@ -62,8 +62,9 @@ public class OrderManager {
                 tableNo = table_Mngr.findAvailableTable();
                 if (tableNo == -1) {
                     System.out.println("ERROR: No tables available");
+                    return;
                 }
-                else{
+                else {
                     table_Mngr.setAssign(tableNo, true);
                 }
             }
@@ -72,7 +73,6 @@ public class OrderManager {
             System.out.println("SUCCESS! Order created!");
         }
         else{System.out.println("ERROR! Order already exists!");}
-        return;
     }
 
     /**
