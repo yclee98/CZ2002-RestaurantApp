@@ -257,10 +257,10 @@ public class RestaurantUI {
 
             switch(option){
                 case 1:
-                	cust_Mngr.printCustomers();
+                    cust_Mngr.printCustomers();
                     break;
                 case 2:
-                	cust_Mngr.createCustomer();
+                    cust_Mngr.createCustomer();
                     break;
                 case 3:
                 	cust_Mngr.returnCustomer();
