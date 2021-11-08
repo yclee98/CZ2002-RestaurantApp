@@ -263,11 +263,11 @@ public class RestaurantUI {
                     cust_Mngr.createCustomer();
                     break;
                 case 3:
-                	cust_Mngr.returnCustomer();
-                	break;
+                    cust_Mngr.returnCustomer();
+                    break;
                 case 4:
-                	cust_Mngr.removeCustomer();
-                	break;
+                    cust_Mngr.removeCustomer();
+                    break;
                 default:
             }
         }while(option>0 && option<5);
