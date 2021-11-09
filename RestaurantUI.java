@@ -265,7 +265,7 @@ public class RestaurantUI {
                     cust_Mngr.createCustomer();
                     break;
                 case 3:
-                    cust_Mngr.returnCustomer();
+                    cust_Mngr.displayCustomerInfo();
                     break;
                 case 4:
                     cust_Mngr.removeCustomer();
