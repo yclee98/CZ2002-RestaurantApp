@@ -3,7 +3,7 @@ import FlatFile.CSVFormat;
 /**
  * This is the entity class that stores information of Customer
  */
-public class Customer implements CSVFormat;{
+public class Customer implements CSVFormat{
 	/**
 	 * Customer ID for the customer
 	 */

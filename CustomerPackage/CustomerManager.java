@@ -42,7 +42,7 @@ public class CustomerManager extends Manager{
             
             @Override
             public void extractRow(String[] row) {
-                customerList.add(new Customer(Long.parseLong(row[0]), row[1], row[2]));
+                customerList.add(new Customer(Long.parseLong(row[0]), row[1], Boolean.parseBoolean(row[2])));
             }
             
         });
@@ -61,9 +61,11 @@ public class CustomerManager extends Manager{
         }catch(Exception e) {custId=1;}
 
         System.out.println("Enter Customer Name");
-        custName = userInput.nextLine();
+       // custName = userInput.nextLine();
+	   
+	   custName = userInput.next()+userInput.nextLine();
 
-        System.out.println("Enter Customer Membership Status");
+        System.out.println("Enter Customer Membership Status (true/false)");
         mem = userInput.nextBoolean(); 
 
         customerList.add(new Customer(custId, custName, mem));
@@ -132,8 +134,11 @@ public class CustomerManager extends Manager{
 	 */
 	public void printCustomers(){
 		System.out.println("*********** Customers ***********");
-		System.out.printf("%-20s\t\t%-20s\n","Customer", "ID");
+		System.out.printf("%-20s\t\t%-20s\t\t%-20s\n","Customer", "ID", "Membership Status");
 		for(int i = 0; i < customerList.size(); i++){
-			System.out.printf("%-20s\t\t%-20s\n", customerList.get(i).getCustomerName(), Long.toString(customerList.get(i).getCustomerID()));
+			System.out.printf("%-20s\t\t%-20s\t\t%-20s\n", customerList.get(i).getCustomerName(), 
+			Long.toString(customerList.get(i).getCustomerID()), customerList.get(i).isMember());
 		}
 	}
+}
+

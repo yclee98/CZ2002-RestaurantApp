@@ -275,6 +275,7 @@ public class RestaurantUI {
                     cust_Mngr.removeCustomer();
                     break;
                 default:
+                    cust_Mngr.saveData();
             }
         }while(option>0 && option<5);
     }
