@@ -3,6 +3,8 @@ import OrdersPackage.InvoiceManager;
 import OrdersPackage.OrderManager;
 import OrdersPackage.OrderUI;
 import TablePackage.TableManager;
+import TableResPackage.TableResManager;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import MenuCatePackage.*;
@@ -10,16 +12,18 @@ import MenuItemPackage.*;
 import PromoPackage.*;
 import StaffPackage.*;
 import ReservationPackage.*;
+import TableResPackage.*;
 
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
     protected static TableManager table_Mngr = new TableManager();
-    protected static ReservationManager tableres_Mngr = new ReservationManager();
+    protected static ReservationManager res_Mngr = new ReservationManager();
     protected static StaffManager staff_Mngr = new StaffManager();
     protected static CustomerManager cust_Mngr = new CustomerManager();
     protected static MenuManager menu_Mngr = new MenuManager();
+    protected static TableResManager tableRes_Mngr = new TableResManager();
 
 
     public static void main(String[] args){
@@ -47,7 +51,7 @@ public class RestaurantUI {
             System.out.println("1. Menu Items/Promotion");
             System.out.println("2. Order");
             System.out.println("3. Reservation");
-            System.out.println("4. Check Table Availability");
+            System.out.println("4. Table");
             System.out.println("5. Print Sale Revenue Report");
             System.out.println("6. Staff");
             System.out.println("7. Customer");
@@ -63,10 +67,10 @@ public class RestaurantUI {
                     orderPage();
                     break;
                 case 3:
-                    reservationPage();
+                    tableRes_Mngr.reservationMenu();                  
                     break;
                 case 4:
-                    //go to check table availability
+                    tableRes_Mngr.tableMenu();  
                     break;
                 case 5:
                     invoice_Mngr.viewSaleReport();
