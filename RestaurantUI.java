@@ -9,12 +9,14 @@ import MenuCatePackage.*;
 import MenuItemPackage.*;
 import PromoPackage.*;
 import StaffPackage.*;
+import ReservationPackage.*;
 
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
-    protected static TableReservationManager tableres_Mngr = new TableReservationManager();
+    protected static TableManager table_Mngr = new TableManager();
+    protected static ReservationManager tableres_Mngr = new ReservationManager();
     protected static StaffManager staff_Mngr = new StaffManager();
     protected static CustomerManager cust_Mngr = new CustomerManager();
     protected static MenuManager menu_Mngr = new MenuManager();
