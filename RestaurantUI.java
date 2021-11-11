@@ -247,7 +247,7 @@ public class RestaurantUI {
         int option;
         do{
             System.out.println("***** Customer *****");
-            System.out.println("Select an option");
+            System.out.println("Select an option.");
             System.out.println("1. View All Customer");
             System.out.println("2. Create Customer");
             System.out.println("3. View Customer");
