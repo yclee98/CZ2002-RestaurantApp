@@ -11,9 +11,9 @@ import StaffPackage.*;
 /**
  * Main orderUI to recieve user input to do different order functions
  */
-public class OrderUI {
+public class OrderTaker {
 
-    public OrderUI(){}
+    public OrderTaker(){}
 
     /**
      * View all existing orders
@@ -259,36 +259,36 @@ public class OrderUI {
             switch(option){
 
                 case 1: // view all orders
-                    OrderUI.viewAllOrders(order_Mngr);
+                    OrderTaker.viewAllOrders(order_Mngr);
                     break;
 
                 case 2: // Create orders
-                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr, res_Mngr);
+                    OrderTaker.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr, res_Mngr);
                     break;
 
                 case 3: //View Individual order
-                    OrderUI.viewIndividualOrders(order_Mngr);
+                    OrderTaker.viewIndividualOrders(order_Mngr);
                     break;
 
                 case 4: // add items to order
                     // print all the customer names and the associated orderIDs
-                    OrderUI.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
+                    OrderTaker.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
                     break;
 
                 case 5: // Remove items from order
-                    OrderUI.removeItemsFromOrder(order_Mngr);
+                    OrderTaker.removeItemsFromOrder(order_Mngr);
                     break;
 
                 case 6: //
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
+                    OrderTaker.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
                     break;
 
                 case 7: // print order invoice
-                    OrderUI.printOrderInvoice(invoice_Mngr);
+                    OrderTaker.printOrderInvoice(invoice_Mngr);
                     break;
 
                 case 8: // print all invoice
-                    OrderUI.printAllInvoices(invoice_Mngr);
+                    OrderTaker.printAllInvoices(invoice_Mngr);
                     break;
                 default:
             }

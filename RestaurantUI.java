@@ -1,18 +1,12 @@
 import CustomerPackage.CustomerManager;
 import OrdersPackage.InvoiceManager;
 import OrdersPackage.OrderManager;
-import OrdersPackage.OrderUI;
-import TablePackage.TableManager;
+import OrdersPackage.OrderTaker;
 import TableResPackage.TableResManager;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-import MenuCatePackage.*;
-import MenuItemPackage.*;
-import PromoPackage.*;
+
 import StaffPackage.*;
-import ReservationPackage.*;
-import TableResPackage.*;
 
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
@@ -151,36 +145,36 @@ public class RestaurantUI {
             switch(option){
 
                 case 1: // view all orders
-                    OrderUI.viewAllOrders(order_Mngr);
+                    OrderTaker.viewAllOrders(order_Mngr);
                     break;
 
                 case 2: // Create orders
-                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, tableRes_Mngr.tm, order_Mngr, tableRes_Mngr.rm);
+                    OrderTaker.CreateOrders(cust_Mngr, staff_Mngr, tableRes_Mngr.tm, order_Mngr, tableRes_Mngr.rm);
                     break;
 
                 case 3: //View Individual OrdersPackage.Order
-                    OrderUI.viewIndividualOrders(order_Mngr);
+                    OrderTaker.viewIndividualOrders(order_Mngr);
                     break;
 
                 case 4: // add items to order
                     // print all the customer names and the associated orderIDs
-                    OrderUI.AddItemsToOrder(order_Mngr, menu_Mngr.item_Mngr, menu_Mngr.promo_Mngr);
+                    OrderTaker.AddItemsToOrder(order_Mngr, menu_Mngr.item_Mngr, menu_Mngr.promo_Mngr);
                     break;
 
                 case 5: // Remove items from OrdersPackage.Order
-                    OrderUI.removeItemsFromOrder(order_Mngr);
+                    OrderTaker.removeItemsFromOrder(order_Mngr);
                     break;
 
                 case 6:
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, tableRes_Mngr.tm);
+                    OrderTaker.settlePayment(order_Mngr, invoice_Mngr, tableRes_Mngr.tm);
                     break;
 
                 case 7: // print order invoice
-                    OrderUI.printOrderInvoice(invoice_Mngr);
+                    OrderTaker.printOrderInvoice(invoice_Mngr);
                     break;
 
                 case 8: // print all invoice
-                    OrderUI.printAllInvoices(invoice_Mngr);
+                    OrderTaker.printAllInvoices(invoice_Mngr);
                     break;
                 default:
             }
