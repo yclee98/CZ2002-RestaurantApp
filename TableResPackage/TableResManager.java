@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class TableResManager {
     private static Scanner sc = new Scanner(System.in);
-    public static TableManager tm = new TableManager();
-    public static ReservationManager rm = new ReservationManager();
+    private static TableManager tm = new TableManager();
+    private static ReservationManager rm = new ReservationManager();
 
-     public static void main(String[] args){
-         tableResMainPage();
-     }
+    // public static void main(String[] args){
+    //     tableResMainPage();        
+    // }
 
     public static void tableResMainPage(){
         int option;
@@ -33,12 +33,12 @@ public class TableResManager {
                     reservationMenu();
                     break;
                 default:
-                    System.out.println("choose from 1 and 2");
+                 System.out.println("choose from 1 and 2");
             }
         }while(option>0 && option <3);
     }
 
-
+    
     public static void tableMenu(){
         int option;
         do{
@@ -63,8 +63,8 @@ public class TableResManager {
                     if(tm.ifExist(tableNum) == 0){
                         System.out.println("Please key in the capacity ");
                         int capacity = sc.nextInt();
-
-
+                        
+                        
                         if(capacity<2 || capacity>10) {
                             System.out.println("Number of seats should be between 2 to 10");
                             break;
@@ -90,9 +90,9 @@ public class TableResManager {
                     System.out.println("Please key in the Table Number ");
                     tm.isTableNumAvailable(sc.nextInt());
                     break;
-                case 4:
+                case 4: 
                     tm.sortByNum();
-
+                    
                     tm.showAvailableTables();
                     break;
                 case 5:
@@ -108,7 +108,7 @@ public class TableResManager {
                 case 7:
                     break;
                 default:
-                    System.out.println("Please choose from options 1 to 6 ");
+                    System.out.println("Please choose from options 1 to 7 ");
             }
         }while(option>0 && option <7);
     }
@@ -122,8 +122,7 @@ public class TableResManager {
             System.out.println("1. Add Reservation");
             System.out.println("2. Remove Reservation");
             System.out.println("3. Check Reservation");
-            System.out.println("4. Save reservation into CSV");
-            System.out.println("6. Back");
+            System.out.println("4. Back");
             System.out.println();
             option = sc.nextInt();
 
@@ -133,9 +132,9 @@ public class TableResManager {
                     int contact = sc.nextInt();
                     if(rm.ifexist(contact) == 0){
                         System.out.println("Please key in the date and time in the format of day, month, year, HH, MM");
-                        long dtTime = Utility.DateTime.dateTimeToEpoch(sc.nextInt(), sc.nextInt(),
-                                sc.nextInt(), sc.nextInt(), sc.nextInt());
-                        //Reservation must be done 2 hrs in advance
+                        long dtTime = Utility.DateTime.dateTimeToEpoch(sc.nextInt(), sc.nextInt(), 
+                                                                       sc.nextInt(), sc.nextInt(), sc.nextInt());
+                        //Reservation must be done 2 hrs in advance 
                         if(rm.isReservationInAdvance(dtTime) == false){
                             System.out.println("Reservation must be done at least 4hrs in advance");
                         }
@@ -148,13 +147,13 @@ public class TableResManager {
                             //Assume that each customer takes the most 2 hrs from their reservation time to dine
                             //7200000 translates to 2hrs in epoch
                             ArrayList<Integer> num = new ArrayList<Integer>();
-                            for(int i=0; i<rm.getReservationList().size(); i++){
-                                if(((dtTime <= (rm.getReservationList().get(i).getEpochDateTime() + 7200000)) &&
-                                        ((dtTime + 7200000) >= (rm.getReservationList().get(i).getEpochDateTime())))){
-                                    num.add(rm.getReservationList().get(i).getTableNum());
-                                }
+		                    for(int i=0; i<rm.getReservationList().size(); i++){
+			                    if(((dtTime <= (rm.getReservationList().get(i).getEpochDateTime() + 7200000)) &&
+			                        ((dtTime + 7200000) >= (rm.getReservationList().get(i).getEpochDateTime())))){
+				                        num.add(rm.getReservationList().get(i).getTableNum());
+			                    }
                             }
-
+        
                             int tableNum = tm.assignTable(capacity, num);
                             //if there is a table
                             if(tableNum != -1 ){
@@ -174,7 +173,7 @@ public class TableResManager {
                     else
                         System.out.println("There is already a reservation made with this number");
                     break;
-
+                    
                 case 2:
                     System.out.println("Please key in Customer Contact Number");
                     rm.removeReservation(sc.nextInt());
@@ -186,17 +185,11 @@ public class TableResManager {
                     break;
 
                 case 4:
-                    rm.saveData();
                     break;
-                case 5:
-
-                case 6:
-                    rm.endThread();
-                    break;
-
+                   
                 default:
-                    System.out.println("Please choose from options 1 to 5");
+                    System.out.println("Please choose from options 1 to 4");
             }
-        }while(option>0 && option <6);
+        }while(option>0 && option <4);
     }
 }

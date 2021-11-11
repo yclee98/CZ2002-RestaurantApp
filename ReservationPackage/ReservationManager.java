@@ -37,8 +37,8 @@ public class ReservationManager extends Manager {
 	//compare current time to Reservation Time
 	//Reservation must be done at least 4 hrs in advance
 	public boolean isReservationInAdvance(long dateTimeEpoch) {
-		// if((dateTimeEpoch) > (DateTime.getEpochNow() + 14400)) {
-		   if((dateTimeEpoch) > (DateTime.getEpochNow() + 10000L)) {
+		 if((dateTimeEpoch) > (DateTime.getEpochNow() )) {
+		//   if((dateTimeEpoch) > (DateTime.getEpochNow() + 10000L)) {
 			return true;
 		}
 		

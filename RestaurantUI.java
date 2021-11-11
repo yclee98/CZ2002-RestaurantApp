@@ -74,6 +74,8 @@ public class RestaurantUI {
                     customerPage();
                     break;
                 default:
+                    TableResManager.rm.endThread();
+                    TableResManager.rm.saveData();
             }
             System.out.println();
         }while(option>0 && option<8);
