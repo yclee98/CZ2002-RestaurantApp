@@ -163,9 +163,4 @@ public class SalesReportGenerator {
         }
         return -1;
     }
-
-    public static void main(String[] args) {
-        System.out.printf("%-20s%-20s%-20s\n", "Name", "Quantity Sold", "Sales");
-        System.out.printf("%-20s%-20s%.2f\n", "we", 9, 2.900000);
-    }
 }

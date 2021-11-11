@@ -31,7 +31,7 @@ public class ReservationThread extends Thread{
                 //sleep for a certain period of time
                 //can make it sleep longer before waking up to check removeExpiredReservation
             } catch (InterruptedException e) {
-                System.out.println("Ending timer thread");
+                System.out.println("Ending background thread");
                 break;
             }
         }   

@@ -162,7 +162,8 @@ public class ReservationManager extends Manager {
     public void createThread(){//run this method insidde ur constructor 
         reservationThread = new ReservationThread(this.reservationList); //pass in ur reservation array
         reservationThread.start();
-		System.out.println("Create Thread Test");
+		System.out.println("Removing expired reservation automatically in the background");
+		System.out.println();
     }
     
     /**
@@ -172,8 +173,6 @@ public class ReservationManager extends Manager {
         //must use this function at applicaiton exit to kill the thread. 
         //call this function inside restuarant ui when user select exit option
         reservationThread.killThread();
-		System.out.println("Thread End Test");
-
     }
 
 
