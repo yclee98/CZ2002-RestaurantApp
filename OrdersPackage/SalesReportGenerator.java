@@ -93,9 +93,10 @@ public class SalesReportGenerator {
 
                     if((index=findItemIndex(saleReportItems, item[0]))!=-1){
                         saleReportItems.get(index).addQuantity(Integer.parseInt(item[1]));
+                        saleReportItems.get(index).addSales(Double.parseDouble(item[2]));
                     }
                     else{
-                        saleReportItems.add(new SaleReportItem(item[0], Integer.parseInt(item[1])));
+                        saleReportItems.add(new SaleReportItem(item[0], Integer.parseInt(item[1]), Double.parseDouble(item[2])));
                     }
                 } 
             }
@@ -115,12 +116,12 @@ public class SalesReportGenerator {
             return;
         }
         Collections.sort(saleReportItems);
-        System.out.println("------------------------------------------------");
-        System.out.printf("%-20s%-20s\n", "Name", "Quantity Sold");
-        System.out.println("------------------------------------------------");
+        System.out.println("----------------------------------------------------");
+        System.out.printf("%-20s%-20s%-20s\n", "Name", "Quantity Sold", "Sales");
+        System.out.println("----------------------------------------------------");
 
         for(SaleReportItem i: saleReportItems){
-            System.out.printf("%-20s%02d\n", i.getName(), i.getQuantity());
+            System.out.printf("%-20s%-20s%.2f\n", i.getName(), i.getQuantity(), i.getTotalSales());
         }
 
         System.out.println("------------------------------------------------");
@@ -161,5 +162,10 @@ public class SalesReportGenerator {
             }
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+        System.out.printf("%-20s%-20s%-20s\n", "Name", "Quantity Sold", "Sales");
+        System.out.printf("%-20s%-20s%.2f\n", "we", 9, 2.900000);
     }
 }
