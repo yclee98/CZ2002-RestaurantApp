@@ -111,7 +111,7 @@ public class OrderTaker {
     }
 
     /**
-     * UI to recieve user input on MenuItems/PromoSetMeal to add
+     * UI to recieve user input on MenuItems/PromoSetMeal to add.
      * @param order_Mngr manager responsible to add the item
      * @param item_Mngr manager responsible to find the MenuItem to add
      * @param promo_Mngr manager responsible to find the PromoItem to add
