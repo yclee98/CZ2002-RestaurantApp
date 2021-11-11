@@ -6,15 +6,24 @@ import Utility.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * A control class that is used to interact with and mange the reservation and table manger
+ */
 public class TableResManager {
-    public static Scanner sc = new Scanner(System.in);
-    public static TableManager tm = new TableManager();
-    public static ReservationManager rm = new ReservationManager();
+   public static Scanner sc = new Scanner(System.in);
+   public static TableManager tm = new TableManager();
+   public static ReservationManager rm = new ReservationManager();
 
+
+    //Uncomment this to use as component level test
     // public static void main(String[] args){
     //     tableResMainPage();        
     // }
+    
 
+    /**
+     * tableRes UI Main Page
+     */
     public static void tableResMainPage(){
         int option;
         do{
@@ -39,6 +48,9 @@ public class TableResManager {
     }
 
     
+    /**
+     * tableMenu UI Main Page
+     */
     public static void tableMenu(){
         int option;
         do{
@@ -113,6 +125,10 @@ public class TableResManager {
         }while(option>0 && option <7);
     }
 
+
+    /**
+     * reservationMenu UI Main page
+     */
     public static void reservationMenu(){
         int option;
         do{
