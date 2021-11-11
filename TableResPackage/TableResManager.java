@@ -7,9 +7,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class TableResManager {
-    private static Scanner sc = new Scanner(System.in);
-    private static TableManager tm = new TableManager();
-    private static ReservationManager rm = new ReservationManager();
+    public static Scanner sc = new Scanner(System.in);
+    public static TableManager tm = new TableManager();
+    public static ReservationManager rm = new ReservationManager();
 
     // public static void main(String[] args){
     //     tableResMainPage();        
@@ -19,7 +19,7 @@ public class TableResManager {
         int option;
         do{
             System.out.println("*****Main Menu*****");
-            System.out.println("Select an option");
+            System.out.println("Select an option"); 
             System.out.println("1. Tables Menu");
             System.out.println("2. Reservation Menu");
             System.out.println();
