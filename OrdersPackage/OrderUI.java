@@ -1,5 +1,6 @@
 package OrdersPackage;
 import CustomerPackage.*;
+import ReservationPackage.ReservationManager;
 import TablePackage.TableManager;
 import MenuItemPackage.*;
 import PromoPackage.*;
@@ -30,7 +31,7 @@ public class OrderUI {
      * @param order_Mngr manager responsible for storing the new order
      */
     public static void CreateOrders(CustomerManager cust_Mngr, StaffManager staff_Mngr, TableManager table_Mngr,
-                                    OrderManager order_Mngr){
+                                    OrderManager order_Mngr, ReservationManager res_Mngr){
 
         Scanner userInput = new Scanner(System.in);
         long cID, sID;
@@ -90,7 +91,9 @@ public class OrderUI {
             }
             break;
         }while(true);
-        order_Mngr.createOrder(sID, newCust, inOut, table_Mngr);
+
+
+        order_Mngr.createOrder(sID, newCust, inOut, table_Mngr, res_Mngr);
         order_Mngr.printCustomerAndOrders();
     }
 
@@ -186,7 +189,7 @@ public class OrderUI {
         System.out.println("Please enter the desired order ID to remove items from");
         orderID = userInput.nextLong();
         if(!order_Mngr.checkOrderExists(orderID)){
-            System.out.println("ERROR! OrdersPackage.Order does not exist!");
+            System.out.println("ERROR! Order does not exist!");
             return;
         }
         order_Mngr.removeItemFromOrder(orderID);
@@ -235,6 +238,7 @@ public class OrderUI {
         TableManager table_Mngr = new TableManager();
         StaffManager staff_Mngr = new StaffManager();
         CustomerManager cust_Mngr = new CustomerManager();
+        ReservationManager res_Mngr = new ReservationManager();
 
         int option;
         do{
@@ -259,7 +263,7 @@ public class OrderUI {
                     break;
 
                 case 2: // Create orders
-                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr);
+                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr, res_Mngr);
                     break;
 
                 case 3: //View Individual order

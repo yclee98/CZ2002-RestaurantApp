@@ -52,11 +52,11 @@ public class ReservationManager extends Manager {
 		for(int i =0; i<reservationList.size(); i++){
 			if(reservationList.get(i).getContact() == contact){
 				reservationList.remove(i);
-				System.out.printf("Reservation by contact numebr %d has been successfully removed. \n", contact);
+				System.out.printf("Reservation by contact number %d has been successfully removed. \n", contact);
 				return;
 			}
 		}
-		System.out.printf("Reservation by contact numebr %d not found. \n", contact);
+		System.out.printf("Reservation by contact number %d not found. \n", contact);
 	}
 	
 	//check reservation details
@@ -85,6 +85,23 @@ public class ReservationManager extends Manager {
 		}
 		return 0;
 	}
+
+	/**
+	 * used to check if the reservation for a contact number exists or not. If exist return Reservation
+	 * obj, else return null
+	 * @param contact contact of the customer to check reservation for
+	 * @return customer's reservation obj
+	 */
+	public Reservation returnReservation(int contact) {
+		//check based off contact then return relevant data
+		for(int i =0; i<reservationList.size(); i++){
+			if(reservationList.get(i).getContact() == contact){
+				return reservationList.get(i);
+			}
+		}
+		return null;
+	}
+
 
 	//get reservationList
 	public ArrayList<Reservation> getReservationList(){

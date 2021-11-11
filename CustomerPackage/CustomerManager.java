@@ -15,7 +15,6 @@ public class CustomerManager extends Manager{
 	
 	public CustomerManager(){
 		this.retrieveData();
-
 	}
 	/**
 	 * Override the abstract method in order to create FlatfileAdapter to save/retrieve data from csv file
@@ -29,7 +28,7 @@ public class CustomerManager extends Manager{
             }
 
             public String getColumnsName() {
-                return "Customer ID,Customer Name,Membership";
+                return "Customer ID,Customer Name,Contact,Membership";
             }
 
             public String insertRow(int index) {
@@ -42,7 +41,7 @@ public class CustomerManager extends Manager{
             
             @Override
             public void extractRow(String[] row) {
-                customerList.add(new Customer(Long.parseLong(row[0]), row[1], Boolean.parseBoolean(row[2])));
+                customerList.add(new Customer(Long.parseLong(row[0]), row[1], Integer.parseInt(row[2]), Boolean.parseBoolean(row[3])));
             }
             
         });
@@ -53,6 +52,7 @@ public class CustomerManager extends Manager{
 	 */
 	public void createCustomer(){
 		String custName;
+		int custContact;
 		long custId;
 		boolean mem;
         try{
@@ -63,12 +63,15 @@ public class CustomerManager extends Manager{
         System.out.println("Enter Customer Name");
        // custName = userInput.nextLine();
 	   
-	   custName = userInput.next()+userInput.nextLine();
+	    custName = userInput.next()+userInput.nextLine();
 
         System.out.println("Enter Customer Membership Status (true/false)");
-        mem = userInput.nextBoolean(); 
+        mem = userInput.nextBoolean();
 
-        customerList.add(new Customer(custId, custName, mem));
+		System.out.println("Enter Customer Contact Number: ");
+		custContact = userInput.nextInt();
+
+        customerList.add(new Customer(custId, custName, custContact, mem));
 	}
 	
 	/**
@@ -134,10 +137,28 @@ public class CustomerManager extends Manager{
 	 */
 	public void printCustomers(){
 		System.out.println("*********** Customers ***********");
-		System.out.printf("%-20s\t\t%-20s\t\t%-20s\n","Customer", "ID", "Membership Status");
+		System.out.printf("%-20s\t%-20s\t%-20s\t%-20s\n","Customer", "ID", "Contact", "Membership Status");
 		for(int i = 0; i < customerList.size(); i++){
-			System.out.printf("%-20s\t\t%-20s\t\t%-20s\n", customerList.get(i).getCustomerName(), 
-			Long.toString(customerList.get(i).getCustomerID()), customerList.get(i).isMember());
+			System.out.printf("%-20s\t%-20s\t%-20s\t%-20s\n", customerList.get(i).getCustomerName(),
+			Long.toString(customerList.get(i).getCustomerID()), Integer.toString(customerList.get(i).getCustomerContact()),
+					customerList.get(i).isMember());
+		}
+	}
+
+	/**
+	 * Method to allow customer to register for membership
+	 */
+	public void registerMembership(){
+		printCustomers();
+		System.out.println("Please enter the customer ID to register membership");
+		long memID = userInput.nextLong();
+		Customer newMem = returnCustomer(memID);
+		if(newMem == null){
+			System.out.println("ERROR! Customer does not exist");
+		}
+		else{
+			newMem.setMember(true);
+			System.out.println("SUCCESS! Customer membership registered");
 		}
 	}
 }
