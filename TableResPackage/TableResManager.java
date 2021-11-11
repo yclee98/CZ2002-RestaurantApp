@@ -38,7 +38,7 @@ public class TableResManager {
         }while(option>0 && option <3);
     }
 
-
+    
     public static void tableMenu(){
         int option;
         do{
@@ -106,11 +106,11 @@ public class TableResManager {
                     tm.setAssign(tableNum6, tf);
                     break;
                 case 7:
-                    break;  
-                    default:
-                    System.out.println("Please choose from options 1 to 6 ");
-               }
-            }while(option>0 && option <7);
+                    break;
+                default:
+                    System.out.println("Please choose from options 1 to 7 ");
+            }
+        }while(option>0 && option <7);
     }
 
     public static void reservationMenu(){
@@ -122,8 +122,7 @@ public class TableResManager {
             System.out.println("1. Add Reservation");
             System.out.println("2. Remove Reservation");
             System.out.println("3. Check Reservation");
-            System.out.println("4. Save reservation into CSV");
-            System.out.println("6. Back");
+            System.out.println("4. Back");
             System.out.println();
             option = sc.nextInt();
 
@@ -185,18 +184,12 @@ public class TableResManager {
                     rm.checkReservation(sc.nextInt());
                     break;
 
-                case 4: 
-                    rm.saveData();
-                    break;
-                case 5:
-
-                case 6:
-                    rm.endThread();
+                case 4:
                     break;
                    
                 default:
-                    System.out.println("Please choose from options 1 to 5");
-               }
-            }while(option>0 && option <6);
+                    System.out.println("Please choose from options 1 to 4");
+            }
+        }while(option>0 && option <4);
     }
 }
