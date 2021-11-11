@@ -10,18 +10,9 @@ import java.util.ArrayList;
  * A control class that is used to interact with and mange the reservation and table manger
  */
 public class TableResManager {
-    /**
-     * Scanner to take user input 
-     */
-    private static Scanner sc = new Scanner(System.in);
-    /**
-     * Creating a TableManager object to manipulate 
-     */
-    private static TableManager tm = new TableManager();
-    /**
-     * Creating a ReservationManager object to manipulate 
-     */
-    private static ReservationManager rm = new ReservationManager();
+   public static Scanner sc = new Scanner(System.in);
+   public static TableManager tm = new TableManager();
+   public static ReservationManager rm = new ReservationManager();
 
 
     //Uncomment this to use as component level test
@@ -37,7 +28,7 @@ public class TableResManager {
         int option;
         do{
             System.out.println("*****Main Menu*****");
-            System.out.println("Select an option");
+            System.out.println("Select an option"); 
             System.out.println("1. Tables Menu");
             System.out.println("2. Reservation Menu");
             System.out.println();
