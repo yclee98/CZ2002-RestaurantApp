@@ -1,25 +1,17 @@
 import CustomerPackage.CustomerManager;
 import OrdersPackage.InvoiceManager;
 import OrdersPackage.OrderManager;
-import OrdersPackage.OrderUI;
-import TablePackage.TableManager;
+import OrdersPackage.OrderTaker;
 import TableResPackage.TableResManager;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-import MenuCatePackage.*;
-import MenuItemPackage.*;
-import PromoPackage.*;
+
 import StaffPackage.*;
-import ReservationPackage.*;
-import TableResPackage.*;
 
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
-    protected static TableManager table_Mngr = new TableManager();
-    protected static ReservationManager res_Mngr = new ReservationManager();
     protected static StaffManager staff_Mngr = new StaffManager();
     protected static CustomerManager cust_Mngr = new CustomerManager();
     protected static MenuManager menu_Mngr = new MenuManager();
@@ -137,11 +129,8 @@ public class RestaurantUI {
     
     private static void orderPage(){
         int option;
-        long orderID;
-        MenuItem cusItem;
-        PromoSetMeal cusMeal;
         do{
-            System.out.println("***** OrdersPackage.Order *****");
+            System.out.println("***** Order *****");
             System.out.println("Select an option");
             System.out.println("1. View All Orders");
             System.out.println("2. Create Order");
@@ -158,36 +147,36 @@ public class RestaurantUI {
             switch(option){
 
                 case 1: // view all orders
-                    OrderUI.viewAllOrders(order_Mngr);
+                    OrderTaker.viewAllOrders(order_Mngr);
                     break;
 
                 case 2: // Create orders
-                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr);
+                    OrderTaker.CreateOrders(cust_Mngr, staff_Mngr, tableRes_Mngr.tm, order_Mngr, tableRes_Mngr.rm);
                     break;
 
                 case 3: //View Individual OrdersPackage.Order
-                    OrderUI.viewIndividualOrders(order_Mngr);
+                    OrderTaker.viewIndividualOrders(order_Mngr);
                     break;
 
                 case 4: // add items to order
                     // print all the customer names and the associated orderIDs
-                    OrderUI.AddItemsToOrder(order_Mngr, menu_Mngr.item_Mngr, menu_Mngr.promo_Mngr);
+                    OrderTaker.AddItemsToOrder(order_Mngr, menu_Mngr.item_Mngr, menu_Mngr.promo_Mngr);
                     break;
 
                 case 5: // Remove items from OrdersPackage.Order
-                    OrderUI.removeItemsFromOrder(order_Mngr);
+                    OrderTaker.removeItemsFromOrder(order_Mngr);
                     break;
 
                 case 6:
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
+                    OrderTaker.settlePayment(order_Mngr, invoice_Mngr, tableRes_Mngr.tm);
                     break;
 
                 case 7: // print order invoice
-                    OrderUI.printOrderInvoice(invoice_Mngr);
+                    OrderTaker.printOrderInvoice(invoice_Mngr);
                     break;
 
                 case 8: // print all invoice
-                    OrderUI.printAllInvoices(invoice_Mngr);
+                    OrderTaker.printAllInvoices(invoice_Mngr);
                     break;
                 default:
             }
@@ -254,12 +243,13 @@ public class RestaurantUI {
         int option;
         do{
             System.out.println("***** Customer *****");
-            System.out.println("Select an option");
+            System.out.println("Select an option.");
             System.out.println("1. View All Customer");
             System.out.println("2. Create Customer");
             System.out.println("3. View Customer");
             System.out.println("4. Remove Customer");
-            System.out.println("5. Back");
+            System.out.println("5. Register Customer membership");
+            System.out.println("6. Back");
             option = userInput.nextInt();
             System.out.println();
 
@@ -276,8 +266,11 @@ public class RestaurantUI {
                 case 4:
                     cust_Mngr.removeCustomer();
                     break;
+                case 5:
+                    cust_Mngr.registerMembership();
                 default:
+                    cust_Mngr.saveData();
             }
-        }while(option>0 && option<5);
+        }while(option>0 && option<6);
     }
 }

@@ -1,8 +1,12 @@
 package OrdersPackage;
 import CustomerPackage.*;
+import ReservationPackage.Reservation;
 import TablePackage.TableManager;
 import MenuItemPackage.*;
 import PromoPackage.*;
+import ReservationPackage.ReservationManager;
+
+import javax.swing.text.Utilities;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -54,18 +58,32 @@ public class OrderManager {
      * @param inOut Indicates whether the customer is eating in or taking out.
      * @param table_Mngr Used to check and assign the table to the customer.
      */
-    public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr){
+    public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr, ReservationManager res_Mngr){
+        long currentDT = Utility.DateTime.getEpochNow();
         boolean existOrder = checkOrderExists(customer);
+        boolean resOrder = false;
         int tableNo = -1;
+        int custCont = customer.getCustomerContact();
+
         if(!existOrder) {
+            // If the customer is eating in
             if (inOut == 1) {
-                tableNo = table_Mngr.findAvailableTable();
-                if (tableNo == -1) {
-                    System.out.println("ERROR: No tables available");
-                    return;
+                // Find out if the customer has made a reservation
+                Reservation cusRes = res_Mngr.returnReservation(custCont);
+                // if customer arrives during the time of the reservation
+                if(cusRes != null && currentDT >= cusRes.getEpochDateTime() && currentDT < cusRes.getEndDateTime()){
+                    System.out.println("NOTICE: Customer has made reservation previously");
+                    tableNo = cusRes.getTableNum();
                 }
+                // if customer has no reservation at the time -> assign any empty table
                 else {
-                    table_Mngr.setAssign(tableNo, true);
+                    tableNo = table_Mngr.findAvailableTable();
+                    if (tableNo == -1) {
+                        System.out.println("ERROR: No tables available");
+                        return;
+                    } else {
+                        table_Mngr.setAssign(tableNo, true);
+                    }
                 }
             }
             Order newOrder = new Order(staffID, customer, tableNo);
@@ -266,7 +284,7 @@ public class OrderManager {
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes+service);
-                    System.out.printf("    Goods & Service Tax 7%%: +$%.2f", taxesValue);
+                    System.out.printf("    Goods & Service Tax 7%%: +$%.2f\n", taxesValue);
                 }
                 break;
             }

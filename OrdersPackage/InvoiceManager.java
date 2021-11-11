@@ -116,7 +116,7 @@ public class InvoiceManager extends Manager{
         for (int i = 0; i < parts.length; i++) {
             String[] subParts = parts[i].split("\\/");
 //            String reformedParts = String.format("%-20s%02d", subParts[0], subParts[1]);
-            rebuiltOrderItem.add(String.format("%2d. %-10s %-18d \t\t $%-10.2f\n", (i+1), subParts[0], Integer.parseInt(subParts[1]),
+            rebuiltOrderItem.add(String.format("%2d. %-20s %-15d$%-10.2f\n", (i+1), subParts[0], Integer.parseInt(subParts[1]),
                     Double.parseDouble(subParts[2])));
         }
         return rebuiltOrderItem;

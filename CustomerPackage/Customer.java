@@ -3,7 +3,7 @@ import FlatFile.CSVFormat;
 /**
  * This is the entity class that stores information of Customer
  */
-public class Customer implements CSVFormat;{
+public class Customer implements CSVFormat{
 	/**
 	 * Customer ID for the customer
 	 */
@@ -16,17 +16,23 @@ public class Customer implements CSVFormat;{
 	 * Membership status of the customer
 	 */
 	private boolean isMember;
+	/**
+	 * Contact number of the customer
+	 */
+	private int customerContact;
 
 	/**
 	 * Constructor of the Customer class 
 	 * @param custId represents the ID of each customer
 	 * @param custName represents name of the customer
 	 * @param mem customer membership status
+	 * @param contactNo  Contact number of the customer
 	 */
-	public Customer(long custId, String custName, boolean mem){
+	public Customer(long custId, String custName, int contactNo, boolean mem){
 		customerID=custId;
 		customerName=custName;
 		isMember=mem;
+		customerContact = contactNo;
 	}
 	/**
 	 * 
@@ -56,6 +62,15 @@ public class Customer implements CSVFormat;{
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
+	/**
+	 *
+	 * @return the customer contact number
+	 */
+	public int getCustomerContact() {
+		return customerContact;
+	}
+
 	/**
 	 * 
 	 * @return membership status
@@ -78,6 +93,7 @@ public class Customer implements CSVFormat;{
 	public String toCSVFormat(){
 		return customerID + "," +
 				customerName + "," +
+				customerContact + "," +
 				isMember;
 	}
 }	

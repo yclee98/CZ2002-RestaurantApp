@@ -14,14 +14,16 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
      */
     private int quantity;
 
+    private double totalSales;
     /**
      * Constructor of the class to create new sale report item
      * @param name of the item
      * @param quantity sold for this item 
      */
-    public SaleReportItem(String name, int quantity){
+    public SaleReportItem(String name, int quantity, double sales){
         this.name = name;
         this.quantity = quantity;
+        this.totalSales = sales;
     }
 
     /**
@@ -45,6 +47,21 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
     public void addQuantity(int quantity){
         this.quantity += quantity;
     }
+
+    /**
+     * To increment the total sales of this item
+     * @param sales sales to increase by
+     */
+    public void addSales(double sales){
+        this.totalSales += sales;
+    }
+
+    /**
+     * @return the total sales of this sale report item
+     */
+    public double getTotalSales(){
+        return this.totalSales;
+    };
 
     /**
      * Indicates whether input object o is "equal to" this class base on the name 

@@ -1,5 +1,6 @@
 package OrdersPackage;
 import CustomerPackage.*;
+import ReservationPackage.ReservationManager;
 import TablePackage.TableManager;
 import MenuItemPackage.*;
 import PromoPackage.*;
@@ -10,9 +11,9 @@ import StaffPackage.*;
 /**
  * Main orderUI to recieve user input to do different order functions
  */
-public class OrderUI {
+public class OrderTaker {
 
-    public OrderUI(){}
+    public OrderTaker(){}
 
     /**
      * View all existing orders
@@ -30,7 +31,7 @@ public class OrderUI {
      * @param order_Mngr manager responsible for storing the new order
      */
     public static void CreateOrders(CustomerManager cust_Mngr, StaffManager staff_Mngr, TableManager table_Mngr,
-                                    OrderManager order_Mngr){
+                                    OrderManager order_Mngr, ReservationManager res_Mngr){
 
         Scanner userInput = new Scanner(System.in);
         long cID, sID;
@@ -90,7 +91,9 @@ public class OrderUI {
             }
             break;
         }while(true);
-        order_Mngr.createOrder(sID, newCust, inOut, table_Mngr);
+
+
+        order_Mngr.createOrder(sID, newCust, inOut, table_Mngr, res_Mngr);
         order_Mngr.printCustomerAndOrders();
     }
 
@@ -186,7 +189,7 @@ public class OrderUI {
         System.out.println("Please enter the desired order ID to remove items from");
         orderID = userInput.nextLong();
         if(!order_Mngr.checkOrderExists(orderID)){
-            System.out.println("ERROR! OrdersPackage.Order does not exist!");
+            System.out.println("ERROR! Order does not exist!");
             return;
         }
         order_Mngr.removeItemFromOrder(orderID);
@@ -235,6 +238,7 @@ public class OrderUI {
         TableManager table_Mngr = new TableManager();
         StaffManager staff_Mngr = new StaffManager();
         CustomerManager cust_Mngr = new CustomerManager();
+        ReservationManager res_Mngr = new ReservationManager();
 
         int option;
         do{
@@ -255,36 +259,36 @@ public class OrderUI {
             switch(option){
 
                 case 1: // view all orders
-                    OrderUI.viewAllOrders(order_Mngr);
+                    OrderTaker.viewAllOrders(order_Mngr);
                     break;
 
                 case 2: // Create orders
-                    OrderUI.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr);
+                    OrderTaker.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr, res_Mngr);
                     break;
 
                 case 3: //View Individual order
-                    OrderUI.viewIndividualOrders(order_Mngr);
+                    OrderTaker.viewIndividualOrders(order_Mngr);
                     break;
 
                 case 4: // add items to order
                     // print all the customer names and the associated orderIDs
-                    OrderUI.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
+                    OrderTaker.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
                     break;
 
                 case 5: // Remove items from order
-                    OrderUI.removeItemsFromOrder(order_Mngr);
+                    OrderTaker.removeItemsFromOrder(order_Mngr);
                     break;
 
                 case 6: //
-                    OrderUI.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
+                    OrderTaker.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
                     break;
 
                 case 7: // print order invoice
-                    OrderUI.printOrderInvoice(invoice_Mngr);
+                    OrderTaker.printOrderInvoice(invoice_Mngr);
                     break;
 
                 case 8: // print all invoice
-                    OrderUI.printAllInvoices(invoice_Mngr);
+                    OrderTaker.printAllInvoices(invoice_Mngr);
                     break;
                 default:
             }
