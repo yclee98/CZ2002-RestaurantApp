@@ -10,8 +10,17 @@ import java.util.ArrayList;
  * A control class that is used to interact with and mange the reservation and table manger
  */
 public class TableResManager {
+    /**
+     * Create a scanner to take user input
+     */
    public static Scanner sc = new Scanner(System.in);
+   /**
+    * Create an TableManager to manipulate 
+    */
    public static TableManager tm = new TableManager();
+   /**
+    * Create an ReservationManager to manipulate 
+    */
    public static ReservationManager rm = new ReservationManager();
 
 
