@@ -6,10 +6,16 @@ import Utility.Manager;
 
 /**
  * This is a controller class which manages all the entities of customer 
- * This is done with the help of an array list
+ * This is done with the help of an array list.
  */
 public class CustomerManager extends Manager{
+	/**
+	 * holds customer objects for all customers
+	 */
 	private ArrayList<Customer> customerList = new ArrayList<Customer>();
+	/**
+	 * Scanner to accept user input
+	 */
 	private Scanner userInput = new Scanner(System.in);
 
 	/**

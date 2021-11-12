@@ -8,7 +8,7 @@ import Utility.Manager;
 
 /**
  * This control class manages all the staff member entities
- * It store all the staff entities inside an array list
+ * It store all the staff entities inside an array list.
  */
 public class StaffManager extends Manager{
     /**

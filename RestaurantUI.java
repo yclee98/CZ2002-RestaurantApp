@@ -9,7 +9,7 @@ import java.util.Scanner;
 import StaffPackage.*;
 
 /**
- * This class is implement the User Interface for the Restaurant 
+ * This class is implement the User Interface for the Restaurant.
  */
 public class RestaurantUI {
     /**
