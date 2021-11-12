@@ -7,11 +7,22 @@ import java.util.ArrayList;
     it will remove it from the reservation. 
  */
 public class ReservationThread extends Thread{
+    /**
+     * List of all the Reservation in the system
+     */
     private ArrayList<Reservation> allReservation;
+    /**
+     * boolean variable on if the program is running true for running
+     */
     private boolean isRunning;
+    
 
+    /**
+     * this arraylist is same as the one in manager
+     * anything updated in the manager array will auto update this
+     * @param allReservation List of all the Reservation in the system
+     */
     public ReservationThread(ArrayList<Reservation> allReservation){
-        //this arraylist is same as the one in manager, so anything updated in the manager array will auto update this
         this.allReservation = allReservation; 
         this.isRunning = true;
     }
