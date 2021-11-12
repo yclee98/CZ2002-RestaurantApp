@@ -18,7 +18,8 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
     /**
      * Constructor of the class to create new sale report item
      * @param name of the item
-     * @param quantity sold for this item 
+     * @param quantity sold for this item
+     * @param sales total sales for the item
      */
     public SaleReportItem(String name, int quantity, double sales){
         this.name = name;
@@ -27,6 +28,7 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
     }
 
     /**
+     * Get the name
      * @return the name of this sale report item
      */
     public String getName(){

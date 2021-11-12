@@ -16,14 +16,19 @@ enum Period{
  * This class is use to generate a sales report given an array of invoices 
  */
 public class SalesReportGenerator {
+    /**
+     * Scanner to accept user input
+     */
     private Scanner userInput = new Scanner(System.in);
-    public SalesReportGenerator(){
 
-    }
+    /**
+     * Constructor for the SalesReportGenerator class
+     */
+    public SalesReportGenerator(){}
 
     /**
      * Perform users input to determine the period to generate the sales report 
-     * @param allOrderInvoice all the invoices that will be part of the sales report 
+     * @param allOrderInvoices all the invoices that will be part of the sales report
      */
     public void viewSaleReport(ArrayList<OrderInvoice> allOrderInvoices){
         int day, month, year;
