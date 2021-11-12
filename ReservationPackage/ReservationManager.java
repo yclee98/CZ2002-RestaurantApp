@@ -16,7 +16,7 @@ public class ReservationManager extends Manager {
 	 */
 	private long dateTimeEpoch;
 
-	
+
 	/**
 	 * List of all the Reservation in the system
 	 */
@@ -47,9 +47,14 @@ public class ReservationManager extends Manager {
 		reservationList.add(newRes);
 	}
 
+	public void addReservationCSV(String name, int contact, int numPax, long dateTimeEpoch, int tableNum){
+		Reservation newRes  = new Reservation(name, contact, numPax, dateTimeEpoch, tableNum);
+		//adding to the reservationList
+		reservationList.add(newRes);
+	}
 
 	/**
-	 * Method to get the user input time 
+	 * Method to get the user input time
 	 * @param day day of the reservation
 	 * @param month month of the reservation
 	 * @param year year of the reservation
@@ -66,10 +71,8 @@ public class ReservationManager extends Manager {
 	 * @return
 	 */
 	public boolean isReservationInAdvance(long dateTimeEpoch) {
-		//Set for test 
-		if((dateTimeEpoch) > (DateTime.getEpochNow() )) {
-			//Can add any time to set a constrain
-			//if((dateTimeEpoch) > (DateTime.getEpochNow() + 10000L)) {
+		 if((dateTimeEpoch) > (DateTime.getEpochNow() )) {
+		//   if((dateTimeEpoch) > (DateTime.getEpochNow() + 10000L)) {
 			return true;
 		}
 		
@@ -77,11 +80,7 @@ public class ReservationManager extends Manager {
 			return false;
 	}
 	
-	
-	/**
-	 * Remove reservation based of contact number
-	 * @param contact enter contact number of customer
-	 */
+	//remove reservation
 	public void removeReservation(int contact) {
 		//iterate through the list and then remove
 		for(int i =0; i<reservationList.size(); i++){
@@ -94,11 +93,7 @@ public class ReservationManager extends Manager {
 		System.out.printf("Reservation by contact number %d not found. \n", contact);
 	}
 	
-	
-	/**
-	 * Check reservation details based of contact number 
-	 * @param contact enter contact number of customer
-	 */
+	//check reservation details
 	public void checkReservation(int contact) {
 		//check based off contact then return relevant data
 		for(int i =0; i<reservationList.size(); i++){
@@ -114,12 +109,7 @@ public class ReservationManager extends Manager {
 		return;
 	}
 
-	
-	/**
-	 * Check Reservation Exist
-	 * @param contact
-	 * @return 1 if Reservation exist and 0 if it does not
-	 */
+	//Check Reservation Exist 
 	public int ifexist(int contact) {
 		//check based off contact then return relevant data
 		for(int i =0; i<reservationList.size(); i++){
@@ -147,12 +137,10 @@ public class ReservationManager extends Manager {
 	}
 
 
-	/**
-	 * @return reservation list
-	 */
+	//get reservationList
 	public ArrayList<Reservation> getReservationList(){
 		return reservationList;
-    }
+   }
 
    private ReservationThread reservationThread; //create a reservationthread variable
    /**
@@ -176,9 +164,14 @@ public class ReservationManager extends Manager {
     }
 
 
-	/**
-	 * Save to CSV 
-	 */
+	
+
+
+	//saving to CSV
+
+	
+	
+	
 	@Override
 	public void createFlatFileAdapter(){
 		super.addFlatFileAdapter(new FlatFileAdapter(){

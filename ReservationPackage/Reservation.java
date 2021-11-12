@@ -33,7 +33,7 @@ public class Reservation implements CSVFormat{
 	
 	/**
 	 * Creates Reservation object from attributes from the table that is to be converted
-	 * @param namen name of the customer
+	 * @param name name of the customer
 	 * @param contact contact number of the customer
 	 * @param numPax party size of the customer
 	 * @param dateTimeEpoch date and time of reservation
@@ -48,7 +48,7 @@ public class Reservation implements CSVFormat{
 		this.tableNum = tableNum;
 		//For demostration purpose the auto delete will be 15s var declared below is in ms
 		//can set to a higher number for actual implementation
-		this.endDateTime = (dateTimeEpoch + 15000L);
+		this.endDateTime = (dateTimeEpoch + 300000L);
 	}
 
 

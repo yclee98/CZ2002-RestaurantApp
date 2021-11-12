@@ -169,7 +169,7 @@ public class OrderTaker {
                         System.out.println("No item with index " + item_idx);
                         continue;
                     }
-                    System.out.println("Specify quantity to add (Enter -1 to finish)");
+                    System.out.println("Specify quantity to add ");
                     int qty = userInput.nextInt();
                     order_Mngr.addItemToOrder(orderID, cusMeal, qty);
                 }while(true);

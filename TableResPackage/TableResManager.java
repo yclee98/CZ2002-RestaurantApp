@@ -15,20 +15,13 @@ public class TableResManager {
      */
    public static Scanner sc = new Scanner(System.in);
    /**
-    * Create an TableManager to manipulate 
+    * Create an TableManager to manipulate
     */
    public static TableManager tm = new TableManager();
    /**
-    * Create an ReservationManager to manipulate 
+    * Create an ReservationManager to manipulate
     */
    public static ReservationManager rm = new ReservationManager();
-
-
-    //Uncomment this to use as component level test
-    // public static void main(String[] args){
-    //     tableResMainPage();        
-    // }
-    
 
     /**
      * tableRes UI Main Page
@@ -37,7 +30,7 @@ public class TableResManager {
         int option;
         do{
             System.out.println("*****Main Menu*****");
-            System.out.println("Select an option"); 
+            System.out.println("Select an option");
             System.out.println("1. Tables Menu");
             System.out.println("2. Reservation Menu");
             System.out.println();

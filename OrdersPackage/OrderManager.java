@@ -265,30 +265,30 @@ public class OrderManager {
     public double calculateFinalPrice(long orderID){
         Order payOrder;
         double finalPrice = 0;
-
+        double taxesValue = 0;
+        double serviceValue = 0;
         for(int i = 0; i < orderList.size(); i++)
         {
             if(orderList.get(i).getOrderID() == orderID){
                 payOrder = orderList.get(i);
-                double taxesValue = payOrder.getTotalPrice() * taxes;
-                double serviceValue = payOrder.getTotalPrice() * service;
+                taxesValue = payOrder.getTotalPrice() * taxes;
+                serviceValue = payOrder.getTotalPrice() * service;
                 payOrder.setServiceCharge(serviceValue);
-                payOrder.setGstValue(taxes);
+                payOrder.setGstValue(taxesValue);
                 if(payOrder.getCustomer().isMember()){
                     double discountValue = payOrder.getTotalPrice() * discount;
                     finalPrice = (payOrder.getTotalPrice() * (1+taxes+service)) - discountValue;
-                    System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
-                    System.out.printf("    Service Charge      5%%:     +$%.2f\n", serviceValue);
                     System.out.printf("    MemberShip Discount 10%%:    -$%.2f\n", discountValue);
                     payOrder.setDiscountValue(discountValue);
                 }
                 else{
                     finalPrice = payOrder.getTotalPrice() * (1+taxes+service);
-                    System.out.printf("    Goods & Service Tax 7%%: +$%.2f\n", taxesValue);
                 }
                 break;
             }
         }
+        System.out.printf("    Goods & Service Tax 7%%:     +$%.2f\n", taxesValue);
+        System.out.printf("    Service Charge      5%%:     +$%.2f\n", serviceValue);
         System.out.printf("Final payment Price = $%.2f\n", finalPrice);
         System.out.println("=============================================");
         return finalPrice;
