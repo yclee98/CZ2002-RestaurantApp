@@ -42,7 +42,7 @@ public class Customer implements CSVFormat{
 	}
 	/**
 	 * Change the ID of Customer
-	 * @param customerID
+	 * @param customerID the id of the customer
 	 */
 	public void setCustomerID(long customerID) {
 		this.customerID = customerID;
@@ -56,7 +56,7 @@ public class Customer implements CSVFormat{
 	}
 	/**
 	 * Change the name of customer
-	 * @param customerName
+	 * @param customerName name of the customer
 	 */
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
@@ -79,7 +79,7 @@ public class Customer implements CSVFormat{
 	}
 	/**
 	 * Change membership status
-	 * @param isMember
+	 * @param isMember membership status of the customer
 	 */
 	public void setMember(boolean isMember) {
 		this.isMember = isMember;
