@@ -134,8 +134,6 @@ public class SalesReportGenerator {
         System.out.printf("%-40s$%.2f\n","Total GST", dataArray[1]);
         System.out.printf("%-40s$%.2f\n","Total Service Charge", dataArray[2]);
         System.out.printf("%-40s($%.2f)\n","Total Discount", dataArray[3]);
-        // double cal = dataArray[0] + dataArray[1] + dataArray[2] - dataArray[3];
-        // System.out.printf("%-40s$%.2f\n","Total Revenue calculated", cal);
         System.out.printf("%-40s$%.2f\n","Total Revenue", dataArray[4]);
     }
 
