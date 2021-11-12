@@ -12,12 +12,33 @@ import StaffPackage.*;
  * This class is implement the User Interface for the Restaurant 
  */
 public class RestaurantUI {
+    /**
+     * Scanner to read user input
+     */
     protected static Scanner userInput = new Scanner(System.in);
+    /**
+     * OrderManager responsible for managing orders part of the program
+     */
     protected static OrderManager order_Mngr = new OrderManager();
+    /**
+     * InvoiceManager responsible for managing invoice part of the program
+     */
     protected static InvoiceManager invoice_Mngr = new InvoiceManager();
+    /**
+     * StaffManager responsible for managing staff part of the program
+     */
     protected static StaffManager staff_Mngr = new StaffManager();
+    /**
+     * CustomerManager responsible for managing Customer part of the program
+     */
     protected static CustomerManager cust_Mngr = new CustomerManager();
+    /**
+     * MenuManager responsible for managing Menu part of the program
+     */
     protected static MenuManager menu_Mngr = new MenuManager();
+    /**
+     * TableResManager responsible for managing Table and Reservation part of the program
+     */
     protected static TableResManager tableRes_Mngr = new TableResManager();
 
 

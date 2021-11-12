@@ -14,6 +14,9 @@ public class StaffManager extends Manager{
     private ArrayList<Staff> staffList = new ArrayList<>();
     private Scanner userInput = new Scanner(System.in);
 
+    /**
+     * StaffManager Constructor, retrieves staff information from the staff.csv to populate staffList
+     */
     public StaffManager(){
         this.retrieveData();
     }

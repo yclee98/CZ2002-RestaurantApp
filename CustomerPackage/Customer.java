@@ -35,7 +35,6 @@ public class Customer implements CSVFormat{
 		customerContact = contactNo;
 	}
 	/**
-	 * 
 	 * @return the customer ID
 	 */
 	public long getCustomerID() {
