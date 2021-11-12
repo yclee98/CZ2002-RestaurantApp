@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import StaffPackage.*;
 
+/**
+ * This class is implement the User Interface for the Restaurant 
+ */
 public class RestaurantUI {
     protected static Scanner userInput = new Scanner(System.in);
     protected static OrderManager order_Mngr = new OrderManager();
@@ -18,8 +21,14 @@ public class RestaurantUI {
     protected static TableResManager tableRes_Mngr = new TableResManager();
 
 
+    /**
+     * The main entry point to start the application
+     * It deos loading of the categories, menu and promotion items 
+     * and then run the main menu page at start
+     * @param args no argument needed 
+     */
     public static void main(String[] args){
-	//Autoload Menu
+	    //Autoload Menu
     	//load categories
     	menu_Mngr.cate_Mngr.getCateList().clear();
     	menu_Mngr.cate_Mngr.retrieveData(); 
@@ -35,6 +44,9 @@ public class RestaurantUI {
         mainMenuPage();        
     }
 
+    /**
+     * Display the main menu UI page 
+     */
     private static void mainMenuPage(){
         int option;
         do{
@@ -81,6 +93,9 @@ public class RestaurantUI {
         }while(option>0 && option<8);
     }
 
+    /**
+     * Display the menu items/promotion UI page 
+     */
     private static void menuPage(){
         int option;
         do{
@@ -127,6 +142,9 @@ public class RestaurantUI {
         }while(option>0 && option<5);
     }
     
+    /**
+     * Display the order UI page
+     */
     private static void orderPage(){
         int option;
         do{
@@ -183,29 +201,9 @@ public class RestaurantUI {
         }while(option>0 && option<9);
     }
 
-    private static void reservationPage(){
-        int option;
-        do{
-            System.out.println("***** Reservation *****");
-            System.out.println("Select an option");
-            System.out.println("1. View All Reservations");
-            System.out.println("2. Create Reservation Booking");
-            System.out.println("3. View Individual Reservation Booking");
-            System.out.println("4. Remove Reservation Booking");
-            System.out.println("5. Back");
-            option = userInput.nextInt();
-            System.out.println();
-
-            switch(option){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-            }
-        }while(option>0 && option<5);
-    }
-
+    /**
+     * Display the staff UI page 
+     */
     private static void staffPage(){
         int option;
         do{
@@ -239,6 +237,9 @@ public class RestaurantUI {
         }while(option>0 && option<5);
     }
 
+    /**
+     * Display the customer UI page
+     */
     private static void customerPage(){
         int option;
         do{
