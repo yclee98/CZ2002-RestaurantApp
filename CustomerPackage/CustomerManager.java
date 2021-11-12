@@ -61,8 +61,6 @@ public class CustomerManager extends Manager{
         }catch(Exception e) {custId=1;}
 
         System.out.println("Enter Customer Name");
-       // custName = userInput.nextLine();
-	   
 	    custName = userInput.next()+userInput.nextLine();
 
         System.out.println("Enter Customer Membership Status (true/false)");
