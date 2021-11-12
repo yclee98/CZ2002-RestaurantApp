@@ -36,6 +36,9 @@ public class OrderManager {
     private double service = 0.05;
     private Scanner userInput = new Scanner(System.in);
 
+    /**
+     * The constructor of OrderManager
+     */
     public OrderManager(){}
 
     /**
@@ -57,6 +60,7 @@ public class OrderManager {
      * @param customer Customer object that the order belongs to.
      * @param inOut Indicates whether the customer is eating in or taking out.
      * @param table_Mngr Used to check and assign the table to the customer.
+     * @param res_Mngr Used to check the reservation timing for a customer
      */
     public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr, ReservationManager res_Mngr){
         long currentDT = Utility.DateTime.getEpochNow();
@@ -193,6 +197,7 @@ public class OrderManager {
                 ArrayList<OrderPromoItems> promoInOrder = orderList.get(i).getPromoItemList();
                 System.out.println("==============================================");
                 System.out.println("Order: " + orderID);
+                System.out.println("Staff ID: " + orderList.get(i).getStaffID());
                 System.out.println("Customer ID: " + orderList.get(i).getCustomer().getCustomerID());
                 System.out.println("Customer: " + orderList.get(i).getCustomer().getCustomerName());
                 System.out.println("Table No: "+ orderList.get(i).getTableNumber());
