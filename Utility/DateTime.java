@@ -22,9 +22,9 @@ public class DateTime {
 
     /**
      * This method take in day month year to convert it to epoch 
-     * @param day
-     * @param month
-     * @param year
+     * @param day to convert 
+     * @param month to convert
+     * @param year to convert
      * @return long epoch time
      */
     public static long dateToEpoch(int day, int month, int year){
@@ -36,11 +36,11 @@ public class DateTime {
     }
     /**
      * This method take in day month year hour and minute to convert into epoch
-     * @param day
-     * @param month
-     * @param year
-     * @param hourOfDay
-     * @param minute
+     * @param day to convert
+     * @param month to convert
+     * @param year to convert
+     * @param hourOfDay to convert
+     * @param minute to convert
      * @return long epoch time
      */
     public static long dateTimeToEpoch(int day, int month, int year, int hourOfDay, int minute){

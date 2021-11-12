@@ -5,14 +5,16 @@ import FlatFile.FlatFileAdapter;
 import Utility.Manager;
 
 /**
- * 
  * This is a controller class which manages all the entities of customer 
  * This is done with the help of an array list
  */
 public class CustomerManager extends Manager{
 	private ArrayList<Customer> customerList = new ArrayList<Customer>();
 	private Scanner userInput = new Scanner(System.in);
-	
+
+	/**
+	 * Constructor for the CustomerManager, retrieves Data from Customer.csv to populate customerList
+	 */
 	public CustomerManager(){
 		this.retrieveData();
 	}
@@ -145,6 +147,7 @@ public class CustomerManager extends Manager{
 
 	/**
 	 * Method to allow customer to register for membership
+	 * @param register indicate if registering (true) or de-registering (false)
 	 */
 	public void registerMembership(Boolean register){
 		printCustomers();
