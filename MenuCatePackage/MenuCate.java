@@ -41,7 +41,7 @@ public class MenuCate implements CSVFormat {
 	/**
 	 * Sets the name of the MenuCate
 	 * 
-	 * @param catName The name of this MenuCate
+	 * @param catName The new name of this MenuCate
 	 */
 	public void setCatName(String catName) {
 		this.catName = catName;
@@ -59,7 +59,7 @@ public class MenuCate implements CSVFormat {
 	/**
 	 * Sets the ID of the MenuCate
 	 * 
-	 * @param catID The ID of this MenuCate
+	 * @param catID The new ID of this MenuCate
 	 */
 	public void setCatID(long catID) {
 		this.catID = catID;

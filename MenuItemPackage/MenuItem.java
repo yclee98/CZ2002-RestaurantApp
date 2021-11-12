@@ -62,7 +62,7 @@ public class MenuItem implements CSVFormat {
 	/**
 	 * Sets the name of the MenuItem
 	 * 
-	 * @param name The name of this MenuItem
+	 * @param name The new name of this MenuItem
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -80,7 +80,7 @@ public class MenuItem implements CSVFormat {
 	/**
 	 * Sets the description of the MenuItem
 	 * 
-	 * @param description The description of this MenuItem
+	 * @param description The new description of this MenuItem
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -98,7 +98,7 @@ public class MenuItem implements CSVFormat {
 	/**
 	 * Sets the price of the MenuItem
 	 * 
-	 * @param price The price of this MenuItem
+	 * @param price The new price of this MenuItem
 	 */
 	public void setPrice(float price) {
 		this.price = price;
@@ -116,7 +116,7 @@ public class MenuItem implements CSVFormat {
 	/**
 	 * Sets the ID of the MenuItem
 	 * 
-	 * @param itemID The ID of this MenuItem
+	 * @param itemID The new ID of this MenuItem
 	 */
 	public void setItemID(long itemID) {
 		this.itemID = itemID;
