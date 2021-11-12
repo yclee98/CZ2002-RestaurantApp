@@ -97,10 +97,6 @@ public class Order {
         return staffID;
     }
 
-//    public void setStaffID(long staffID) {
-//        this.staffID = staffID;
-//    }
-
     /**
      * Gets the customer which this order belongs to
      * @return Customer object this order belongs to

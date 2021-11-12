@@ -38,7 +38,7 @@ public class OrderTaker {
 
         Scanner userInput = new Scanner(System.in);
         long cID, sID;
-        int tableNo = -1, inOut;
+        int inOut;
 
         cust_Mngr.printCustomers();
         do {
@@ -231,70 +231,4 @@ public class OrderTaker {
     public static void printAllInvoices(InvoiceManager invoice_Mngr){
         invoice_Mngr.printAllInvoices();
     }
-
-//    public static void main(String[] args){
-//        Scanner userInput = new Scanner(System.in);
-//        OrderManager order_Mngr = new OrderManager();
-//        InvoiceManager invoice_Mngr = new InvoiceManager();
-//        PromoManager promo_Mngr = new PromoManager();
-//        ItemManager item_Mngr = new ItemManager();
-//        TableManager table_Mngr = new TableManager();
-//        StaffManager staff_Mngr = new StaffManager();
-//        CustomerManager cust_Mngr = new CustomerManager();
-//        ReservationManager res_Mngr = new ReservationManager();
-//
-//        int option;
-//        do{
-//            System.out.println("***** Order *****");
-//            System.out.println("Select an option");
-//            System.out.println("1. View All Orders");
-//            System.out.println("2. Create Order");
-//            System.out.println("3. View Individual Order");
-//            System.out.println("4. Add Items to Order");
-//            System.out.println("5. Remove items from Order");
-//            System.out.println("6. Pay for items from Order");
-//            System.out.println("7. Print Order Invoice");
-//            System.out.println("8. Print All Invoice");
-//            System.out.println("9. Back");
-//            option = userInput.nextInt();
-//            System.out.println();
-//
-//            switch(option){
-//
-//                case 1: // view all orders
-//                    OrderTaker.viewAllOrders(order_Mngr);
-//                    break;
-//
-//                case 2: // Create orders
-//                    OrderTaker.CreateOrders(cust_Mngr, staff_Mngr, table_Mngr, order_Mngr, res_Mngr);
-//                    break;
-//
-//                case 3: //View Individual order
-//                    OrderTaker.viewIndividualOrders(order_Mngr);
-//                    break;
-//
-//                case 4: // add items to order
-//                    // print all the customer names and the associated orderIDs
-//                    OrderTaker.AddItemsToOrder(order_Mngr, item_Mngr, promo_Mngr);
-//                    break;
-//
-//                case 5: // Remove items from order
-//                    OrderTaker.removeItemsFromOrder(order_Mngr);
-//                    break;
-//
-//                case 6: //
-//                    OrderTaker.settlePayment(order_Mngr, invoice_Mngr, table_Mngr);
-//                    break;
-//
-//                case 7: // print order invoice
-//                    OrderTaker.printOrderInvoice(invoice_Mngr);
-//                    break;
-//
-//                case 8: // print all invoice
-//                    OrderTaker.printAllInvoices(invoice_Mngr);
-//                    break;
-//                default:
-//            }
-//        }while(option>0 && option<9);
-//    }
 }

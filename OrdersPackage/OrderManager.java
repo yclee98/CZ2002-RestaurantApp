@@ -5,8 +5,6 @@ import TablePackage.TableManager;
 import MenuItemPackage.*;
 import PromoPackage.*;
 import ReservationPackage.ReservationManager;
-
-import javax.swing.text.Utilities;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -65,7 +63,6 @@ public class OrderManager {
     public void createOrder(long staffID, Customer customer, int inOut, TableManager table_Mngr, ReservationManager res_Mngr){
         long currentDT = Utility.DateTime.getEpochNow();
         boolean existOrder = checkOrderExists(customer);
-        boolean resOrder = false;
         int tableNo = -1;
         int custCont = customer.getCustomerContact();
 
