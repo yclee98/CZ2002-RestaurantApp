@@ -34,6 +34,7 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
     }
 
     /**
+     * Get the quantity 
      * @return the quantity of this sale report item
      */
     public int getQuantity(){
@@ -57,6 +58,7 @@ public class SaleReportItem implements Comparable<SaleReportItem>{
     }
 
     /**
+     * Get the total sales 
      * @return the total sales of this sale report item
      */
     public double getTotalSales(){

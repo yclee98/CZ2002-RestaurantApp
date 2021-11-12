@@ -36,6 +36,7 @@ public class Staff implements CSVFormat{
         this.jobTitle = job;
     }
     /**
+     * Get the staff ID
      * @return the staff ID
      */
     public long getStaffID() {
@@ -49,6 +50,7 @@ public class Staff implements CSVFormat{
         this.staffID = staffID;
     }
     /**
+     * Get the staff name
      * @return the staff name
      */
     public String getStaffName() {
@@ -62,6 +64,7 @@ public class Staff implements CSVFormat{
         this.staffName = staffName;
     }
     /**
+     * Get the gender
      * @return the gender of the staff
      */
     public char getGender() {
@@ -75,6 +78,7 @@ public class Staff implements CSVFormat{
         this.gender = gender;
     }
     /**
+     * Get the job title
      * @return the job title of the staff
      */
     public String getJobTitle() {
