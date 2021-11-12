@@ -35,6 +35,7 @@ public class Customer implements CSVFormat{
 		customerContact = contactNo;
 	}
 	/**
+	 * retrieve customer contact number
 	 * @return the customer ID
 	 */
 	public long getCustomerID() {
@@ -48,7 +49,7 @@ public class Customer implements CSVFormat{
 		this.customerID = customerID;
 	}
 	/**
-	 * 
+	 * retrieve customer contact name
 	 * @return the customer name
 	 */
 	public String getCustomerName() {
@@ -63,7 +64,7 @@ public class Customer implements CSVFormat{
 	}
 
 	/**
-	 *
+	 * retrieve customer contact number
 	 * @return the customer contact number
 	 */
 	public int getCustomerContact() {
@@ -71,7 +72,7 @@ public class Customer implements CSVFormat{
 	}
 
 	/**
-	 * 
+	 * retrieve customer membership status
 	 * @return membership status
 	 */
 	public boolean isMember() {
