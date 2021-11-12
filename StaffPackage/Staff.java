@@ -43,7 +43,7 @@ public class Staff implements CSVFormat{
     }
     /**
      * Changes the ID of this staff
-     * @param staffID
+     * @param staffID to change to
      */
     public void setStaffID(long staffID) {
         this.staffID = staffID;
@@ -56,7 +56,7 @@ public class Staff implements CSVFormat{
     }
     /**
      * Changes the name of this staff
-     * @param staffName
+     * @param staffName to change to
      */
     public void setStaffName(String staffName) {
         this.staffName = staffName;
@@ -69,7 +69,7 @@ public class Staff implements CSVFormat{
     }
     /**
      * Changes the gender of this staff
-     * @param gender
+     * @param gender to change to
      */
     public void setGender(char gender) {
         this.gender = gender;
@@ -82,7 +82,7 @@ public class Staff implements CSVFormat{
     }
     /**
      * Changes the job title of this staff
-     * @param jobTitle
+     * @param jobTitle to change to
      */
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
