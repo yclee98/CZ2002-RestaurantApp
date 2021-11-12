@@ -17,7 +17,7 @@ public class Customer implements CSVFormat{
 	 */
 	private boolean isMember;
 	/**
-	 * Contact number of the customer
+	 * Contact number of the customer.
 	 */
 	private int customerContact;
 

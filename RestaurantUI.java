@@ -66,7 +66,7 @@ public class RestaurantUI {
     }
 
     /**
-     * Display the main menu UI page 
+     * Display the main menu UI page.
      */
     private static void mainMenuPage(){
         int option;

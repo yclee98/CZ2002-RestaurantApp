@@ -11,7 +11,13 @@ import Utility.Manager;
  * It store all the staff entities inside an array list
  */
 public class StaffManager extends Manager{
+    /**
+     * holds staff object of all staff members
+     */
     private ArrayList<Staff> staffList = new ArrayList<>();
+    /**
+     * Scanner to accept user input
+     */
     private Scanner userInput = new Scanner(System.in);
 
     /**
@@ -132,6 +138,4 @@ public class StaffManager extends Manager{
         System.out.println("Staff not found");
         return -1;
     }
-
-    
 }
