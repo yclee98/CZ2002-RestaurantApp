@@ -148,17 +148,28 @@ public class CustomerManager extends Manager{
 	/**
 	 * Method to allow customer to register for membership
 	 */
-	public void registerMembership(){
+	public void registerMembership(Boolean register){
 		printCustomers();
-		System.out.println("Please enter the customer ID to register membership");
+		System.out.println("Please enter the customer ID to register/De-register membership");
 		long memID = userInput.nextLong();
 		Customer newMem = returnCustomer(memID);
 		if(newMem == null){
 			System.out.println("ERROR! Customer does not exist");
 		}
 		else{
-			newMem.setMember(true);
-			System.out.println("SUCCESS! Customer membership registered");
+			if(register) {
+				newMem.setMember(true);
+				System.out.println("SUCCESS! Customer membership registered");
+			}
+			else {
+				if(!newMem.isMember()){
+					System.out.println("ERROR! Customer is not a member");
+				}
+				else{
+					newMem.setMember(false);
+					System.out.println("SUCCESS! Customer membership De-registered");
+				}
+			}
 		}
 	}
 }

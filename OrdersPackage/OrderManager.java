@@ -242,6 +242,10 @@ public class OrderManager {
         System.out.println("Please verify the order: ");
         viewOrder(orderID);
         paymentPrice = calculateFinalPrice(orderID);
+        if(paymentPrice == -1){
+            System.out.println("ERROR! No items in order, unable to pay!");
+            return;
+        }
         System.out.println("\nConfirm and proceed to payment? (Y/N): ");
         userReply = userInput.next();
         if(Objects.equals(userReply, "Y")){
@@ -271,6 +275,9 @@ public class OrderManager {
         {
             if(orderList.get(i).getOrderID() == orderID){
                 payOrder = orderList.get(i);
+                if(payOrder.getOrderItemList().size() == 0){
+                    return -1;
+                }
                 taxesValue = payOrder.getTotalPrice() * taxes;
                 serviceValue = payOrder.getTotalPrice() * service;
                 payOrder.setServiceCharge(serviceValue);

@@ -249,7 +249,8 @@ public class RestaurantUI {
             System.out.println("3. View Customer");
             System.out.println("4. Remove Customer");
             System.out.println("5. Register Customer membership");
-            System.out.println("6. Back");
+            System.out.println("6. De-register Customer membership");
+            System.out.println("7. Back");
             option = userInput.nextInt();
             System.out.println();
 
@@ -267,10 +268,12 @@ public class RestaurantUI {
                     cust_Mngr.removeCustomer();
                     break;
                 case 5:
-                    cust_Mngr.registerMembership();
+                    cust_Mngr.registerMembership(true);
+                case 6:
+                    cust_Mngr.registerMembership(false);
                 default:
                     cust_Mngr.saveData();
             }
-        }while(option>0 && option<6);
+        }while(option>0 && option<7);
     }
 }
