@@ -8,12 +8,21 @@ import Utility.Manager;
 
 /**
  * This control class manages all the staff member entities
- * It store all the staff entities inside an array list
+ * It store all the staff entities inside an array list.
  */
 public class StaffManager extends Manager{
+    /**
+     * holds staff object of all staff members
+     */
     private ArrayList<Staff> staffList = new ArrayList<>();
+    /**
+     * Scanner to accept user input
+     */
     private Scanner userInput = new Scanner(System.in);
 
+    /**
+     * StaffManager Constructor, retrieves staff information from the staff.csv to populate staffList
+     */
     public StaffManager(){
         this.retrieveData();
     }
@@ -129,6 +138,4 @@ public class StaffManager extends Manager{
         System.out.println("Staff not found");
         return -1;
     }
-
-    
 }
