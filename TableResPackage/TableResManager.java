@@ -92,6 +92,7 @@ public class TableResManager {
 
                         else
                             tm.addTable(tableNum, capacity);
+                            System.out.println("Table Number " + tableNum + " added");
                     }
                     else
                         System.out.println("The table is already in existance please key in a differnet table number ");
